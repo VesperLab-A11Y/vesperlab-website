@@ -164,3 +164,140 @@ a:hover{color:var(--link-hover);text-decoration-thickness:2px;}
     animation-iteration-count:1 !important;
   }
 }
+
+/* ============================================================================
+   Styles de la page
+   ============================================================================ */
+
+/* Conteneur : largeur lisible, marges fluides, rythme vertical généreux */
+.site-header,
+main#main,
+.site-footer{
+  max-width:64rem;
+  margin-inline:auto;
+  padding-inline:clamp(var(--space-6), 5vw, var(--space-16));
+}
+
+/* En-tête : logo centré, important */
+.site-header{
+  padding-block:clamp(var(--space-10), 8vw, var(--space-16)) var(--space-10);
+  text-align:center;
+}
+.wordmark{
+  margin:0;
+  color:var(--accent);              /* sauge de marque, 9,8:1 sur --ink-975 */
+  line-height:0;
+}
+.wordmark svg{
+  height:clamp(64px, 12vw, 112px);
+  width:auto;
+}
+
+/* Accroche */
+.lead{
+  max-width:42rem;
+  margin-block:0 clamp(var(--space-10), 9vw, var(--space-16));
+}
+.lead-headline{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:clamp(1.75rem, 5.5vw, var(--font-size-display));
+  line-height:var(--leading-tight);
+  letter-spacing:var(--tracking-display);
+  margin:0 0 var(--space-6);
+}
+.lead-headline em{
+  font-style:italic;
+}
+.lead-body{
+  font-size:var(--font-size-lead);
+  color:var(--text-secondary);
+  margin:0;
+}
+
+/* Deux colonnes */
+.cols{
+  display:grid;
+  gap:clamp(var(--space-10), 6vw, var(--space-16));
+  align-items:start;
+  padding-bottom:clamp(var(--space-16), 12vw, 6rem);
+}
+@media (min-width:720px){
+  .cols{grid-template-columns:1fr 1fr;}
+}
+.col h2{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:var(--font-size-h2);
+  line-height:var(--leading-heading);
+  margin:0 0 var(--space-5);
+}
+.col h3{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:var(--font-size-h3);
+  margin:var(--space-10) 0 var(--space-5);
+}
+.col p{
+  color:var(--text-secondary);
+  margin:0;
+}
+
+/* Liste des liens sociaux */
+.social{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:flex;
+  gap:var(--space-4);
+}
+.social a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:var(--min-hit);
+  min-height:var(--min-hit);
+  color:var(--text-secondary);
+  border-radius:var(--radius-md);
+  text-decoration:none;
+}
+.social a:hover{color:var(--accent-hover);}
+.social svg{width:24px;height:24px;}
+
+/* Bouton « Écrivez-moi » */
+.button{
+  display:inline-flex;
+  align-items:center;
+  min-height:var(--min-hit);
+  margin-top:var(--space-6);
+  padding:var(--space-3) var(--space-8);
+  background:var(--accent);
+  color:var(--accent-on);
+  font-weight:700;
+  text-decoration:none;
+  border-radius:var(--radius-md);
+}
+.button:hover{
+  background:var(--accent-hover);
+  color:var(--accent-on);
+}
+
+/* Pied de page */
+.site-footer{
+  padding-block:var(--space-10) clamp(var(--space-10), 8vw, var(--space-16));
+  border-top:1px solid var(--border-default);
+  text-align:center;
+  color:var(--text-muted);
+  font-size:var(--font-size-caption);
+}
+.site-footer p{margin:var(--space-3) 0;}
+
+/* Une seule animation : arrivée douce du contenu, coupée en reduced-motion */
+@keyframes lever{
+  from{opacity:0;transform:translateY(8px);}
+  to{opacity:1;transform:none;}
+}
+main#main{animation:lever .5s ease-out both;}
+@media (prefers-reduced-motion:reduce){
+  main#main{animation:none;}
+}
