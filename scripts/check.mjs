@@ -97,6 +97,10 @@ thirdParty.length === 0 ? ok('aucune ressource tierce chargée') : fail('ressour
 for (const m of html.matchAll(/(?:src|href)="(assets\/[^"]+)"/g)) {
   existsSync(new URL('../' + m[1], import.meta.url)) ? ok('asset ' + m[1]) : fail('asset introuvable : ' + m[1]);
 }
+// og-image.png n'est référencé que par une URL absolue (og:image) : on le vérifie à part.
+existsSync(new URL('../assets/og-image.png', import.meta.url))
+  ? ok('asset assets/og-image.png')
+  : fail('asset introuvable : assets/og-image.png');
 
 // 16. Textes de contenu obligatoires (verbatim)
 const copy = [
