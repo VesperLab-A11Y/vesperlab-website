@@ -200,16 +200,15 @@ Pas de `main.js` : la page n'a aucun comportement dynamique.
   d'audit).
 - Reset léger + `:focus-visible { outline: 2px solid var(--focus-ring);
   outline-offset: 2px; }` (identique à la Library).
-- **Thème :** sombre par défaut (le `:root`). On **honore `prefers-color-scheme:
-  light`** via `@media`, en recopiant les valeurs de jetons clairs déjà définies
-  dans `Vesper-Library/style.css` (bloc `[data-theme="light"]`). **Pas de
-  bouton de bascule** en v1 — on suit le système, comme le fait la Library
-  (« un site d'accessibilité ne peut pas imposer le mode sombre »). En thème
-  clair, la couleur du logo passe au noir (`--void-950`) : la sauge claire ne
-  tient pas le contraste sur fond papier (voir `vesper-logos/LISEZ-MOI.md`).
+- **Thème : sombre uniquement en v1.** Le `:root` porte les jetons sombres,
+  point. **Pas de `@media (prefers-color-scheme)`, pas de bouton de bascule** —
+  c'est l'identité visuelle voulue (brief 2026-08-20 : « sombre uniquement pour
+  l'instant »). Si le contraste d'un élément précis pose problème, on ajuste cet
+  élément, on n'ajoute pas de thème clair. Les valeurs de jetons clairs de
+  `Vesper-Library/style.css` ne sont **pas** reprises.
 - **Logo :** SVG inliné dans un conteneur dont on pilote `color:` —
-  `var(--sage-500)` en sombre (9,8:1 sur `--ink-975`), `var(--void-950)` en
-  clair. Aucune `width`/`height` fixée sur le SVG (zoom 400 % OK) ; on borne via
+  `var(--sage-500)` (9,8:1 sur `--ink-975`, cf. `vesper-logos/LISEZ-MOI.md`).
+  Aucune `width`/`height` fixée sur le SVG (zoom 400 % OK) ; on borne via
   `.wordmark svg { height: clamp(64px, 12vw, 112px); width: auto; }`.
 - **Mise en page :**
   - Mobile-first, une colonne.
@@ -252,15 +251,17 @@ Pas de `main.js` : la page n'a aucun comportement dynamique.
 
 ### 4.5 Favicon
 
-- `assets/favicon.svg` = le logo `currentColor` — déclaré `rel="icon"
-  sizes="any"`. Net à partir de ~32 px.
-- `assets/favicon-16.svg` = **silhouette pleine** pour 16–24 px (le tracé au
-  trait devient illisible sous 24 px — voir `LISEZ-MOI.md`). Il n'existe pas de
-  favicon Vesper Lab pré-fait (seuls les *outils* en ont). Option retenue :
-  réutiliser `~/Desktop/vesper-logos/library/library-favicon-16-currentcolor.svg`
-  (même marque chauve-souris, cohérente avec la Library) ; à défaut, en dériver
-  un par fermeture morphologique. **À confirmer avec Pauline.**
-- `assets/favicon-32.png` : repli PNG pour les vieux agents.
+Jeu **Viewer** (`~/Desktop/vesper-logos/viewer/`) — la marque chauve-souris s'y
+lit comme un « V », ce qui colle mieux à « Vesper » qu'un pictogramme d'outil.
+En copiant les fichiers dans `assets/`, remplacer le `<title>Vesper Viewer —
+icône</title>` par `<title>Vesper Lab</title>`.
+
+- `assets/favicon.svg` = `viewer-favicon-currentcolor.svg` (`viewBox
+  "0 -141.5 928 928"`, tracé complet) — `rel="icon" sizes="any"`. Net ≥ 32 px.
+- `assets/favicon-16.svg` = `viewer-favicon-16-currentcolor.svg` (`viewBox
+  "0 0 300 300"`, silhouette pleine) — `rel="icon" sizes="16x16"`.
+- `assets/favicon-32.png` : repli PNG, rendu depuis `favicon.svg` en
+  `--sage-500` sur fond transparent.
 - `assets/apple-touch-icon.png` : 180×180, marque sur fond `--void-950` opaque
   (pas de transparence sur iOS).
 - Déclarations dans `<head>` :
@@ -280,8 +281,8 @@ Pas de `main.js` : la page n'a aucun comportement dynamique.
   `og:locale=fr_CA`.
 - `<meta name="twitter:card" content="summary_large_image">`
 - `<link rel="canonical" href="https://vesperlab.dev/">`
-- `<meta name="theme-color">` : `--void-950` en sombre, valeur claire via
-  `media="(prefers-color-scheme: light)"`.
+- `<meta name="theme-color" content="#100F0D">` (`--void-950`), sans variante
+  claire.
 - Pas de JSON-LD en v1 (optionnel, peut s'ajouter plus tard).
 
 ---
@@ -296,12 +297,12 @@ Pas de `main.js` : la page n'a aucun comportement dynamique.
 - Skip-link fonctionnel et visible au focus.
 - `:focus-visible` net partout (outline 2 px + offset), jamais supprimé.
 - Cibles tactiles ≥ 44 × 44 px (bouton, liens icônes).
-- Contraste : corps `--text-body` sur `--surface-page` bien au-delà de AAA ;
-  logo ≥ 3:1 sur son fond dans les deux thèmes ; à **vérifier au build**
-  l'accent sauge en tant que **texte de lien** (`--link` = `--sage-500`) sur
-  `--surface-page` → viser 4,5:1, sinon assombrir le lien localement ou ajouter
-  un soulignement systématique (le soulignement est de toute façon conservé sur
-  les liens de texte).
+- Contraste (thème sombre unique) : corps `--text-body` sur `--surface-page`
+  bien au-delà de AAA ; logo sauge ≥ 9:1 sur `--ink-975` ; à **vérifier au
+  build** l'accent sauge en tant que **texte de lien** (`--link` =
+  `--sage-500`) sur `--surface-page` → viser 4,5:1, sinon assombrir le lien
+  localement ou garder un soulignement systématique (le soulignement est de
+  toute façon conservé sur les liens de texte).
 - Aucune information portée par la couleur seule (les liens de texte sont
   soulignés ; les liens icônes ont un libellé).
 - `prefers-reduced-motion` respecté (une seule animation, désactivable).
@@ -390,8 +391,8 @@ navigateur) :
 
 1. **Rendu** : desktop + mobile (375 px) + 320 px de large — pas de scroll
    horizontal, colonnes qui s'empilent au bon breakpoint.
-2. **Thème** : forcer `prefers-color-scheme: dark` puis `light` — lisibilité et
-   contraste du logo dans les deux.
+2. **Thème** : la page reste sombre quelle que soit la préférence système —
+   forcer `prefers-color-scheme: light` ne doit rien changer (aucun style clair).
 3. **Clavier** : Tab traverse skip-link → liens sociaux → lien email → bouton
    « Écrivez-moi » → lien footer, focus visible à chaque étape ; skip-link
    amène bien à `#main`.
@@ -420,7 +421,8 @@ couvert, pour qu'elle enchaîne son audit.
 - Récupération des `.woff2` Noto (sous-ensembles latin / latin-ext) et
   génération des `@font-face`.
 - Dessin de `og-image.png` (1200×630) et de `apple-touch-icon.png`.
-- Choix final du `favicon-16` (réutilisation Library vs dérivation) — §4.5.
+- Copie des favicons du jeu Viewer dans `assets/` + réécriture du `<title>` SVG
+  en « Vesper Lab » ; génération du `favicon-32.png`.
 - Reformulation fine du dernier membre de phrase de la colonne droite
   (« … ou en m'écrivant directement. »).
 - Copies SVG des icônes GitHub / Buy Me a Coffee / LinkedIn (jeux d'icônes
@@ -429,17 +431,17 @@ couvert, pour qu'elle enchaîne son audit.
 
 ---
 
-## 10. Décisions à confirmer par Pauline
+## 10. Décisions confirmées par Pauline (2026-09-03)
 
-1. **`<h1>` = le logo** (nom accessible « Vesper Lab »), l'accroche reste un
-   paragraphe. OK ?
-2. **Thème clair automatique** via `prefers-color-scheme`, sans bouton de
-   bascule, comme la Library. OK ? (Le brief 2026-08-20 disait « sombre
-   uniquement » — ce point le contredit volontairement.)
-3. **Polices auto-hébergées** plutôt que Google Fonts `@import`. OK ?
-4. **Licence MIT.** OK ?
-5. **`favicon-16` réutilisé depuis le jeu Library** (marque chauve-souris
-   commune) faute de favicon Vesper Lab dédié. OK, ou tu veux un pictogramme
-   Vesper Lab dessiné pour les petites tailles (tâche séparée) ?
-6. Reformuler « … grâce au formulaire ci-dessous » en « … ou en m'écrivant
-   directement. » puisqu'il n'y a plus de formulaire. OK ?
+1. **`<h1>` = le logo** (nom accessible « Vesper Lab ») ; l'accroche reste un
+   paragraphe stylé.
+2. **Thème sombre uniquement** en v1 — pas de thème clair, pas de
+   `prefers-color-scheme`, pas de bouton. (Prime sur le point de la Library.)
+3. **Polices auto-hébergées** (`.woff2` Noto dans le repo), pas de `@import`
+   Google Fonts.
+4. **Licence MIT.**
+5. **Favicon = jeu Viewer** (la marque se lit comme un « V »), `<title>` SVG
+   réécrit en « Vesper Lab ». Pas de pictogramme dédié à dessiner.
+6. Colonne droite : « … ou grâce au formulaire ci-dessous » →
+   « … ou en m'écrivant directement. » ; `contact@vesperlab.dev` reste en clair
+   et cliquable dans le paragraphe, suivi du bouton « Écrivez-moi ».
