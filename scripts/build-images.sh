@@ -9,25 +9,50 @@ cd "$(dirname "$0")/.."
 SAGE="#BDCFA9"   # sauge (le trait du logo / de la chauve-souris)
 INK="#0E0F0D"    # encre (le fond sombre)
 
-# --- favicon-32.png : depuis le favicon détaillé, déjà en sauge, fond transparent ---
-rsvg-convert -w 32 -h 32 assets/favicon.svg -o assets/favicon-32.png
+# Petit utilitaire : extrait la valeur de l'attribut « d » du premier <path> d'un SVG.
+# (le « d » seul ne porte jamais de fill ; la couleur est posée par l'enrobage)
+extract_d() {
+  node -e 'const s=require("fs").readFileSync(process.argv[1],"utf8");const m=s.match(/<path\b[^>]*\bd="([^"]+)"/);if(!m){console.error("tracé introuvable dans "+process.argv[1]);process.exit(1)}process.stdout.write(m[1])' "$1"
+}
 
-# --- apple-touch-icon.png : même marque sur un carré ink opaque, 180x180 ---
-rsvg-convert -w 180 -h 180 --background-color "$INK" assets/favicon.svg -o assets/apple-touch-icon.png
+# Garde-fou : un tracé doit être non vide et commencer par une commande (m/M).
+assert_path() {
+  case "$1" in
+    [mM]*) : ;;
+    *) echo "ERREUR : tracé invalide (« ${1:0:20}… »)" >&2; exit 1 ;;
+  esac
+}
+
+# Tracés sources
+F16_PATH=$(extract_d assets/favicon-16.svg)   # silhouette pleine, art sur carré 300x300
+assert_path "$F16_PATH"
+LOGO_PATH=$(extract_d assets/vesperlab-logo.svg)  # logo complet, viewBox 0 0 1006 974
+assert_path "$LOGO_PATH"
+
+# --- favicon-32.png : silhouette pleine en sauge, fond transparent, petite marge ---
+# viewBox -12 -12 324 324 = l'art de 300 unités avec ~12 unités de marge (~4 %).
+cat > assets/_fav32.svg <<SVG
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-12 -12 324 324" width="32" height="32">
+  <path fill="$SAGE" fill-rule="nonzero" d="$F16_PATH"/>
+</svg>
+SVG
+rsvg-convert -w 32 -h 32 assets/_fav32.svg -o assets/favicon-32.png
+
+# --- apple-touch-icon.png : silhouette sauge encartée sur fond ink opaque, 180x180 ---
+# viewBox -44 -44 388 388 = l'art de 300 unités avec ~44 unités de marge tout autour (~13 %).
+cat > assets/_apple.svg <<SVG
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-44 -44 388 388" width="180" height="180">
+  <rect x="-44" y="-44" width="388" height="388" fill="$INK"/>
+  <path fill="$SAGE" fill-rule="nonzero" d="$F16_PATH"/>
+</svg>
+SVG
+rsvg-convert -w 180 -h 180 assets/_apple.svg -o assets/apple-touch-icon.png
 
 # --- og-image.png : 1200x630, logo sauge centré au-dessus de deux lignes de texte ---
 # Le tracé du logo est repris tel quel de assets/vesperlab-logo.svg (viewBox 0 0 1006 974).
 # L'attribut sed du brief supposait un ordre d'attributs précis ; on extrait le « d »
 # de façon fiable avec node (le tracé ne doit PAS porter son propre fill, la couleur
 # vient du <g fill="#BDCFA9"> parent).
-LOGO_PATH=$(node -e 'const s=require("fs").readFileSync("assets/vesperlab-logo.svg","utf8");const m=s.match(/<path\b[^>]*\bd="([^"]+)"/);if(!m){console.error("tracé du logo introuvable");process.exit(1)}process.stdout.write(m[1])')
-
-# Garde-fou : le tracé doit être non vide et commencer par une commande de chemin (m/M).
-case "$LOGO_PATH" in
-  [mM]*) : ;;
-  *) echo "ERREUR : tracé du logo invalide (« ${LOGO_PATH:0:20}… »)" >&2; exit 1 ;;
-esac
-
 # Transformation du logo :
 #   scale 0.30  -> 1006x974 devient ~302x292
 #   translate x -> (1200 - 302) / 2 = 449  (centrage horizontal)
@@ -48,7 +73,9 @@ cat > assets/_og.svg <<SVG
   </text>
 </svg>
 SVG
-
 rsvg-convert -w 1200 -h 630 assets/_og.svg -o assets/og-image.png
+
+# Nettoyage des SVG d'enrobage (matière au rendu, gitignorés)
+rm -f assets/_og.svg assets/_apple.svg assets/_fav32.svg
 
 echo "OK : favicon-32.png, apple-touch-icon.png, og-image.png"
