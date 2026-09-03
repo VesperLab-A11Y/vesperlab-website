@@ -1,37 +1,55 @@
-// Récupère les .woff2 Noto (sous-ensembles latin + latin-ext) depuis l'API
-// Google Fonts CSS2, et les enregistre en local. Outil de dev, lancé une fois.
+// Récupère les .woff2 Noto statiques (sous-ensembles latin + latin-ext) depuis Fontsource via jsdelivr.
+// Chaque fichier est un .woff2 statique distinct pour un poids spécifique.
 // Usage : node scripts/fetch-fonts.mjs
 import { writeFileSync, mkdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 
 const OUT = new URL('../assets/fonts/', import.meta.url);
 mkdirSync(OUT, { recursive: true });
 
-// UA moderne → Google renvoie du woff2 ; on ne garde que latin et latin-ext.
-const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
-
-const FAMILIES = [
-  { css: 'Noto+Serif:wght@400;600', slug: 'noto-serif' },
-  { css: 'Noto+Sans:wght@400;600;700', slug: 'noto-sans' },
+// Liste explicite des 10 fichiers : famille × sous-ensemble × poids
+const FONTS = [
+  { family: 'noto-serif', subset: 'latin', weight: 400 },
+  { family: 'noto-serif', subset: 'latin', weight: 600 },
+  { family: 'noto-serif', subset: 'latin-ext', weight: 400 },
+  { family: 'noto-serif', subset: 'latin-ext', weight: 600 },
+  { family: 'noto-sans', subset: 'latin', weight: 400 },
+  { family: 'noto-sans', subset: 'latin', weight: 600 },
+  { family: 'noto-sans', subset: 'latin', weight: 700 },
+  { family: 'noto-sans', subset: 'latin-ext', weight: 400 },
+  { family: 'noto-sans', subset: 'latin-ext', weight: 600 },
+  { family: 'noto-sans', subset: 'latin-ext', weight: 700 },
 ];
 
-for (const fam of FAMILIES) {
-  const cssUrl = `https://fonts.googleapis.com/css2?family=${fam.css}&display=swap`;
-  const css = await fetch(cssUrl, { headers: { 'User-Agent': UA } }).then(r => r.text());
+const hashes = new Set();
 
-  // Chaque @font-face est précédé d'un commentaire /* latin */ ou /* latin-ext */
-  const blocks = css.split('@font-face').slice(1);
-  for (const block of blocks) {
-    // Chercher le dernier commentaire avant ce bloc (sans exiger qu'il soit à la fin)
-    const beforeBlock = css.slice(0, css.indexOf(block));
-    const allMatches = beforeBlock.match(/\/\*\s*([a-z0-9-]+)\s*\*\//gi);
-    const subset = allMatches ? allMatches[allMatches.length - 1].replace(/\/\*\s*|\s*\*\//g, '').toLowerCase() : null;
-    if (subset !== 'latin' && subset !== 'latin-ext') continue;
-    const weight = (block.match(/font-weight:\s*(\d+)/) || [])[1];
-    const url = (block.match(/src:\s*url\(([^)]+)\)/) || [])[1];
-    if (!weight || !url) continue;
-    const buf = Buffer.from(await fetch(url).then(r => r.arrayBuffer()));
-    const name = `${fam.slug}-${subset}-${weight}.woff2`;
-    writeFileSync(new URL(name, OUT), buf);
-    console.log(`✓ ${name}  (${buf.length} o)`);
+for (const font of FONTS) {
+  const url = `https://cdn.jsdelivr.net/fontsource/fonts/${font.family}@latest/${font.subset}-${font.weight}-normal.woff2`;
+  const res = await fetch(url);
+
+  // Vérifier que le statut est 200
+  if (!res.ok) throw new Error(`Fetch failed: ${url} (status ${res.status})`);
+
+  const buf = Buffer.from(await res.arrayBuffer());
+
+  // Vérifier que le fichier commence par les octets wOF2
+  if (buf[0] !== 119 || buf[1] !== 79 || buf[2] !== 70 || buf[3] !== 50) {
+    throw new Error(`Invalid woff2 magic bytes in ${url}`);
   }
+
+  // Écrire le fichier
+  const name = `${font.family}-${font.subset}-${font.weight}.woff2`;
+  writeFileSync(new URL(name, OUT), buf);
+
+  // Calculer et enregistrer le hash sha256
+  const hash = createHash('sha256').update(buf).digest('hex');
+  if (hashes.has(hash)) {
+    throw new Error(`Collision détectée : ${name} a le même hash qu'un fichier précédent`);
+  }
+  hashes.add(hash);
+
+  console.log(`✓ ${name}  (${buf.length} o)`);
 }
+
+// Vérifier que tous les 10 fichiers ont des hashes distincts
+console.log(`✓ 10 fichiers, 10 hachages distincts`);
