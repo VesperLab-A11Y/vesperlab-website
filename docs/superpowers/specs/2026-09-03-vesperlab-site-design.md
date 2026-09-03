@@ -281,8 +281,8 @@ icône</title>` par `<title>Vesper Lab</title>`.
   `og:locale=fr_CA`.
 - `<meta name="twitter:card" content="summary_large_image">`
 - `<link rel="canonical" href="https://vesperlab.dev/">`
-- `<meta name="theme-color" content="#100F0D">` (`--void-950`), sans variante
-  claire.
+- `<meta name="theme-color" content="#0E0F0D">` (`--void-950` du DS V2), sans
+  variante claire.
 - Pas de JSON-LD en v1 (optionnel, peut s'ajouter plus tard).
 
 ---
