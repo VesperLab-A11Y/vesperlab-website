@@ -116,5 +116,23 @@ const copy = [
 ];
 for (const s of copy) html.includes(s) ? ok('copie : « ' + s.slice(0, 32) + '… »') : fail('copie manquante : « ' + s + ' »');
 
+// 17. 404.html : présent, lien retour accueil, feuille de styles partagée
+if (!existsSync(new URL('../404.html', import.meta.url))) fail('404.html manquant');
+else {
+  const e = readFileSync(new URL('../404.html', import.meta.url), 'utf8');
+  /<html[^>]*\blang="fr"/.test(e) ? ok('404 lang="fr"') : fail('404 lang manquant');
+  /href="\/"/.test(e) ? ok('404 → lien accueil') : fail('404 sans lien accueil');
+  /rel="stylesheet" href="style\.css"/.test(e) ? ok('404 utilise style.css') : fail('404 sans style.css');
+  /<meta name="robots" content="noindex">/.test(e) ? ok('404 noindex') : fail('404 sans noindex');
+  (e.match(/<h1[\s>]/g) || []).length === 1 ? ok('404 un seul <h1>') : fail('404 : nombre de <h1> incorrect');
+}
+
+// 18. Fichiers de déploiement
+for (const f of ['robots.txt', 'sitemap.xml', '_headers']) {
+  existsSync(new URL('../' + f, import.meta.url)) ? ok(f) : fail(f + ' manquant');
+}
+/https:\/\/vesperlab\.dev\/sitemap\.xml/.test(readFileSync(new URL('../robots.txt', import.meta.url), 'utf8'))
+  ? ok('robots.txt déclare le sitemap') : fail('robots.txt sans sitemap');
+
 console.log(failures ? `\n${failures} échec(s)` : '\nTout est vert.');
 process.exit(failures ? 1 : 0);
