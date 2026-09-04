@@ -2,9 +2,8 @@
 
 Vérification effectuée le 2026-09-04 sur le code de la branche `build-site`
 (`node scripts/check.mjs` vert, passe navigateur complète). Voir aussi
-`docs/apercu-desktop.png` / `docs/apercu-mobile.png` (ou leur description
-ci-dessous si les fichiers n'ont pas pu être enregistrés — voir la note en
-bas de page).
+`docs/apercu-desktop.png` / `docs/apercu-mobile.png` (description également
+disponible ci-dessous).
 
 ## Déjà en place dans le code
 - `lang="fr"` ; un seul `<h1>` ; hiérarchie h1→h2→h3→h2 sans saut.
