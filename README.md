@@ -8,6 +8,9 @@ l'automne 2026.
 
 HTML/CSS statique, zéro dépendance, zéro build. Polices Noto auto-hébergées.
 Design system Vesper Lab V2 (thème sombre). Hébergé sur Cloudflare Pages.
+Le fichier `.assetsignore` exclut `docs/`, `.superpowers/` et `scripts/` du
+déploiement, pour que les specs, plans et scripts internes ne deviennent pas
+des pages publiques du site.
 
 ## Développement
 
