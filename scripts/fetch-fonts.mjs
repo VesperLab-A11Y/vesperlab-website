@@ -23,8 +23,15 @@ const FONTS = [
 
 const hashes = new Set();
 
+// Version épinglée (au lieu de @latest) pour que le script reste
+// reproductible : une exécution future retélécharge exactement les mêmes
+// octets tant que cette version n'est pas changée à la main. Version
+// résolue via https://data.jsdelivr.com/v1/packages/npm/@fontsource/noto-sans
+// (et noto-serif, même version) le 2026-09-04.
+const FONTSOURCE_VERSION = '5.3.0';
+
 for (const font of FONTS) {
-  const url = `https://cdn.jsdelivr.net/fontsource/fonts/${font.family}@latest/${font.subset}-${font.weight}-normal.woff2`;
+  const url = `https://cdn.jsdelivr.net/fontsource/fonts/${font.family}@${FONTSOURCE_VERSION}/${font.subset}-${font.weight}-normal.woff2`;
   const res = await fetch(url);
 
   // Vérifier que le statut est 200
@@ -51,5 +58,5 @@ for (const font of FONTS) {
   console.log(`✓ ${name}  (${buf.length} o)`);
 }
 
-// Vérifier que tous les 10 fichiers ont des hashes distincts
-console.log(`✓ 10 fichiers, 10 hachages distincts`);
+// Vérifier que tous les fichiers ont des hashes distincts
+console.log(`✓ ${FONTS.length} fichiers, ${hashes.size} hachages distincts`);
