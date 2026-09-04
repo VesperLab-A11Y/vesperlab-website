@@ -78,7 +78,7 @@ const head = [
   [/<link rel="canonical" href="https:\/\/vesperlab\.dev\/">/, 'canonical'],
   [/<meta property="og:title"/, 'og:title'],
   [/<meta property="og:image" content="https:\/\/vesperlab\.dev\/assets\/og-image\.png">/, 'og:image absolu'],
-  [/<meta name="theme-color" content="#0E0F0D">/, 'theme-color'],
+  [/<meta name="theme-color" content="#030504">/, 'theme-color'],
   [/<link rel="icon" href="assets\/favicon\.svg" sizes="any">/, 'favicon svg'],
 ];
 for (const [re, label] of head) re.test(html) ? ok(label) : fail(label + ' manquant/incorrect');
@@ -133,6 +133,32 @@ for (const f of ['robots.txt', 'sitemap.xml', '_headers']) {
 }
 /https:\/\/vesperlab\.dev\/sitemap\.xml/.test(readFileSync(new URL('../robots.txt', import.meta.url), 'utf8'))
   ? ok('robots.txt déclare le sitemap') : fail('robots.txt sans sitemap');
+
+// 19. style.css : aucune ressource tierce (le §14 ne couvrait qu'index.html)
+const css = readFileSync(new URL('../style.css', import.meta.url), 'utf8');
+/@import/.test(css) ? fail('style.css : @import interdit') : ok('style.css : aucun @import');
+/https?:\/\//.test(css) ? fail('style.css : URL http(s) absolue interdite') : ok('style.css : aucune URL http(s) absolue');
+const fontFaceCount = (css.match(/@font-face\s*\{/g) || []).length;
+fontFaceCount === 10 ? ok('style.css : 10 blocs @font-face') : fail('style.css : ' + fontFaceCount + ' blocs @font-face (attendu 10)');
+for (const m of css.matchAll(/url\('(assets\/[^']+)'\)/g)) {
+  existsSync(new URL('../' + m[1], import.meta.url)) ? ok('style.css : asset ' + m[1]) : fail('style.css : asset introuvable : ' + m[1]);
+}
+
+// 20. style.css : thème sombre uniquement, aucun prefers-color-scheme
+/prefers-color-scheme/.test(css)
+  ? fail('style.css : prefers-color-scheme interdit (thème sombre uniquement)')
+  : ok('style.css : aucun prefers-color-scheme');
+
+// 21. 404.html : aucun <script>, aucune ressource tierce (même allowlist qu'index.html)
+{
+  const e = readFileSync(new URL('../404.html', import.meta.url), 'utf8');
+  /<script[\s>]/.test(e) ? fail('<script> interdit dans 404.html') : ok('404 : aucun <script>');
+  const thirdParty404 = [...e.matchAll(/(?:src|href)="(https?:\/\/[^"]+)"/g)]
+    .map(m => m[1])
+    .filter(u => !u.startsWith('https://vesperlab.dev'))
+    .filter(u => !/^https:\/\/(www\.linkedin\.com|github\.com|buymeacoffee\.com)/.test(u));
+  thirdParty404.length === 0 ? ok('404 : aucune ressource tierce chargée') : fail('404 : ressource tierce : ' + thirdParty404.join(', '));
+}
 
 console.log(failures ? `\n${failures} échec(s)` : '\nTout est vert.');
 process.exit(failures ? 1 : 0);
