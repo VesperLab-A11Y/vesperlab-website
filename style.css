@@ -72,7 +72,6 @@
   --leading-heading:1.25;
   --leading-body:1.65;
   --tracking-display:0.005em;
-  --tracking-eyebrow:0.12em;
 
   /* Espacements / rayons */
   --space-3:8px;
@@ -83,7 +82,6 @@
   --space-10:32px;
   --space-16:64px;   /* propre au site : rythme vertical des grands blocs */
   --radius-md:8px;
-  --radius-pill:20px;
   --min-hit:44px;
 
   /* Couleurs — neutres oklch teinte 150 */
@@ -105,7 +103,6 @@
   --text-secondary:var(--cream-300);
   --text-muted:var(--cream-500);
   --border-default:var(--hairline);
-  --border-strong:var(--hairline-strong);
   --accent:var(--sage-500);
   --accent-hover:var(--sage-300);
   --accent-on:var(--sage-on);
@@ -131,8 +128,12 @@ img,svg{max-width:100%;}
 [hidden]{display:none !important;}
 
 /* ---- Focus : visible partout, jamais supprimé ---- */
+/* Repli #BDCFA9 (sauge de marque) avant le var() oklch() : si oklch() n'est
+   pas supporté, outline-color est simplement ignoré et le repli reste actif
+   au lieu d'invalider tout le raccourci outline. */
 :focus-visible{
-  outline:2px solid var(--focus-ring);
+  outline:2px solid #BDCFA9;
+  outline-color:var(--focus-ring);
   outline-offset:2px;
   border-radius:3px;
 }
