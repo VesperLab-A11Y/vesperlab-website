@@ -97,6 +97,9 @@
   --sage-500:oklch(0.83 0.055 128);
   --sage-on:oklch(0.145 0.008 150);
 
+  /* Vert très foncé — ligne de séparation discrète (jeton DS V2 --olive-900) */
+  --olive-900:#272E24;
+
   /* Alias sémantiques */
   --surface-page:var(--ink-975);
   --text-body:var(--cream-100);
@@ -181,7 +184,7 @@ main#main,
 
 /* En-tête : logo centré, important */
 .site-header{
-  padding-block:clamp(var(--space-10), 8vw, var(--space-16)) var(--space-10);
+  padding-block:clamp(var(--space-10), 8vw, var(--space-16)) clamp(var(--space-10), 6vw, var(--space-16));
   text-align:center;
 }
 .wordmark{
@@ -202,7 +205,7 @@ main#main,
 .lead-headline{
   font-family:var(--font-display);
   font-weight:600;
-  font-size:clamp(1.75rem, 5.5vw, var(--font-size-display));
+  font-size:clamp(1.6rem, 4.6vw, 2.25rem);
   line-height:var(--leading-tight);
   letter-spacing:var(--tracking-display);
   margin:0 0 var(--space-6);
@@ -221,7 +224,9 @@ main#main,
   display:grid;
   gap:clamp(var(--space-10), 6vw, var(--space-16));
   align-items:start;
+  padding-top:clamp(var(--space-8), 5vw, var(--space-10));
   padding-bottom:clamp(var(--space-16), 12vw, 6rem);
+  border-top:1px solid var(--olive-900);  /* sépare discrètement le titre du reste, sans casser le contraste */
 }
 @media (min-width:720px){
   .cols{grid-template-columns:1fr 1fr;}
@@ -258,7 +263,7 @@ main#main,
   justify-content:center;
   min-width:var(--min-hit);
   min-height:var(--min-hit);
-  color:var(--text-secondary);
+  color:var(--accent);              /* même sauge que le logo et le bouton « Écrivez-moi » */
   border-radius:var(--radius-md);
   text-decoration:none;
 }
