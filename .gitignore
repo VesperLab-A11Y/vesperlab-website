@@ -1,6 +1,4 @@
 .DS_Store
 *.log
 assets/_*
-docs/superpowers/
-docs/redirection-framer.md
-docs/couverture-accessibilite.md
+docs/
