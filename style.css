@@ -1,10 +1,3 @@
-/* ============================================================================
-   Vesper Lab — feuille de styles du site vitrine
-   Jetons du design system V2 (sombre uniquement), recopiés depuis
-   ~/Desktop/Vesper-Library/style.css. Seuls les jetons utilisés ici sont repris
-   (les jetons --severity-*, le thème clair et Noto Sans Mono sont écartés).
-   ============================================================================ */
-
 /* ---- Polices auto-hébergées (aucune requête tierce) ---- */
 @font-face{
   font-family:'Noto Serif'; font-style:normal; font-weight:400; font-display:swap;
@@ -57,7 +50,6 @@
   unicode-range:U+0100-024F,U+0259,U+1E00-1EFF,U+2020,U+20A0-20AB,U+20AD-20CF,U+2113,U+2C60-2C7F,U+A720-A7FF;
 }
 
-/* ---- Jetons (design system V2, sombre) ---- */
 :root{
   /* Typographie */
   --font-display:'Noto Serif',Georgia,'Times New Roman',serif;
@@ -80,7 +72,7 @@
   --space-6:16px;
   --space-8:24px;
   --space-10:32px;
-  --space-16:64px;   /* propre au site : rythme vertical des grands blocs */
+  --space-16:64px;   
   --radius-md:8px;
   --min-hit:44px;
 
@@ -97,7 +89,7 @@
   --sage-500:oklch(0.83 0.055 128);
   --sage-on:oklch(0.145 0.008 150);
 
-  /* Vert très foncé — ligne de séparation discrète (jeton DS V2 --olive-900) */
+  /* Vert très foncé */
   --olive-900:#272E24;
 
   /* Alias sémantiques */
@@ -159,7 +151,7 @@ a:hover{color:var(--link-hover);text-decoration-thickness:2px;}
 }
 .skip-link:focus{top:0;}
 
-/* ---- Mouvement réduit : on neutralise toute animation/transition ---- */
+/* ---- Mouvement réduit ---- */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{
@@ -189,7 +181,7 @@ main#main,
 }
 .wordmark{
   margin:0;
-  color:var(--accent);              /* sauge de marque, 9,8:1 sur --ink-975 */
+  color:var(--accent);
   line-height:0;
 }
 .wordmark svg{
@@ -226,7 +218,7 @@ main#main,
   align-items:start;
   padding-top:clamp(var(--space-8), 5vw, var(--space-10));
   padding-bottom:clamp(var(--space-16), 12vw, 6rem);
-  border-top:1px solid var(--olive-900);  /* sépare discrètement le titre du reste, sans casser le contraste */
+  border-top:1px solid var(--olive-900); 
 }
 @media (min-width:720px){
   .cols{grid-template-columns:1fr 1fr;}
@@ -263,7 +255,7 @@ main#main,
   justify-content:center;
   min-width:var(--min-hit);
   min-height:var(--min-hit);
-  color:var(--accent);              /* même sauge que le logo et le bouton « Écrivez-moi » */
+  color:var(--accent);            
   border-radius:var(--radius-md);
   text-decoration:none;
 }
@@ -298,7 +290,7 @@ main#main,
 }
 .site-footer p{margin:var(--space-3) 0;}
 
-/* Une seule animation : arrivée douce du contenu, coupée en reduced-motion */
+/* Une seule animations */
 @keyframes lever{
   from{opacity:0;transform:translateY(8px);}
   to{opacity:1;transform:none;}

@@ -4,7 +4,7 @@ Site vitrine de **Vesper Lab**, laboratoire d'accessibilité numérique, Montré
 Page unique « bientôt en ligne », en attendant l'ouverture des services à
 l'automne 2026.
 
-## Pile
+## A propos
 
 HTML/CSS statique, zéro dépendance, zéro build. 
 Polices Noto auto-hébergées.
@@ -13,7 +13,7 @@ Hébergé sur Cloudflare Pages.
 ## Accessibilité
 
 Cible WCAG 2.2 AA (AAA sur le texte courant). HTML sémantique, thème sombre
-unique assumé, focus visible, `prefers-reduced-motion` respecté, aucune
+unique, focus visible, `prefers-reduced-motion` respecté, aucune
 ressource tierce chargée.
 
 ## Licence

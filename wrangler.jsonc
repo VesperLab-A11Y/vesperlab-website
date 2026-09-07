@@ -1,16 +1,13 @@
 {
   // Configuration du déploiement Cloudflare Workers (site statique, sans code serveur).
-  // Cloudflare génère ce fichier automatiquement s'il est absent ; on le versionne
-  // ici pour maîtriser deux choses : le nom du Worker et la gestion des 404.
+  // Cloudflare génère ce fichier automatiquement s'il est absent
   "name": "vesperlab-website",
   "compatibility_date": "2026-09-03",
   "observability": {
     "enabled": true
   },
   "assets": {
-    // Tout le dépôt est publié tel quel, sauf ce que liste .assetsignore.
     "directory": ".",
-    // Une URL inconnue sert la page 404.html de marque (au lieu d'une 404 vide).
     "not_found_handling": "404-page"
   }
 }
