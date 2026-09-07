@@ -1,4 +1,16 @@
+# Fichiers présents dans le dépôt mais NON publiés sur le site.
+# Syntaxe identique à .gitignore.
+
+# Notes de travail internes
 docs/
 .superpowers/
+
+# Scripts de build (utiles au dépôt, pas au site servi)
 scripts/
-docs/superpowers/plans/
+
+# Métadonnées du dépôt, à ne pas exposer comme pages
+wrangler.jsonc
+.assetsignore
+.gitignore
+README.md
+LICENSE
