@@ -1,0 +1,24 @@
+<header class="site-header">
+  <a class="site-logo" href="{{home}}" aria-label="{{i18n.logoAria}}">
+    <!-- Logo inliné depuis assets/vesperlab-logo.svg (source unique) : la couleur
+         est pilotée en CSS via currentColor, impossible à travers une balise <img>.
+         Le nom accessible du lien vient de aria-label ; le <title> interne du SVG
+         reste redondant mais sans effet néfaste. -->
+    {{inline:assets/vesperlab-logo.svg}}
+  </a>
+
+  <nav class="site-nav" aria-label="{{i18n.navAria}}">
+    <ul>
+      <li><a href="{{home}}"{{aria.accueil}}>{{i18n.navAccueil}}</a></li>
+      <li><a href="{{nav.apropos}}"{{aria.apropos}}>{{i18n.navApropos}}</a></li>
+      <li><a href="{{nav.services}}"{{aria.services}}>{{i18n.navServices}}</a></li>
+      <li><a href="{{nav.lelab}}"{{aria.lelab}}>{{i18n.navLeLab}}</a></li>
+      <li><a href="{{nav.blog}}"{{aria.blog}}>{{i18n.navBlog}}</a></li>
+      <li><a href="{{nav.contact}}"{{aria.contact}}>{{i18n.navContact}}</a></li>
+    </ul>
+  </nav>
+
+  <p class="lang-switch">
+    <a href="{{langToggleHref}}" lang="{{langToggleLang}}" hreflang="{{langToggleLang}}">{{i18n.langToggle}}</a>
+  </p>
+</header>

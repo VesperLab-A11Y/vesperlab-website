@@ -1,0 +1,17 @@
+{
+  "_comment": "Shared interface strings for every EN page. Page content itself lives inline in src/pages/en/*.html. Draft translations — review for client terminology.",
+  "skipLink": "Skip to content",
+  "logoAria": "Vesper Lab, back to home",
+  "navAria": "Main navigation",
+  "navAccueil": "Home",
+  "navApropos": "About",
+  "navServices": "Services",
+  "navLeLab": "The Lab",
+  "navBlog": "Blog",
+  "navContact": "Contact",
+  "langToggle": "Français",
+  "footerA11y": "This site meets WCAG 2.2 AA accessibility criteria.",
+  "footerCreditBefore": "Built by Vesper Lab, ",
+  "footerCreditLink": "open-source",
+  "footerCreditAfter": "."
+}

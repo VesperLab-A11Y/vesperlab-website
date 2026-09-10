@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>Vesper Lab — Blog</title>
+  <link>https://vesperlab.dev/blog/</link>
+  <description>Articles sur l'accessibilité numérique.</description>
+  <language>fr-CA</language>
+  <item>
+    <title>Exemple de structure d'article</title>
+    <link>https://vesperlab.dev/blog/exemple-de-structure/</link>
+    <guid>https://vesperlab.dev/blog/exemple-de-structure/</guid>
+    <pubDate>Sat, 05 Sep 2026 12:00:00 GMT</pubDate>
+    <description>Fichier de démonstration pour vérifier la chaîne de génération du blog. À supprimer avant la mise en ligne.</description>
+  </item>
+</channel>
+</rss>

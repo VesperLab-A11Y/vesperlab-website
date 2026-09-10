@@ -1,0 +1,51 @@
+{
+  "_comment": "Inventaire des pages du site. Une entrée par page ; chaque page a une version fr et une version en, chacune avec son chemin d'URL, son <title> et sa meta description. Le fragment de contenu correspondant est src/pages/<key>.html (fr) et src/pages/en/<key>.html (en). L'ordre du tableau = l'ordre de la navigation.",
+
+  "navKeys": ["accueil", "apropos", "services", "lelab", "blog", "contact"],
+
+  "pages": [
+    {
+      "key": "accueil",
+      "fr": { "path": "/",        "title": "Vesper Lab : accessibilité numérique",              "description": "Laboratoire d'accessibilité numérique, à Montréal. Audits de sites et de documents, en français et en anglais." },
+      "en": { "path": "/en/",     "title": "Vesper Lab: digital accessibility",                 "description": "Digital accessibility lab based in Montréal. Website and document audits, in French and English." }
+    },
+    {
+      "key": "apropos",
+      "fr": { "path": "/a-propos/",     "title": "À propos — Vesper Lab",   "description": "Pauline Chevalliot, d'ex-développeuse web à auditrice en accessibilité numérique." },
+      "en": { "path": "/en/about/",     "title": "About — Vesper Lab",      "description": "Pauline Chevalliot, from web developer to digital accessibility auditor." }
+    },
+    {
+      "key": "services",
+      "fr": { "path": "/services/",      "title": "Services — Vesper Lab",   "description": "Audits d'accessibilité de sites web et de documents, contre-audits, accompagnement." },
+      "en": { "path": "/en/services/",   "title": "Services — Vesper Lab",   "description": "Accessibility audits for websites and documents, re-audits, guidance." }
+    },
+    {
+      "key": "lelab",
+      "fr": { "path": "/le-lab/",        "title": "Le Lab — Vesper Lab",    "description": "Réalisations et outils libres autour de l'accessibilité numérique." },
+      "en": { "path": "/en/the-lab/",    "title": "The Lab — Vesper Lab",   "description": "Case studies and open-source tooling for digital accessibility." }
+    },
+    {
+      "key": "lelab-realisations",
+      "nav": false,
+      "fr": { "path": "/le-lab/realisations/",   "title": "Réalisations — Vesper Lab",   "description": "Études de cas d'audits d'accessibilité." },
+      "en": { "path": "/en/the-lab/case-studies/", "title": "Case studies — Vesper Lab", "description": "Accessibility audit case studies." }
+    },
+    {
+      "key": "lelab-outils",
+      "nav": false,
+      "fr": { "path": "/le-lab/outils/",   "title": "Outils — Vesper Lab",   "description": "Vesper Toolkit, Vesper Library et les autres outils libres de Vesper Lab." },
+      "en": { "path": "/en/the-lab/tools/", "title": "Tools — Vesper Lab",   "description": "Vesper Toolkit, Vesper Library and the other open-source tools by Vesper Lab." }
+    },
+    {
+      "key": "blog",
+      "generated": true,
+      "fr": { "path": "/blog/",     "title": "Blog — Vesper Lab",   "description": "Articles sur l'accessibilité numérique, les audits et les outils." },
+      "en": { "path": "/en/blog/",  "title": "Blog — Vesper Lab",   "description": "Articles on digital accessibility, audits and tooling." }
+    },
+    {
+      "key": "contact",
+      "fr": { "path": "/contact/",     "title": "Contact — Vesper Lab",   "description": "Écrire à Vesper Lab : courriel, LinkedIn, délai de réponse annoncé." },
+      "en": { "path": "/en/contact/",  "title": "Contact — Vesper Lab",   "description": "Get in touch with Vesper Lab: email, LinkedIn, stated response time." }
+    }
+  ]
+}

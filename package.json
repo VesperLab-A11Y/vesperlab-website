@@ -1,0 +1,12 @@
+{
+  "name": "vesperlab-website",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Site vitrine Vesper Lab — HTML/CSS/JS statique, assemblé localement, servi par Cloudflare (Workers static assets).",
+  "scripts": {
+    "build": "node scripts/build-site.mjs && node scripts/build-blog.mjs",
+    "check": "node scripts/check.mjs",
+    "serve": "python3 -m http.server 8000"
+  }
+}

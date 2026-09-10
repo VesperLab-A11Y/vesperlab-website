@@ -2,3 +2,9 @@
 *.log
 assets/_*
 docs/
+node_modules/
+
+# Artefacts de revue produits par les assembleurs (à valider puis renommer,
+# ils ne remplacent pas les fichiers live tant que le site n'a pas basculé)
+index.generated.html
+sitemap.generated.xml

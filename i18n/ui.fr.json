@@ -1,0 +1,17 @@
+{
+  "_comment": "Libellés d'interface partagés par toutes les pages FR. Le contenu de page, lui, vit en dur dans src/pages/*.html (voir la spec consolidée, §5).",
+  "skipLink": "Aller au contenu",
+  "logoAria": "Vesper Lab, retour à l'accueil",
+  "navAria": "Navigation principale",
+  "navAccueil": "Accueil",
+  "navApropos": "À propos",
+  "navServices": "Services",
+  "navLeLab": "Le Lab",
+  "navBlog": "Blog",
+  "navContact": "Contact",
+  "langToggle": "English",
+  "footerA11y": "Ce site respecte les critères d'accessibilité WCAG 2.2 AA.",
+  "footerCreditBefore": "Créé par Vesper Lab, ",
+  "footerCreditLink": "open-source",
+  "footerCreditAfter": "."
+}

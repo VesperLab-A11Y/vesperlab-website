@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<link rel="canonical" href="https://vesperlab.dev{{path}}">
+<meta name="theme-color" content="#030504">
+
+<!-- Versions linguistiques réciproques -->
+<link rel="alternate" hreflang="fr" href="https://vesperlab.dev{{pathFr}}">
+<link rel="alternate" hreflang="en" href="https://vesperlab.dev{{pathEn}}">
+<link rel="alternate" hreflang="x-default" href="https://vesperlab.dev{{pathFr}}">
+
+<!-- Open Graph / partage -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="{{ogLocale}}">
+<meta property="og:url" content="https://vesperlab.dev{{path}}">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:image" content="https://vesperlab.dev/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicons -->
+<link rel="icon" href="/assets/favicon-16.svg" sizes="16x16">
+<link rel="icon" href="/assets/favicon.svg" sizes="any">
+<link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<!-- Préchargement des deux faces du premier rendu -->
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/noto-serif-latin-600.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/noto-sans-latin-400.woff2" crossorigin>
+
+<link rel="stylesheet" href="/styles/tokens.css">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">{{i18n.skipLink}}</a>
+
+{{> header}}
+
+<main id="main" tabindex="-1">
+{{main}}
+</main>
+
+{{> footer}}
+
+</body>
+</html>

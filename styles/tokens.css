@@ -1,0 +1,65 @@
+/* ============================================================================
+   Jetons du design system Vesper Lab — V2 (sauge / ink / cream / Noto)
+   ----------------------------------------------------------------------------
+   Bloc :root sorti de style.css pour être partagé tel quel par toutes les
+   pages du site multi-pages. Aucune règle ici, seulement des variables.
+   Chargé AVANT style.css sur chaque page :
+     <link rel="stylesheet" href="/styles/tokens.css">
+     <link rel="stylesheet" href="/style.css">
+   ============================================================================ */
+
+:root{
+  /* Typographie */
+  --font-display:'Noto Serif',Georgia,'Times New Roman',serif;
+  --font-body:'Noto Sans',Arial,Helvetica,sans-serif;
+  --font-size-display:44px;
+  --font-size-h2:24px;
+  --font-size-h3:19px;
+  --font-size-lead:19px;
+  --font-size-body:17px;
+  --font-size-caption:13px;
+  --leading-tight:1.18;
+  --leading-heading:1.25;
+  --leading-body:1.65;
+  --tracking-display:0.005em;
+
+  /* Espacements / rayons */
+  --space-3:8px;
+  --space-4:10px;
+  --space-5:12px;
+  --space-6:16px;
+  --space-8:24px;
+  --space-10:32px;
+  --space-16:64px;
+  --radius-md:8px;
+  --min-hit:44px;
+
+  /* Couleurs — neutres oklch teinte 150 */
+  --ink-975:oklch(0.11 0.006 150);
+  --cream-100:oklch(0.93 0.018 85);
+  --cream-300:oklch(0.85 0.018 85);
+  --cream-500:oklch(0.72 0.02 85);
+  --hairline:rgba(233,223,200,0.14);
+  --hairline-strong:rgba(233,223,200,0.18);
+
+  /* Accent — sauge séchée teinte 128 */
+  --sage-300:oklch(0.89 0.05 128);
+  --sage-500:oklch(0.83 0.055 128);
+  --sage-on:oklch(0.145 0.008 150);
+
+  /* Vert très foncé */
+  --olive-900:#272E24;
+
+  /* Alias sémantiques */
+  --surface-page:var(--ink-975);
+  --text-body:var(--cream-100);
+  --text-secondary:var(--cream-300);
+  --text-muted:var(--cream-500);
+  --border-default:var(--hairline);
+  --accent:var(--sage-500);
+  --accent-hover:var(--sage-300);
+  --accent-on:var(--sage-on);
+  --focus-ring:var(--sage-500);
+  --link:var(--sage-500);
+  --link-hover:var(--sage-300);
+}

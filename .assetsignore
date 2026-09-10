@@ -4,13 +4,22 @@
 # Notes de travail internes
 docs/
 .superpowers/
+.claude/
 
-# Scripts de build (utiles au dépôt, pas au site servi)
+# Sources d'assemblage (utiles au dépôt, pas au site servi)
 scripts/
+src/
+i18n/
+blog/_posts/
 
 # Métadonnées du dépôt, à ne pas exposer comme pages
 wrangler.jsonc
 .assetsignore
 .gitignore
+package.json
 README.md
 LICENSE
+
+# Artefacts de revue (non déployés)
+index.generated.html
+sitemap.generated.xml
