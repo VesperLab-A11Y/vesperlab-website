@@ -1,78 +1,119 @@
 <!-- Fragment de contenu FR : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     3 sections : Vesper Lab (adapté, ton exploration plutôt que vente),
-     Mon parcours, La Vesper derrière le Lab. -->
+     Intro fixe (h1 + accroche + 3 boutons) puis une « frame » qui n'existe
+     pas dans la page tant qu'aucun bouton n'est cliqué : nav → intro/boutons
+     → pied de page. Cliquer un bouton fait apparaître UNE des 3 sections
+     (L'humain / L'esprit / L'entité) dans la frame, à la place de celle
+     déjà ouverte s'il y en a une ; recliquer le bouton actif referme tout.
+     Comportement dans assets/js/apropos.js (vanilla, pas de framework).
+     Lune de fond conservée sur cette page (contrairement à l'essai précédent)
+     mais atténuée : voir ".page-apropos" dans style.css. -->
 
-<h1>À propos</h1>
-
-<section aria-labelledby="h-lab">
-  <h2 id="h-lab">Vesper Lab</h2>
-  <figure class="apropos-figure">
-    <img src="/assets/img/apropos-lab.jpg" alt="Illustration au trait blanc sur fond noir : une étagère avec une horloge, des livres, un oiseau et un miroir." loading="lazy">
-  </figure>
-  <p>Vesper Lab est le nom sous lequel je documente et je pratique
-    l'accessibilité numérique : audits, code, et ce que j'apprends en le
-    faisant.</p>
-
-  <h3>Ce que je publie</h3>
-  <p>L'accessibilité numérique se documente surtout en anglais, souvent
-    derrière un abonnement. Je traduis, je documente et je publie en libre
-    accès : le référentiel des 87 critères WCAG 2.2 en français et en
-    anglais, les outils que je construis pour mes propres audits, et des
-    articles sur ce que j'apprends en chemin.</p>
-  <p>Une petite organisation qui n'a pas les moyens de mandater personne
-    devrait pouvoir commencer seule.</p>
-
-  <h3>Comment je travaille</h3>
-  <p>Ce site est audité selon les critères WCAG 2.2, et ses limites connues
-    sont publiées dans sa
-    <a href="{{nav.declaration}}">déclaration d'accessibilité</a>. Mes outils
-    sont conçus pour être utilisables par les personnes qu'ils concernent, y
-    compris au lecteur d'écran. Je suis moi-même concernée par une partie de
-    ces enjeux, ce qui m'évite de les traiter comme des abstractions.
-    J'écris en français épicène, en suivant les recommandations de l'OQLF.</p>
-  <p>Je me certifie CPACC à l'automne 2026, et j'apprends autant en
-    documentant qu'en auditant.</p>
+<section class="hero">
+  <h1>On ne devient pas aveugle en éteignant la lumière.</h1>
+  <p class="lead-body">Vesper Lab se résume en trois piliers : une personne,
+    une réflexion, et une idée. Derrière mon histoire, un seul et même fil
+    conducteur, bien visible dans l'obscurité.</p>
 </section>
 
-<section aria-labelledby="h-parcours">
-  <h2 id="h-parcours">Mon parcours</h2>
-  <figure class="apropos-figure">
-    <img src="/assets/img/apropos-moi.jpg" alt="Pauline Chevalliot, une tasse de café à la main, assise près d'une fenêtre. Son chat se tient derrière elle." loading="lazy">
-  </figure>
-  <p>J'ai passé six ans dans le milieu médical d'urgence, principalement
-    comme ambulancière. C'est en rencontrant des personnes uniques, en
-    écoutant leur histoire et en observant comment le monde interagissait
-    avec elles que je suis tombée dans les sciences sociales. Depuis la
-    cellule de l'ambulance, j'ai consacré mon mémoire aux biais et aux
-    stéréotypes des soignantes et soignants, et à leur effet concret sur la
-    prise en charge des personnes en situation d'urgence.</p>
-  <p>En visitant les hôpitaux, je me suis arrêtée devant des signalisations
-    illisibles, j'ai trébuché sur des rampes bancales, et j'ai buté sur des
-    sites web en cherchant le bon service depuis mon téléphone. J'ai
-    réorienté mon travail vers la conception web, avec un intérêt
-    particulier pour les organismes de santé, puis vers le développement,
-    pour pouvoir mener mes idées jusqu'au bout.</p>
-  <p>J'ai ensuite travaillé à l'évaluation de systèmes d'intelligence
-    artificielle : détection des contenus nuisibles, correction des biais,
-    adaptation culturelle, vérification des faits, et rédaction en français
-    épicène. Le même réflexe qu'ailleurs, chercher qui le système sert mal.</p>
-  <p>Arrivée de France au Québec, je travaille aujourd'hui en français et en
-    anglais, entre deux cadres réglementaires. Ce qui relie tout ça, c'est
-    une même façon de regarder : remarquer ce que personne ne relève, et
-    vouloir comprendre pourquoi c'est là.</p>
-</section>
+<div class="apropos-toggle-row" role="group" aria-label="Sections de la page À propos">
+  <button type="button" class="apropos-toggle" aria-expanded="false" aria-controls="panel-humain">L'humain</button>
+  <button type="button" class="apropos-toggle" aria-expanded="false" aria-controls="panel-esprit">L'esprit</button>
+  <button type="button" class="apropos-toggle" aria-expanded="false" aria-controls="panel-entite">L'entité</button>
+</div>
 
-<section aria-labelledby="h-vesper">
-  <h2 id="h-vesper">La Vesper derrière le Lab</h2>
-  <p>Les chauves-souris ont longtemps souffert de la stigmatisation du
-    handicap. Le consensus sur leur cécité s'est formé au détour
-    d'expériences qui consistaient à les aveugler sciemment, pour observer
-    comment elles se repéraient sans la vue. Il était alors impensable
-    qu'une espèce évolue, et d'autant plus impensable de pouvoir vivre en
-    autonomie avec la lumière éteinte. Nous avons compris l'écholocation
-    bien plus tard, et découvert que ces animaux voyaient très bien, et
-    avaient même un sens supplémentaire.</p>
-  <p>Quand la vespère se réveille au crépuscule, elle remet en question
-    notre vision de ce qui est, ce qui devrait être, et comment vivre
-    ensemble autour de ce qui existe déjà.</p>
-</section>
+<div class="apropos-frame">
+  <div class="apropos-frame-inner">
+
+    <section id="panel-humain" class="apropos-panel" hidden aria-labelledby="h-humain">
+      <h2 id="h-humain">L'humain</h2>
+      <div class="apropos-row apropos-row--30 apropos-row--reverse">
+        <div class="apropos-text">
+          <p>J'ai passé six ans dans le milieu médical d'urgence, principalement
+            comme ambulancière. C'est en rencontrant des personnes uniques, en
+            écoutant leur histoire et en observant comment le monde interagissait
+            avec elles que je suis tombée dans les sciences sociales. Depuis la
+            cellule de l'ambulance, j'ai consacré mon mémoire aux biais et aux
+            stéréotypes des soignantes et soignants, et à leur effet concret sur la
+            prise en charge des personnes en situation d'urgence.</p>
+          <p>En visitant les hôpitaux, je me suis arrêtée devant des signalisations
+            illisibles, j'ai trébuché sur des rampes bancales, et j'ai buté sur des
+            sites web en cherchant le bon service depuis mon téléphone. J'ai
+            réorienté mon travail vers la conception web, avec un intérêt
+            particulier pour les organismes de santé, puis vers le développement,
+            pour pouvoir mener mes idées jusqu'au bout.</p>
+        </div>
+        <figure class="apropos-figure">
+          <img src="/assets/img/apropos-moi.jpg" alt="Pauline Chevalliot, une tasse de café à la main, assise près d'une fenêtre. Son chat se tient derrière elle." loading="lazy">
+        </figure>
+      </div>
+      <p>J'ai ensuite travaillé à l'évaluation de systèmes d'intelligence
+        artificielle : détection des contenus nuisibles, correction des biais,
+        adaptation culturelle, vérification des faits, et rédaction en français
+        épicène. Le même réflexe qu'ailleurs, chercher qui le système sert mal.</p>
+      <p>Arrivée de France au Québec, je travaille aujourd'hui en français et en
+        anglais, entre deux cadres réglementaires. Ce qui relie tout ça, c'est
+        une même façon de regarder : remarquer ce que personne ne relève, et
+        vouloir comprendre pourquoi c'est là.</p>
+    </section>
+
+    <section id="panel-esprit" class="apropos-panel" hidden aria-labelledby="h-esprit">
+      <h2 id="h-esprit">L'esprit</h2>
+      <p>Les chauves-souris ont longtemps souffert de la stigmatisation du
+        handicap. Le consensus sur leur cécité s'est formé au détour
+        d'expériences qui consistaient à les aveugler sciemment, pour observer
+        comment elles se repéraient sans la vue. Il était alors impensable
+        qu'une espèce évolue, et d'autant plus impensable de pouvoir vivre en
+        autonomie avec la lumière éteinte. Nous avons compris l'écholocation
+        bien plus tard, et découvert que ces animaux voyaient très bien, et
+        avaient même un sens supplémentaire.</p>
+      <p>Quand la vespère se réveille au crépuscule, elle remet en question
+        notre vision de ce qui est, ce qui devrait être, et comment vivre
+        ensemble autour de ce qui existe déjà.</p>
+      <!-- Brouillon : paragraphe à retravailler par Pauline (note session du
+           2026-09-15 : communauté, vie de groupe, marginalisation,
+           engagement bénévole). Posé ici pour donner une forme à la section,
+           pas un texte final. -->
+      <p>Documenter et publier en accès libre, c'est aussi une manière de
+        rester proche de ce que vit une communauté marginalisée : je le fais
+        bénévolement, en dehors de tout mandat. Ce qui limite l'accès n'est pas
+        seulement technique. C'est aussi une question de qui a le temps, les
+        moyens, ou la légitimité perçue de s'engager. La vespère est un animal
+        qu'on a exclu du « normal » avant même de chercher à la comprendre.
+        Une raison de plus pour construire cette communauté avec celles et
+        ceux qu'on met de côté par réflexe, et pas après coup.</p>
+    </section>
+
+    <section id="panel-entite" class="apropos-panel" hidden aria-labelledby="h-entite">
+      <h2 id="h-entite">L'entité</h2>
+      <p>Vesper Lab est le nom sous lequel je documente et je pratique
+        l'accessibilité numérique : audits, code, et ce que j'apprends en le
+        faisant.</p>
+      <div class="apropos-row">
+        <div class="apropos-text">
+          <h3>Ce que je publie</h3>
+          <p>L'accessibilité numérique se documente surtout en anglais, souvent
+            derrière un abonnement. Je traduis, je documente et je publie en libre
+            accès : le référentiel des 87 critères WCAG 2.2 en français et en
+            anglais, les outils que je construis pour mes propres audits, et des
+            articles sur ce que j'apprends en chemin.</p>
+          <p>Une petite organisation qui n'a pas les moyens de mandater personne
+            devrait pouvoir commencer seule.</p>
+        </div>
+        <figure class="apropos-figure">
+          <img src="/assets/img/apropos-lab.jpg" alt="Illustration au trait blanc sur fond noir : une étagère avec une horloge, des livres, un oiseau et un miroir." loading="lazy">
+        </figure>
+      </div>
+      <h3>Comment je travaille</h3>
+      <p>Ce site est audité selon les critères WCAG 2.2, et ses limites connues
+        sont publiées dans sa
+        <a href="{{nav.declaration}}">déclaration d'accessibilité</a>. Mes outils
+        sont conçus pour être utilisables par les personnes qu'ils concernent, y
+        compris au lecteur d'écran. Je suis moi-même concernée par une partie de
+        ces enjeux, ce qui m'évite de les traiter comme des abstractions.
+        J'écris en français épicène, en suivant les recommandations de l'OQLF.</p>
+      <p>Je me certifie CPACC à l'automne 2026, et j'apprends autant en
+        documentant qu'en auditant.</p>
+    </section>
+
+  </div>
+</div>

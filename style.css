@@ -592,7 +592,7 @@ html.vl-font-1{font-size:112.5%;}
 html.vl-font-2{font-size:125%;}
 
 /* ============================================================================
-   Page Accueil (multi-pages) — 7 blocs, voir src/pages/accueil.html
+   Page Accueil (multi-pages) — 6 blocs, voir src/pages/accueil.html
    ============================================================================ */
 
 main#main > section{
@@ -661,33 +661,30 @@ main#main h3{
   font-style:italic;
 }
 
-/* ---- 3. À quoi ressemble un constat ---- */
-.constat-card{
-  max-width:44rem;
-  padding:var(--space-8);
+/* ---- 3. Sur le blog ---- */
+.blog-grid{
+  list-style:none;
+  margin:0 0 var(--space-8);
+  padding:0;
+  display:grid;
+  gap:var(--space-6);
+}
+@media (min-width:720px){
+  .blog-grid{grid-template-columns:repeat(3, 1fr);}
+}
+.blog-card{
+  display:block;
+  height:100%;
+  padding:var(--space-6);
   background:var(--surface-card);
   border:1px solid var(--border-default);
-  border-left:3px solid var(--accent-quiet);
   border-radius:var(--radius-lg);
+  text-decoration:none;
+  color:var(--text-body);
 }
-.constat-tags{display:flex;gap:var(--space-2);margin:0 0 var(--space-4);}
-.constat-tag{
-  font-family:var(--font-mono);
-  font-size:var(--font-size-caption);
-  padding:2px 10px;
-  border-radius:var(--radius-pill);
-  background:var(--surface-input);
-  color:var(--text-muted);
-}
-.constat-card p{color:var(--text-secondary);margin:0 0 var(--space-4);}
-.constat-card p:last-child{margin-bottom:0;}
-.constat-criteria{font-size:var(--font-size-body-sm);color:var(--text-muted) !important;}
-.constat-source{
-  margin:var(--space-4) 0 0;
-  font-size:var(--font-size-caption);
-  color:var(--text-faint);
-  font-style:italic;
-}
+.blog-card:hover{border-color:var(--accent);color:var(--text-body);}
+.blog-card h3{font-size:var(--font-size-body);margin:0 0 var(--space-3);}
+.blog-card p{margin:0;color:var(--text-secondary);font-size:var(--font-size-body-sm);}
 
 /* ---- 4. Le Lab ---- */
 .lab-teaser > p{max-width:42rem;color:var(--text-secondary);}
@@ -734,32 +731,7 @@ main#main h3{
 }
 .mp-card--lab .button:hover{background:var(--ink-800);color:var(--cream-100);}
 
-/* ---- 5. Sur le blog ---- */
-.blog-grid{
-  list-style:none;
-  margin:0 0 var(--space-8);
-  padding:0;
-  display:grid;
-  gap:var(--space-6);
-}
-@media (min-width:720px){
-  .blog-grid{grid-template-columns:repeat(3, 1fr);}
-}
-.blog-card{
-  display:block;
-  height:100%;
-  padding:var(--space-6);
-  background:var(--surface-card);
-  border:1px solid var(--border-default);
-  border-radius:var(--radius-lg);
-  text-decoration:none;
-  color:var(--text-body);
-}
-.blog-card:hover{border-color:var(--accent);color:var(--text-body);}
-.blog-card h3{font-size:var(--font-size-body);margin:0 0 var(--space-3);}
-.blog-card p{margin:0;color:var(--text-secondary);font-size:var(--font-size-body-sm);}
-
-/* ---- 6. Qui je suis / 7. Rester en contact ---- */
+/* ---- 5. Qui je suis / 6. Rester en contact ---- */
 .about-teaser p,
 .contact-teaser > p{max-width:42rem;color:var(--text-secondary);}
 .about-teaser .button-ghost,
@@ -869,12 +841,122 @@ main#main h3{
   -webkit-mask-image:radial-gradient(ellipse 65% 100% at 50% 50%, black 45%, transparent 100%);
 }
 
-/* ---- Page À propos : photo et illustration ---- */
-.apropos-figure{
-  margin:0 0 var(--space-8);
+/* ---- Page À propos : texte + image en 2 colonnes ----
+   65% texte / 35% image sur grand écran (70/30 avec --30), empilé en dessous
+   de 720px. L'image est verticalement centrée sur le bloc de texte
+   (align-items:center). Le modificateur --reverse inverse la position ET la
+   piste de grille (via grid-column explicite, PAS `order`) : en grille CSS,
+   `order` change aussi l'ordre d'auto-placement dans les pistes, pas
+   seulement l'ordre visuel — avec seulement `order`, l'image héritait de la
+   piste large (70%) au lieu de l'étroite (30%), d'où la photo "énorme"
+   observée sur L'humain. grid-column fige chaque élément dans sa piste,
+   indépendamment de l'ordre du DOM (qui reste texte puis image dans les deux
+   sections, pour une lecture clavier/lecteur d'écran cohérente). */
+.apropos-row{
+  display:grid;
+  gap:var(--space-8);
+  align-items:center;
 }
+@media (min-width:720px){
+  .apropos-row{grid-template-columns:65fr 35fr;}
+  /* grid-row:1 explicite sur les deux : sans ça, l'auto-placement (qui ne
+     revient jamais en arrière une fois le curseur avancé) pousse le 2e
+     enfant du DOM sur une nouvelle ligne dès que son grid-column est AVANT
+     celui du 1er (cas --reverse : le texte, 1er du DOM, prend la colonne 2 ;
+     l'image, 2e du DOM, redemande la colonne 1 — trop tard, curseur déjà
+     passé). C'était le vrai bug derrière l'image mal alignée sur L'humain :
+     elle ne partageait pas la ligne du texte, elle tombait dessous. */
+  .apropos-row .apropos-text{grid-column:1;grid-row:1;}
+  .apropos-row .apropos-figure{grid-column:2;grid-row:1;}
+  .apropos-row--30{grid-template-columns:70fr 30fr;}
+  .apropos-row--reverse{grid-template-columns:35fr 65fr;}
+  .apropos-row--reverse.apropos-row--30{grid-template-columns:30fr 70fr;}
+  .apropos-row--reverse .apropos-text{grid-column:2;}
+  .apropos-row--reverse .apropos-figure{grid-column:1;}
+}
+.apropos-figure{margin:0;}
 .apropos-figure img{
-  border-radius:var(--radius-lg);
   width:100%;
-  max-width:32rem;
+  display:block;
+  /* Fondu des bords plutôt que coin arrondi net : le fond de l'illustration
+     (noir pur) et le fond de la page (--surface-page, quasi noir mais teinté)
+     ne matchent jamais exactement en dur ; l'image se dissout dans la page
+     au lieu de découper un rectangle dessus. Même logique que le masque de
+     .mp-card::before plus bas, appliqué ici directement sur l'image. */
+  mask-image:radial-gradient(ellipse 92% 92% at 50% 50%, black 80%, transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 92% 92% at 50% 50%, black 80%, transparent 100%);
+}
+
+/* Lune de fond conservée sur la page À propos (même mécanique que partout :
+   .moon-fixed/.page-scrim/assets/js/moon.js, rien à dupliquer), mais
+   atténuée : cette page a déjà deux images fortes + une carte (.apropos-frame)
+   comme repères, la lune n'a plus besoin d'être le seul élément d'ambiance. */
+.page-apropos .moon-fixed .moon{opacity:.4;}
+.page-apropos .page-scrim{opacity:.55;}
+
+/* ---- Page À propos : 3 boutons + frame à bascule ----
+   La frame (résumé des 3 sections) n'existe pas visuellement tant qu'aucun
+   bouton n'est actif : hauteur 0 via la technique grid-template-rows
+   0fr → 1fr (anime une hauteur "auto" sans mesurer de pixels en JS). Un seul
+   panneau visible à la fois (recliquer le bouton actif referme tout) —
+   logique d'accordéon à sélection unique, pas des tabs (rien n'est ouvert
+   par défaut). Comportement dans assets/js/apropos.js. */
+.apropos-toggle-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--space-4);
+  margin:0 0 var(--space-10);
+}
+.apropos-toggle{
+  display:inline-flex;
+  align-items:center;
+  min-height:var(--min-hit);
+  padding:var(--space-3) var(--space-8);
+  background:transparent;
+  border:1px solid var(--accent);
+  border-radius:var(--radius-md);
+  color:var(--accent);
+  font-weight:700;
+  font-size:var(--font-size-body);
+  cursor:pointer;
+  transition:background-color .15s ease, color .15s ease;
+}
+.apropos-toggle:hover{color:var(--accent-hover);border-color:var(--accent-hover);}
+.apropos-toggle[aria-expanded="true"]{
+  background:var(--accent);
+  color:var(--accent-on);
+}
+.apropos-toggle[aria-expanded="true"]:hover{background:var(--accent-hover);color:var(--accent-on);}
+
+.apropos-frame{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .4s ease;
+  /* Respiration avant le pied de page quand un onglet est ouvert. (Cette
+     règle visait avant à recopier l'espacement de .hero via
+     var(--space-12) — un jeton qui n'existe pas dans tokens.css, l'échelle
+     saute de --space-10 à --space-16 : le calc() entier était donc invalide
+     et retombait silencieusement à 0, d'où l'absence de marge malgré la
+     règle. Remplacé par une valeur simple et sûre.) */
+  margin-bottom:30px;
+}
+.apropos-frame.is-open{grid-template-rows:1fr;}
+.apropos-frame-inner{
+  overflow:hidden;
+  min-height:0;
+  border:1px solid var(--accent);
+  border-radius:var(--radius-lg);
+  /* Fond noir non-opaque : la lune (atténuée) continue de se deviner derrière
+     la carte plutôt que d'être coupée net. */
+  background:oklch(0.11 0.006 150 / 0.82);
+}
+.apropos-panel{padding:20px;}
+.apropos-panel p{font-size:calc(var(--font-size-body) - 1px);}
+.apropos-panel h2{
+  margin:var(--space-4) var(--space-3) var(--space-6) var(--space-3);
+  padding-bottom:var(--space-3);
+  border-bottom:1px solid var(--border-default);
+}
+@media (prefers-reduced-motion:reduce){
+  .apropos-frame{transition:none;}
 }

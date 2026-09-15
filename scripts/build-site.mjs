@@ -57,6 +57,7 @@ for (const lang of LANGS) {
     const vars = {
       ...i18nVars(ui[lang]),
       lang,
+      pageKey: page.key,
       ogLocale: OG_LOCALE[lang],
       title: meta.title,
       description: meta.description,

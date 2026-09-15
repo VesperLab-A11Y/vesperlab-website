@@ -1,5 +1,5 @@
 <!-- Fragment de contenu FR : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Contenu figé (roadmap), 7 blocs. La lune (fixe, en fond de toute la page)
+     Contenu figé (roadmap), 6 blocs. La lune (fixe, en fond de toute la page)
      et son éclipse liée au scroll global vivent dans src/partials/layout.html
      + style.css ("Lune fixe") + assets/js/moon.js — rien à faire ici pour ça.
      .mp-card fait apparaître une carte de fond en fondu derrière un bloc
@@ -46,26 +46,35 @@
   </ul>
 </section>
 
-<section class="constat mp-card" aria-labelledby="h-constat">
-  <h2 id="h-constat">À quoi ressemble un constat</h2>
-  <div class="constat-card">
-    <p class="constat-tags">
-      <span class="constat-tag">2.4.2</span>
-      <span class="constat-tag">3.1.1</span>
-    </p>
-    <h3>La page ne dit ni son nom, ni sa langue.</h3>
-    <p>Deux lignes manquaient dans le code : le titre du document et sa
-      langue.</p>
-    <p><strong>Ce que ça change.</strong> Une personne qui utilise un lecteur
-      d'écran ouvre la page et n'entend aucun titre, donc rien qui lui
-      permette de savoir où elle se trouve parmi ses onglets. Le texte
-      français lui est ensuite lu avec la prononciation anglaise, ce qui le
-      rend difficilement compréhensible.</p>
-    <p class="constat-criteria">Critères WCAG 2.2 concernés : 2.4.2 Titre de
-      page (A) et 3.1.1 Langue de la page (A).</p>
+<section class="blog-teaser mp-card" aria-labelledby="h-blog">
+  <h2 id="h-blog">Sur le blog</h2>
+  <ul class="blog-grid">
+    <li>
+      <a class="blog-card" href="{{nav.blog}}accessibilite-pdf-5-conseils/">
+        <h3>Accessibilité PDF : 5 conseils qui font écho</h3>
+        <p>Quelles que soient vos raisons, vous en avez forcément une bonne
+          pour améliorer l'accessibilité de vos PDF.</p>
+      </a>
+    </li>
+    <li>
+      <a class="blog-card" href="{{nav.blog}}cv-les-yeux-fermes/">
+        <h3>Et si vous lisiez votre CV les yeux fermés ?</h3>
+        <p>Pourquoi un CV accessible passe mieux les filtres automatiques, et
+          pourquoi ça ne concerne pas que les personnes handicapées.</p>
+      </a>
+    </li>
+    <li>
+      <a class="blog-card" href="{{nav.blog}}entre-voir-et-remarquer/">
+        <h3>Entre voir et remarquer</h3>
+        <p>Ce qu'on ne voit pas tant qu'on n'en a pas besoin, et pourquoi
+          c'est un problème pour l'accessibilité.</p>
+      </a>
+    </li>
+  </ul>
+  <div class="button-row">
+    <a class="button button-ghost" href="{{nav.blog}}">Tous les articles</a>
+    <a class="button button-ghost" href="/blog/feed.xml">S'abonner au flux RSS</a>
   </div>
-  <p class="constat-source">Extrait d'un diagnostic réalisé sur une maquette,
-    août 2026.</p>
 </section>
 
 <section class="lab-teaser mp-card mp-card--lab" aria-labelledby="h-lab">
@@ -107,37 +116,6 @@
   <p>Vesper Lab est né de ces angles morts, et de l'envie d'y voir clair. Je
     travaille depuis Montréal, en français et en anglais.</p>
   <a class="button button-ghost" href="{{nav.apropos}}">En savoir plus</a>
-</section>
-
-<section class="blog-teaser mp-card" aria-labelledby="h-blog">
-  <h2 id="h-blog">Sur le blog</h2>
-  <ul class="blog-grid">
-    <li>
-      <a class="blog-card" href="{{nav.blog}}accessibilite-pdf-5-conseils/">
-        <h3>Accessibilité PDF : 5 conseils qui font écho</h3>
-        <p>Quelles que soient vos raisons, vous en avez forcément une bonne
-          pour améliorer l'accessibilité de vos PDF.</p>
-      </a>
-    </li>
-    <li>
-      <a class="blog-card" href="{{nav.blog}}cv-les-yeux-fermes/">
-        <h3>Et si vous lisiez votre CV les yeux fermés ?</h3>
-        <p>Pourquoi un CV accessible passe mieux les filtres automatiques, et
-          pourquoi ça ne concerne pas que les personnes handicapées.</p>
-      </a>
-    </li>
-    <li>
-      <a class="blog-card" href="{{nav.blog}}entre-voir-et-remarquer/">
-        <h3>Entre voir et remarquer</h3>
-        <p>Ce qu'on ne voit pas tant qu'on n'en a pas besoin, et pourquoi
-          c'est un problème pour l'accessibilité.</p>
-      </a>
-    </li>
-  </ul>
-  <div class="button-row">
-    <a class="button button-ghost" href="{{nav.blog}}">Tous les articles</a>
-    <a class="button button-ghost" href="/blog/feed.xml">S'abonner au flux RSS</a>
-  </div>
 </section>
 
 <section class="contact-teaser mp-card" aria-labelledby="h-contact">

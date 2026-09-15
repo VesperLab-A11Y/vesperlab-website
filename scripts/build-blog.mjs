@@ -148,6 +148,7 @@ for (const lang of ['fr', 'en']) {
     const other = lang === 'fr' ? 'en' : 'fr';
     const vars = {
       ...navVars(lang, blogRoot),
+      pageKey: 'blog',
       title: `${post.meta.title || post.slug} — Vesper Lab`,
       description: post.meta.description || '',
       path: url,
@@ -190,6 +191,7 @@ for (const lang of ['fr', 'en']) {
   const other = lang === 'fr' ? 'en' : 'fr';
   const listVars = {
     ...navVars(lang, blogRoot),
+    pageKey: 'blog',
     title: blogPage[lang].title,
     description: blogPage[lang].description,
     path: blogRoot,
