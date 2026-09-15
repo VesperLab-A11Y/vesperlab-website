@@ -868,3 +868,13 @@ main#main h3{
   mask-image:radial-gradient(ellipse 65% 100% at 50% 50%, black 45%, transparent 100%);
   -webkit-mask-image:radial-gradient(ellipse 65% 100% at 50% 50%, black 45%, transparent 100%);
 }
+
+/* ---- Page À propos : photo et illustration ---- */
+.apropos-figure{
+  margin:0 0 var(--space-8);
+}
+.apropos-figure img{
+  border-radius:var(--radius-lg);
+  width:100%;
+  max-width:32rem;
+}

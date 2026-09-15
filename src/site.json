@@ -1,7 +1,7 @@
 {
   "_comment": "Inventaire des pages du site. Une entrée par page ; chaque page a une version fr et une version en, chacune avec son chemin d'URL, son <title> et sa meta description. Le fragment de contenu correspondant est src/pages/<key>.html (fr) et src/pages/en/<key>.html (en). L'ordre du tableau = l'ordre de la navigation.",
 
-  "navKeys": ["accueil", "apropos", "services", "lelab", "contact"],
+  "navKeys": ["accueil", "apropos", "lelab", "contact"],
   "labMenuKeys": ["lelab-outils", "lelab-realisations", "blog"],
 
   "pages": [
@@ -14,11 +14,6 @@
       "key": "apropos",
       "fr": { "path": "/a-propos/",     "title": "À propos — Vesper Lab",   "description": "Pauline Chevalliot, d'ex-développeuse web à auditrice en accessibilité numérique." },
       "en": { "path": "/en/about/",     "title": "About — Vesper Lab",      "description": "Pauline Chevalliot, from web developer to digital accessibility auditor." }
-    },
-    {
-      "key": "services",
-      "fr": { "path": "/services/",      "title": "Services — Vesper Lab",   "description": "Audits d'accessibilité de sites web et de documents, contre-audits, accompagnement." },
-      "en": { "path": "/en/services/",   "title": "Services — Vesper Lab",   "description": "Accessibility audits for websites and documents, re-audits, guidance." }
     },
     {
       "key": "lelab",
@@ -45,8 +40,8 @@
     },
     {
       "key": "contact",
-      "fr": { "path": "/contact/",     "title": "Contact — Vesper Lab",   "description": "Écrire à Vesper Lab : courriel, LinkedIn, délai de réponse annoncé." },
-      "en": { "path": "/en/contact/",  "title": "Contact — Vesper Lab",   "description": "Get in touch with Vesper Lab: email, LinkedIn, stated response time." }
+      "fr": { "path": "/contact/",     "title": "Contact — Vesper Lab",   "description": "Écrire à Vesper Lab, ou suivre le travail sur LinkedIn et GitHub." },
+      "en": { "path": "/en/contact/",  "title": "Contact — Vesper Lab",   "description": "Get in touch with Vesper Lab, or follow the work on LinkedIn and GitHub." }
     },
     {
       "key": "declaration",

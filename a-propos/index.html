@@ -86,7 +86,6 @@
       <ul>
         <li><a href="/">Accueil</a></li>
         <li><a href="/a-propos/" aria-current="page">À propos</a></li>
-        <li><a href="/services/">Services</a></li>
         <li class="nav-lab">
           <span class="nav-lab-row">
             <a href="/le-lab/">Le Lab</a>
@@ -124,10 +123,83 @@
 
 <main id="main" tabindex="-1">
 <!-- Fragment de contenu FR : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Squelette seulement — contenu à rédiger (voir roadmap Notion + docs/superpowers/specs/2026-09-09-site-multipage-specs-consolidees.md). -->
+     3 sections : Vesper Lab (adapté, ton exploration plutôt que vente),
+     Mon parcours, La Vesper derrière le Lab. -->
+
 <h1>À propos</h1>
 
-<p><!-- TODO : contenu --></p>
+<section aria-labelledby="h-lab">
+  <h2 id="h-lab">Vesper Lab</h2>
+  <figure class="apropos-figure">
+    <img src="/assets/img/apropos-lab.jpg" alt="Illustration au trait blanc sur fond noir : une étagère avec une horloge, des livres, un oiseau et un miroir." loading="lazy">
+  </figure>
+  <p>Vesper Lab est le nom sous lequel je documente et je pratique
+    l'accessibilité numérique : audits, code, et ce que j'apprends en le
+    faisant.</p>
+
+  <h3>Ce que je publie</h3>
+  <p>L'accessibilité numérique se documente surtout en anglais, souvent
+    derrière un abonnement. Je traduis, je documente et je publie en libre
+    accès : le référentiel des 87 critères WCAG 2.2 en français et en
+    anglais, les outils que je construis pour mes propres audits, et des
+    articles sur ce que j'apprends en chemin.</p>
+  <p>Une petite organisation qui n'a pas les moyens de mandater personne
+    devrait pouvoir commencer seule.</p>
+
+  <h3>Comment je travaille</h3>
+  <p>Ce site est audité selon les critères WCAG 2.2, et ses limites connues
+    sont publiées dans sa
+    <a href="/declaration-accessibilite/">déclaration d'accessibilité</a>. Mes outils
+    sont conçus pour être utilisables par les personnes qu'ils concernent, y
+    compris au lecteur d'écran. Je suis moi-même concernée par une partie de
+    ces enjeux, ce qui m'évite de les traiter comme des abstractions.
+    J'écris en français épicène, en suivant les recommandations de l'OQLF.</p>
+  <p>Je me certifie CPACC à l'automne 2026, et j'apprends autant en
+    documentant qu'en auditant.</p>
+</section>
+
+<section aria-labelledby="h-parcours">
+  <h2 id="h-parcours">Mon parcours</h2>
+  <figure class="apropos-figure">
+    <img src="/assets/img/apropos-moi.jpg" alt="Pauline Chevalliot, une tasse de café à la main, assise près d'une fenêtre. Son chat se tient derrière elle." loading="lazy">
+  </figure>
+  <p>J'ai passé six ans dans le milieu médical d'urgence, principalement
+    comme ambulancière. C'est en rencontrant des personnes uniques, en
+    écoutant leur histoire et en observant comment le monde interagissait
+    avec elles que je suis tombée dans les sciences sociales. Depuis la
+    cellule de l'ambulance, j'ai consacré mon mémoire aux biais et aux
+    stéréotypes des soignantes et soignants, et à leur effet concret sur la
+    prise en charge des personnes en situation d'urgence.</p>
+  <p>En visitant les hôpitaux, je me suis arrêtée devant des signalisations
+    illisibles, j'ai trébuché sur des rampes bancales, et j'ai buté sur des
+    sites web en cherchant le bon service depuis mon téléphone. J'ai
+    réorienté mon travail vers la conception web, avec un intérêt
+    particulier pour les organismes de santé, puis vers le développement,
+    pour pouvoir mener mes idées jusqu'au bout.</p>
+  <p>J'ai ensuite travaillé à l'évaluation de systèmes d'intelligence
+    artificielle : détection des contenus nuisibles, correction des biais,
+    adaptation culturelle, vérification des faits, et rédaction en français
+    épicène. Le même réflexe qu'ailleurs, chercher qui le système sert mal.</p>
+  <p>Arrivée de France au Québec, je travaille aujourd'hui en français et en
+    anglais, entre deux cadres réglementaires. Ce qui relie tout ça, c'est
+    une même façon de regarder : remarquer ce que personne ne relève, et
+    vouloir comprendre pourquoi c'est là.</p>
+</section>
+
+<section aria-labelledby="h-vesper">
+  <h2 id="h-vesper">La Vesper derrière le Lab</h2>
+  <p>Les chauves-souris ont longtemps souffert de la stigmatisation du
+    handicap. Le consensus sur leur cécité s'est formé au détour
+    d'expériences qui consistaient à les aveugler sciemment, pour observer
+    comment elles se repéraient sans la vue. Il était alors impensable
+    qu'une espèce évolue, et d'autant plus impensable de pouvoir vivre en
+    autonomie avec la lumière éteinte. Nous avons compris l'écholocation
+    bien plus tard, et découvert que ces animaux voyaient très bien, et
+    avaient même un sens supplémentaire.</p>
+  <p>Quand la vespère se réveille au crépuscule, elle remet en question
+    notre vision de ce qui est, ce qui devrait être, et comment vivre
+    ensemble autour de ce qui existe déjà.</p>
+</section>
 </main>
 
 <footer class="mp-footer">
@@ -153,6 +225,12 @@
             <a href="https://buymeacoffee.com/vesperlab">
               <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path fill="currentColor" d="M20.216 6.415l-.132-.666c-.119-.598-.388-1.163-1.001-1.379-.197-.069-.42-.098-.57-.241-.152-.143-.196-.366-.231-.572-.065-.378-.125-.756-.192-1.133-.057-.325-.102-.69-.25-.987-.195-.4-.597-.634-.996-.788a5.723 5.723 0 00-.626-.194c-1-.263-2.05-.36-3.077-.416a25.834 25.834 0 00-3.7.062c-.915.083-1.88.184-2.75.5-.318.116-.646.256-.888.501-.297.302-.393.77-.177 1.146.154.267.415.456.692.58.36.162.737.284 1.123.366 1.075.238 2.189.331 3.287.37 1.218.05 2.437.01 3.65-.118.299-.033.598-.073.896-.119.352-.054.578-.513.474-.834-.124-.383-.457-.531-.834-.473-.466.074-.96.108-1.382.146-1.177.08-2.358.082-3.536.006a22.228 22.228 0 01-1.157-.107c-.086-.01-.18-.025-.258-.036-.243-.036-.484-.08-.724-.13-.111-.027-.111-.185 0-.212h.005c.277-.06.557-.108.838-.147h.002c.131-.009.263-.032.394-.048a25.076 25.076 0 013.426-.12c.674.019 1.347.067 2.017.144l.228.031c.267.04.533.088.798.145.392.085.895.113 1.07.542.055.137.08.288.111.431l.319 1.484a.237.237 0 01-.199.284h-.003c-.037.006-.075.01-.112.015a36.704 36.704 0 01-4.743.295 37.059 37.059 0 01-4.699-.304c-.14-.017-.293-.042-.417-.06-.326-.048-.649-.108-.973-.161-.393-.065-.768-.032-1.123.161-.29.16-.527.404-.675.701-.154.316-.199.66-.267 1-.069.34-.176.707-.135 1.056.087.753.613 1.365 1.37 1.502a39.69 39.69 0 0011.343.376.483.483 0 01.535.53l-.071.697-1.018 9.907c-.041.41-.047.832-.125 1.237-.122.637-.553 1.028-1.182 1.171-.577.131-1.165.2-1.756.205-.656.004-1.31-.025-1.966-.022-.699.004-1.556-.06-2.095-.58-.475-.458-.54-1.174-.605-1.793l-.731-7.013-.322-3.094c-.037-.351-.286-.695-.678-.678-.336.015-.718.3-.678.679l.228 2.185.949 9.112c.147 1.344 1.174 2.068 2.446 2.272.742.12 1.503.144 2.257.156.966.016 1.942.053 2.892-.122 1.408-.258 2.465-1.198 2.616-2.657.34-3.332.683-6.663 1.024-9.995l.215-2.087a.484.484 0 01.39-.426c.402-.078.787-.212 1.074-.518.455-.488.546-1.124.385-1.766zm-1.478.772c-.145.137-.363.201-.578.233-2.416.359-4.866.54-7.308.46-1.748-.06-3.477-.254-5.207-.498-.17-.024-.353-.055-.47-.18-.22-.236-.111-.71-.054-.995.052-.26.152-.609.463-.646.484-.057 1.046.148 1.526.22.577.088 1.156.159 1.737.212 2.48.226 5.002.19 7.472-.14.45-.06.899-.13 1.345-.21.399-.072.84-.206 1.08.206.166.281.188.657.162.974a.544.544 0 01-.169.364zm-6.159 3.9c-.862.37-1.84.788-3.109.788a5.884 5.884 0 01-1.569-.217l.877 9.004c.065.78.717 1.38 1.5 1.38 0 0 1.243.065 1.658.065.447 0 1.786-.065 1.786-.065.783 0 1.434-.6 1.499-1.38l.94-9.95a3.996 3.996 0 00-1.322-.238c-.826 0-1.491.284-2.26.613z"/></svg>
               <span class="visually-hidden">Buy Me a Coffee</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg aria-hidden="true" focusable="false" viewBox="176 369 671 318"><path fill="currentColor" d="M272.42 487.83v-81.77c0-3 .3-4.85 5.45-4.85h69.35c12.12 0 18.78 10.3 23.63 29.68l3.94 15.45h11.81c2.12-43.91 3.93-63 3.93-63s-29.68 3.33-47.24 3.33h-88.74l-47.55-1.5v12.72l16.05 3c11.21 2.12 13.93 4.54 14.84 14.84 0 0 .91 30.28.91 80.26s-.91 80-.91 80c0 9.08-3.64 12.41-14.84 14.54l-16.05 3v12.71l47.55-1.51h79.35c17.87 0 59.36 1.51 59.36 1.51.91-10.9 7-60.27 7.88-65.71h-11.21l-11.81 27c-9.39 21.19-23 22.71-38.16 22.71h-45.13c-15.14 0-22.41-6.06-22.41-19.08v-69.09s33 0 44.52.91c8.48.61 13.63 3 16.36 14.84l3.64 15.75h13l-.94-39.68 1.82-40h-13l-4.24 17.56c-2.73 11.51-4.54 13.63-16.36 14.84-13.32 1.52-44.82 1.21-44.82 1.21v.3zM452 414.55c-4.24 18.78-8.48 33.31-23.32 43-9.08 6.05-18.17 8.17-21.8 8.48v11.51h27v93c0 26 17.27 38.77 40.28 38.77 17.87 0 36.34-7.57 42.7-23.32l-6.36-8.18c-3 5.15-12.71 12.72-24.83 12.72-13.32 0-20.59-9.09-20.59-32.1v-82.1l44.83 3.33 2.42-20.6-47.33 1.82v-46l-13-.3zm95.7 143-11.51.3c.6 6.66.91 15.14.91 23 0 8.18-.3 15.75-.91 19.38 0 0 23 8.47 46.34 8.47 31.5 0 56.63-15.14 56.63-44.82 0-50.87-76.32-43.3-76.32-77.53 0-14.23 12.72-19.68 26.65-19.68 10.9 0 20 3.94 21.8 9.7l7.57 22.71 11.21-.6c.91-12.12 1.51-26 3.33-37.25-9.69-4.24-30-6.67-42.7-6.67-29.69 0-53.61 13-53.61 42.1 0 50.57 74.5 40.28 74.5 77.53 0 13.32-8.18 22.71-26.65 22.71-17 0-25.44-8.78-28.76-17.57l-8.49-21.8zm182.53 35c-17.53 49-39 61.66-58.34 61.66-8.17 0-12.09-3.63-13.31-9.36l-4.53-23.59-12.7.6c-2.42 13.91-4.84 29.33-8.16 42 7.56 5.74 20.25 8.77 30.23 8.77 20.86 0 52.6-2.73 81.62-71.65l48.67-114.87c3.93-9.37 5.44-10.28 16.93-14.82l6.36-2.39v-10.58l-28.72 1.51-30.83-1.51v10.58l7.86 2.41c7.86 2.42 11.49 5.44 11.49 10.89 0 2.72-.91 5.44-2.43 9.67-4.53 11.5-32.65 79.81-40.2 94.32l7.55-2.73c-13.3-32.95-33.55-88-36.57-97.33a15.06 15.06 0 0 1-.91-4.85c0-4.83 3.32-8.77 10.58-10.28l10-2.11v-10.57l-41.42 1.51-32.95-1.51v10.58l5.44 1.81c7.56 2.42 9.37 4.54 13.91 15.12 25.08 57.44 36.88 88.87 52.89 130l7.57-23.28z"/></svg>
+              <span class="visually-hidden">Etsy</span>
             </a>
           </li>
         </ul>
@@ -188,7 +266,6 @@
       <ul>
         <li><a href="/">Accueil</a></li>
         <li><a href="/a-propos/">À propos</a></li>
-        <li><a href="/services/">Services</a></li>
         <li><a href="/le-lab/">Le Lab</a></li>
         <li><a href="/le-lab/outils/">Vesper Tools</a></li>
         <li><a href="/le-lab/realisations/">Portfolio</a></li>
