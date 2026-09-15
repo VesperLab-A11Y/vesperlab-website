@@ -1,5 +1,154 @@
 <!-- Fragment de contenu FR : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Squelette seulement — contenu à rédiger (voir roadmap Notion + docs/superpowers/specs/2026-09-09-site-multipage-specs-consolidees.md). -->
-<h1>Vesper Lab</h1>
+     Contenu figé (roadmap), 7 blocs. La lune (fixe, en fond de toute la page)
+     et son éclipse liée au scroll global vivent dans src/partials/layout.html
+     + style.css ("Lune fixe") + assets/js/moon.js — rien à faire ici pour ça.
+     .mp-card fait apparaître une carte de fond en fondu derrière un bloc
+     quand il est au centre de l'écran, pour rester lisible par-dessus la
+     lune. Le Lab (.mp-card--lab) a un traitement à part : fond sauge fixe,
+     sans fondu, pour rester un repère visuel fort. -->
 
-<p><!-- TODO : contenu --></p>
+<section class="hero">
+  <h1>L'obscurité ne ferme rien à qui sait <em>écouter</em>.</h1>
+  <p class="lead-body">Vesper Lab passe au crible les sites et les documents
+    numériques, repère ce qui bloque, et explique comment le corriger. Normes
+    WCAG 2.2 et SGQRI 008. Montréal, en français et en anglais.</p>
+  <div class="button-row">
+    <a class="button" href="{{nav.services}}">Voir les services</a>
+    <a class="button button-ghost" href="{{nav.lelab-realisations}}">Voir mon travail</a>
+  </div>
+</section>
+
+<section class="offer mp-card" aria-labelledby="h-offer">
+  <h2 id="h-offer">Ce que je propose</h2>
+  <ul class="offer-list">
+    <li>
+      <p><strong>Diagnostic d'accessibilité</strong> · Une analyse de votre
+        site ou de votre application, centrée sur ce que vivent réellement les
+        personnes qui l'utilisent. Les problèmes sont classés par impact, pas
+        par ordre d'apparition.</p>
+      <p class="offer-note">Rapport lisible par toute l'équipe, annexe
+        technique référencée aux critères.</p>
+    </li>
+    <li>
+      <p><strong>Documents accessibles</strong> · Relecture et balisage de vos
+        documents Word, présentations et PDF, pour qu'ils restent utilisables
+        une fois téléchargés.</p>
+      <p class="offer-note">Fichiers corrigés, ou liste des correctifs pour
+        vos documents existants.</p>
+    </li>
+    <li>
+      <p><strong>Audit de conformité</strong> · L'audit complet, critère par
+        critère, qui produit un taux de conformité et une déclaration
+        d'accessibilité.</p>
+      <p class="offer-note">Disponible à l'automne 2026, après certification
+        CPACC.</p>
+    </li>
+  </ul>
+</section>
+
+<section class="constat mp-card" aria-labelledby="h-constat">
+  <h2 id="h-constat">À quoi ressemble un constat</h2>
+  <div class="constat-card">
+    <p class="constat-tags">
+      <span class="constat-tag">2.4.2</span>
+      <span class="constat-tag">3.1.1</span>
+    </p>
+    <h3>La page ne dit ni son nom, ni sa langue.</h3>
+    <p>Deux lignes manquaient dans le code : le titre du document et sa
+      langue.</p>
+    <p><strong>Ce que ça change.</strong> Une personne qui utilise un lecteur
+      d'écran ouvre la page et n'entend aucun titre, donc rien qui lui
+      permette de savoir où elle se trouve parmi ses onglets. Le texte
+      français lui est ensuite lu avec la prononciation anglaise, ce qui le
+      rend difficilement compréhensible.</p>
+    <p class="constat-criteria">Critères WCAG 2.2 concernés : 2.4.2 Titre de
+      page (A) et 3.1.1 Langue de la page (A).</p>
+  </div>
+  <p class="constat-source">Extrait d'un diagnostic réalisé sur une maquette,
+    août 2026.</p>
+</section>
+
+<section class="lab-teaser mp-card mp-card--lab" aria-labelledby="h-lab">
+  <h2 id="h-lab">Le Lab</h2>
+  <p>Les outils bilingues que je construis pour travailler, publiés en libre
+    accès, accessibles et réutilisables.</p>
+  <ul class="lab-items">
+    <li>
+      <h3>Vesper Toolkit</h3>
+      <p>Une collection de bookmarklets à glisser dans la barre de favoris.
+        Scan axe-core, vérification des liens, des images et des étiquettes
+        de formulaire, sélecteur CSS, et d'autres ajouts réguliers dans la
+        boîte à outils.</p>
+    </li>
+    <li>
+      <h3>Vesper Library</h3>
+      <p>Une bibliothèque de composants d'interface accessibles, testés au
+        lecteur d'écran, avec le code et l'explication de ce qui les rend
+        utilisables.</p>
+    </li>
+    <li>
+      <h3>Le référentiel WCAG 2.2, en français et en anglais</h3>
+      <p>Les 87 critères traduits et documentés, en accès libre. La base de
+        tous les outils du Lab, enrichie au fil des audits.</p>
+    </li>
+  </ul>
+  <a class="button" href="{{nav.lelab}}">Explorer le Lab</a>
+  <p class="lab-note">Compass et Sonar (versions publiques) arrivent en
+    novembre, en première mise à jour du Lab après le lancement.</p>
+</section>
+
+<section class="about-teaser mp-card" aria-labelledby="h-about">
+  <h2 id="h-about">Qui je suis</h2>
+  <p>Ambulancière pendant cinq ans, j'ai étudié la sociologie et les biais du
+    milieu médical depuis la salle de garde, puis la conception et le
+    développement web. Toutes mes casquettes ont le même fil conducteur : qui
+    sont les invisibles, comment les a-t-on effacés, et comment rallumer ce
+    qu'on a éteint.</p>
+  <p>Vesper Lab est né de ces angles morts, et de l'envie d'y voir clair. Je
+    travaille depuis Montréal, en français et en anglais.</p>
+  <a class="button button-ghost" href="{{nav.apropos}}">En savoir plus</a>
+</section>
+
+<section class="blog-teaser mp-card" aria-labelledby="h-blog">
+  <h2 id="h-blog">Sur le blog</h2>
+  <ul class="blog-grid">
+    <li>
+      <a class="blog-card" href="{{nav.blog}}accessibilite-pdf-5-conseils/">
+        <h3>Accessibilité PDF : 5 conseils qui font écho</h3>
+        <p>Quelles que soient vos raisons, vous en avez forcément une bonne
+          pour améliorer l'accessibilité de vos PDF.</p>
+      </a>
+    </li>
+    <li>
+      <a class="blog-card" href="{{nav.blog}}cv-les-yeux-fermes/">
+        <h3>Et si vous lisiez votre CV les yeux fermés ?</h3>
+        <p>Pourquoi un CV accessible passe mieux les filtres automatiques, et
+          pourquoi ça ne concerne pas que les personnes handicapées.</p>
+      </a>
+    </li>
+    <li>
+      <a class="blog-card" href="{{nav.blog}}entre-voir-et-remarquer/">
+        <h3>Entre voir et remarquer</h3>
+        <p>Ce qu'on ne voit pas tant qu'on n'en a pas besoin, et pourquoi
+          c'est un problème pour l'accessibilité.</p>
+      </a>
+    </li>
+  </ul>
+  <div class="button-row">
+    <a class="button button-ghost" href="{{nav.blog}}">Tous les articles</a>
+    <a class="button button-ghost" href="/blog/feed.xml">S'abonner au flux RSS</a>
+  </div>
+</section>
+
+<section class="contact-teaser mp-card" aria-labelledby="h-contact">
+  <h2 id="h-contact">Rester en contact</h2>
+  <p>J'écris sur l'accessibilité, les outils que je construis et ce que
+    j'apprends en chemin.</p>
+  <div class="button-row">
+    <a class="button button-ghost" href="/blog/feed.xml">S'abonner au flux RSS</a>
+    <a class="button" href="{{nav.contact}}">Me contacter</a>
+  </div>
+  <p class="contact-note">Ce site est audité selon les critères WCAG 2.2. Ses
+    limites connues sont documentées dans sa
+    <a href="{{nav.declaration}}">déclaration d'accessibilité</a>.</p>
+</section>

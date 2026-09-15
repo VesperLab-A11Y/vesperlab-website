@@ -116,9 +116,10 @@ function readPosts(dir) {
 function navVars(lang, activePath) {
   const pathByKey = Object.fromEntries(site.pages.map((p) => [p.key, p[lang].path]));
   const v = { ...i18nVars(ui[lang]), lang, ogLocale: OG_LOCALE[lang], home: pathByKey.accueil };
-  for (const key of site.navKeys) {
-    v['nav.' + key] = pathByKey[key] || '#';
-    v['aria.' + key] = pathByKey[key] === activePath ? ' aria-current="page"' : '';
+  // Toutes les pages (pas seulement navKeys) : le header a besoin du sous-menu LAB.
+  for (const p of site.pages) {
+    v['nav.' + p.key] = pathByKey[p.key] || '#';
+    v['aria.' + p.key] = pathByKey[p.key] === activePath ? ' aria-current="page"' : '';
   }
   return v;
 }

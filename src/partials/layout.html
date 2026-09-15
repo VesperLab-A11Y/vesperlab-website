@@ -4,6 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- Applique thème et taille de texte enregistrés AVANT le premier rendu, pour
+     éviter un flash au chargement. Le reste (écouteurs de clic, etc.) est dans
+     assets/js/site.js, chargé en defer. -->
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+  try {
+    var t = localStorage.getItem('vl-theme');
+    if (t && t !== 'dark') document.documentElement.setAttribute('data-theme', t);
+    var f = localStorage.getItem('vl-font-step');
+    if (f && f !== '0') document.documentElement.classList.add('vl-font-' + (f > 0 ? f : '-' + Math.abs(f)));
+  } catch (e) {}
+})();
+</script>
+
 <title>{{title}}</title>
 <meta name="description" content="{{description}}">
 <link rel="canonical" href="https://vesperlab.dev{{path}}">
@@ -38,6 +53,13 @@
 </head>
 <body>
 
+<!-- Lune fixe (immobile à l'écran) + voile : voir la section "Lune fixe" de
+     style.css. Décoratif, aria-hidden, ne doit jamais capter le focus/clic. -->
+<div class="moon-fixed" aria-hidden="true">
+  <div class="moon"><img class="moon-photo" src="/assets/img/moon.jpg" alt=""><div class="moon-shadow"></div></div>
+</div>
+<div class="page-scrim" aria-hidden="true"></div>
+
 <a class="skip-link" href="#main">{{i18n.skipLink}}</a>
 
 {{> header}}
@@ -48,5 +70,7 @@
 
 {{> footer}}
 
+<script defer src="/assets/js/site.js"></script>
+<script defer src="/assets/js/moon.js"></script>
 </body>
 </html>

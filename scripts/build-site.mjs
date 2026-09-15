@@ -67,9 +67,11 @@ for (const lang of LANGS) {
       langToggleHref: page[other].path,
       langToggleLang: other,
     };
-    for (const key of site.navKeys) {
-      vars['nav.' + key] = pathByKey[key] || '#';
-      vars['aria.' + key] = page.key === key ? ' aria-current="page"' : '';
+    // Résout nav.<key> pour TOUTES les pages (pas seulement navKeys) : le header a
+    // besoin des chemins du sous-menu LAB (labMenuKeys) en plus de la nav du haut.
+    for (const p of site.pages) {
+      vars['nav.' + p.key] = pathByKey[p.key] || '#';
+      vars['aria.' + p.key] = page.key === p.key ? ' aria-current="page"' : '';
     }
     vars.main = render(read(fragPath), vars).trim();
 

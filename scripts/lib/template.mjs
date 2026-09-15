@@ -25,7 +25,8 @@ export const partials = {
 export function render(tpl, vars) {
   let out = tpl.replace(/\{\{>\s*(\w+)\s*\}\}/g, (_, name) => partials[name] || '');
   out = out.replace(/\{\{inline:([^}]+)\}\}/g, (_, p) => read(p.trim()).trim());
-  out = out.replace(/\{\{([\w.]+)\}\}/g, (m, key) => (key in vars ? vars[key] : m));
+  // [\w.-] : autorise les tirets dans les clés (ex. nav.lelab-outils).
+  out = out.replace(/\{\{([\w.-]+)\}\}/g, (m, key) => (key in vars ? vars[key] : m));
   return out;
 }
 

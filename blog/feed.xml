@@ -6,11 +6,25 @@
   <description>Articles sur l'accessibilité numérique.</description>
   <language>fr-CA</language>
   <item>
-    <title>Exemple de structure d'article</title>
-    <link>https://vesperlab.dev/blog/exemple-de-structure/</link>
-    <guid>https://vesperlab.dev/blog/exemple-de-structure/</guid>
-    <pubDate>Sat, 05 Sep 2026 12:00:00 GMT</pubDate>
-    <description>Fichier de démonstration pour vérifier la chaîne de génération du blog. À supprimer avant la mise en ligne.</description>
+    <title>Entre voir et remarquer</title>
+    <link>https://vesperlab.dev/blog/entre-voir-et-remarquer/</link>
+    <guid>https://vesperlab.dev/blog/entre-voir-et-remarquer/</guid>
+    <pubDate>Fri, 11 Sep 2026 12:00:00 GMT</pubDate>
+    <description>Ce qu'on ne voit pas tant qu'on n'en a pas besoin, et pourquoi c'est un problème pour l'accessibilité.</description>
+  </item>
+  <item>
+    <title>Et si vous lisiez votre CV les yeux fermés ?</title>
+    <link>https://vesperlab.dev/blog/cv-les-yeux-fermes/</link>
+    <guid>https://vesperlab.dev/blog/cv-les-yeux-fermes/</guid>
+    <pubDate>Fri, 11 Sep 2026 12:00:00 GMT</pubDate>
+    <description>Pourquoi un CV accessible passe mieux les filtres automatiques, et pourquoi ça ne concerne pas que les personnes handicapées.</description>
+  </item>
+  <item>
+    <title>Accessibilité PDF : 5 conseils qui font écho</title>
+    <link>https://vesperlab.dev/blog/accessibilite-pdf-5-conseils/</link>
+    <guid>https://vesperlab.dev/blog/accessibilite-pdf-5-conseils/</guid>
+    <pubDate>Fri, 11 Sep 2026 12:00:00 GMT</pubDate>
+    <description>Quelles que soient vos raisons, vous en avez forcément une bonne pour améliorer l'accessibilité de vos PDF.</description>
   </item>
 </channel>
 </rss>

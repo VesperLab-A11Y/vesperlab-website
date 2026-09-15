@@ -1,65 +1,237 @@
 /* ============================================================================
    Jetons du design system Vesper Lab — V2 (sauge / ink / cream / Noto)
    ----------------------------------------------------------------------------
-   Bloc :root sorti de style.css pour être partagé tel quel par toutes les
-   pages du site multi-pages. Aucune règle ici, seulement des variables.
+   Repris tels quels de « Vesper Lab V2 - Fondations » (colors.css / typography.css /
+   spacing.css du design system), sans le remplacé `@import` Google Fonts : les
+   polices restent auto-hébergées (voir les `@font-face` de style.css), aucune
+   requête tierce n'est autorisée sur ce site (check.mjs le fait respecter).
+   Bloc :root partagé tel quel par toutes les pages du site multi-pages.
    Chargé AVANT style.css sur chaque page :
      <link rel="stylesheet" href="/styles/tokens.css">
      <link rel="stylesheet" href="/style.css">
    ============================================================================ */
 
 :root{
-  /* Typographie */
+  /* ── Typographie ── */
   --font-display:'Noto Serif',Georgia,'Times New Roman',serif;
   --font-body:'Noto Sans',Arial,Helvetica,sans-serif;
+  --font-mono:'Noto Sans Mono','Courier New',monospace;
+
   --font-size-display:44px;
+  --font-size-h1:32px;
   --font-size-h2:24px;
   --font-size-h3:19px;
   --font-size-lead:19px;
   --font-size-body:17px;
+  --font-size-body-sm:15px;
   --font-size-caption:13px;
+
+  --font-size-ui-title:24px;
+  --font-size-ui-h2:19px;
+  --font-size-ui-h3:15px;
+  --font-size-ui-body:15px;
+  --font-size-ui-body-sm:14px;
+  --font-size-ui-caption:13px;
+
+  --font-size-eyebrow:17px;
+
   --leading-tight:1.18;
   --leading-heading:1.25;
   --leading-body:1.65;
-  --tracking-display:0.005em;
 
-  /* Espacements / rayons */
+  --tracking-display:0.005em;
+  --tracking-eyebrow:0.12em;
+  --tracking-wordmark:0.04em;
+
+  /* ── Espacements / rayons / ombres ── */
+  --space-1:4px;
+  --space-2:6px;
   --space-3:8px;
   --space-4:10px;
   --space-5:12px;
   --space-6:16px;
+  --space-7:18px;
   --space-8:24px;
+  --space-9:28px;
   --space-10:32px;
   --space-16:64px;
+
+  --radius-sm:6px;
   --radius-md:8px;
+  --radius-lg:10px;
+  --radius-pill:20px;
+
+  --shadow-card:0 1px 4px rgba(0,0,0,0.24);
+  --shadow-popover:0 8px 24px rgba(0,0,0,0.4);
+
   --min-hit:44px;
 
-  /* Couleurs — neutres oklch teinte 150 */
+  /* ── Neutres : noir à reflet fonte et bois foncé (oklch, teinte 150) ──
+     Le texte garde la teinte 85 : c'est le crème qui porte la chaleur du
+     grimoire, pas les fonds. */
   --ink-975:oklch(0.11 0.006 150);
+  --ink-950:oklch(0.145 0.008 150);
+  --ink-900:oklch(0.195 0.01 150);
+  --ink-800:oklch(0.235 0.012 150);
+  --ink-700:oklch(0.30 0.014 150);
   --cream-100:oklch(0.93 0.018 85);
   --cream-300:oklch(0.85 0.018 85);
   --cream-500:oklch(0.72 0.02 85);
+  --cream-700:oklch(0.66 0.02 85);
   --hairline:rgba(233,223,200,0.14);
   --hairline-strong:rgba(233,223,200,0.18);
 
-  /* Accent — sauge séchée teinte 128 */
+  /* ── Accent unique : sauge séchée (teinte 128) ── */
   --sage-300:oklch(0.89 0.05 128);
   --sage-500:oklch(0.83 0.055 128);
+  --sage-700:oklch(0.66 0.055 128);
+  --sage-900:oklch(0.44 0.05 128);
   --sage-on:oklch(0.145 0.008 150);
 
-  /* Vert très foncé */
+  /* ── Palette de soutien — le corail sert uniquement au danger/critique ── */
+  --paper-100:#F7F1E9;
+  --stone-500:#BDB6AE;
+  --coral-300:#F0A9A2;
+  --coral-700:#A05C57;
+  --void-950:#0E0F0D;
   --olive-900:#272E24;
 
-  /* Alias sémantiques */
+  /* ── Gravités (Critique → Majeur → Modéré → Mineur), voir readme du DS pour
+     la justification du choix de teintes/clartés. ── */
+  --severity-critical-bg:oklch(0.335 0.1 25);
+  --severity-critical-fg:oklch(0.865 0.068 25);
+  --severity-critical-line:oklch(0.68 0.14 25);
+  --severity-major-bg:oklch(0.3 0.078 42);
+  --severity-major-fg:oklch(0.795 0.08 42);
+  --severity-major-line:oklch(0.61 0.125 42);
+  --severity-moderate-bg:oklch(0.27 0.052 68);
+  --severity-moderate-fg:oklch(0.72 0.07 68);
+  --severity-moderate-line:oklch(0.54 0.1 68);
+  --severity-minor-bg:oklch(0.24 0.022 50);
+  --severity-minor-fg:oklch(0.645 0.028 50);
+  --severity-minor-line:oklch(0.47 0.04 50);
+
+  /* ── Alias sémantiques ── */
   --surface-page:var(--ink-975);
+  --surface-app:var(--ink-950);
+  --surface-card:var(--ink-900);
+  --surface-input:var(--ink-800);
+  --surface-raised:var(--ink-700);
+  --surface-accent-deep:var(--sage-900);
   --text-body:var(--cream-100);
   --text-secondary:var(--cream-300);
   --text-muted:var(--cream-500);
+  --text-faint:var(--cream-700);
+  --text-on-accent-deep:var(--cream-100);
   --border-default:var(--hairline);
+  --border-strong:var(--hairline-strong);
   --accent:var(--sage-500);
   --accent-hover:var(--sage-300);
+  --accent-quiet:var(--sage-700);
   --accent-on:var(--sage-on);
   --focus-ring:var(--sage-500);
   --link:var(--sage-500);
   --link-hover:var(--sage-300);
+  --danger:var(--coral-700);
+  --danger-bg:var(--severity-critical-bg);
+  --success:var(--sage-700);
+}
+
+/* ═══ Thèmes ═══
+   Le sombre est le défaut : c'est l'identité, pas une préférence. Le clair
+   existe pour les personnes qui en ont besoin (migraines, dyslexie, etc.) —
+   voir le panneau « options d'accessibilité » du footer.
+
+     [data-theme="light"]   → clair forcé
+     [data-theme="dark"]    → sombre forcé
+     [data-theme="system"]  → suit la préférence du système
+     sans attribut          → sombre
+
+   L'attribut se pose sur <html>. Le choix se conserve en mémoire locale et ne
+   s'écrase jamais tout seul : une préférence explicite l'emporte sur celle du
+   système (voir assets/js ou le script inline du gabarit). */
+
+[data-theme="light"]{
+  --surface-page:oklch(0.965 0.008 85);
+  --surface-app:oklch(0.945 0.01 85);
+  --surface-card:oklch(0.995 0.004 85);
+  --surface-input:oklch(1 0 0);
+  --surface-raised:oklch(1 0 0);
+  --text-body:oklch(0.22 0.012 150);
+  --text-secondary:oklch(0.36 0.012 150);
+  --text-muted:oklch(0.45 0.012 150);
+  --text-faint:oklch(0.52 0.012 150);
+  --border-default:rgba(14,15,13,0.13);
+  --border-strong:rgba(14,15,13,0.20);
+
+  --accent:oklch(0.48 0.08 128);
+  --accent-hover:oklch(0.40 0.08 128);
+  --accent-quiet:oklch(0.42 0.07 128);
+  --accent-on:oklch(0.99 0.004 85);
+  --focus-ring:oklch(0.40 0.08 128);
+  --link:oklch(0.44 0.08 128);
+  --link-hover:oklch(0.34 0.08 128);
+  --success:oklch(0.44 0.08 128);
+  --danger:oklch(0.45 0.14 25);
+
+  --severity-critical-bg:oklch(0.89 0.05 25);
+  --severity-critical-fg:oklch(0.33 0.115 25);
+  --severity-critical-line:oklch(0.45 0.155 25);
+  --severity-major-bg:oklch(0.915 0.04 42);
+  --severity-major-fg:oklch(0.385 0.1 42);
+  --severity-major-line:oklch(0.51 0.135 42);
+  --severity-moderate-bg:oklch(0.94 0.03 68);
+  --severity-moderate-fg:oklch(0.44 0.082 68);
+  --severity-moderate-line:oklch(0.57 0.105 68);
+  --severity-minor-bg:oklch(0.96 0.012 50);
+  --severity-minor-fg:oklch(0.495 0.028 50);
+  --severity-minor-line:oklch(0.63 0.042 50);
+
+  --text-on-accent-deep:var(--cream-100);
+}
+
+@media (prefers-color-scheme: light){
+  [data-theme="system"]{
+    --surface-page:oklch(0.965 0.008 85);
+    --surface-app:oklch(0.945 0.01 85);
+    --surface-card:oklch(0.995 0.004 85);
+    --surface-input:oklch(1 0 0);
+    --surface-raised:oklch(1 0 0);
+    --text-body:oklch(0.22 0.012 150);
+    --text-secondary:oklch(0.36 0.012 150);
+    --text-muted:oklch(0.45 0.012 150);
+    --text-faint:oklch(0.52 0.012 150);
+    --border-default:rgba(14,15,13,0.13);
+    --border-strong:rgba(14,15,13,0.20);
+
+    --accent:oklch(0.48 0.08 128);
+    --accent-hover:oklch(0.40 0.08 128);
+    --accent-quiet:oklch(0.42 0.07 128);
+    --accent-on:oklch(0.99 0.004 85);
+    --focus-ring:oklch(0.40 0.08 128);
+    --link:oklch(0.44 0.08 128);
+    --link-hover:oklch(0.34 0.08 128);
+    --success:oklch(0.44 0.08 128);
+    --danger:oklch(0.45 0.14 25);
+
+    --severity-critical-bg:oklch(0.89 0.05 25);
+    --severity-critical-fg:oklch(0.33 0.115 25);
+    --severity-critical-line:oklch(0.45 0.155 25);
+    --severity-major-bg:oklch(0.915 0.04 42);
+    --severity-major-fg:oklch(0.385 0.1 42);
+    --severity-major-line:oklch(0.51 0.135 42);
+    --severity-moderate-bg:oklch(0.94 0.03 68);
+    --severity-moderate-fg:oklch(0.44 0.082 68);
+    --severity-moderate-line:oklch(0.57 0.105 68);
+    --severity-minor-bg:oklch(0.96 0.012 50);
+    --severity-minor-fg:oklch(0.495 0.028 50);
+    --severity-minor-line:oklch(0.63 0.042 50);
+
+    --text-on-accent-deep:var(--cream-100);
+  }
+}
+
+/* Basculer le thème ne doit pas déclencher d'animation de couleur non demandée. */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{transition-duration:0.01ms !important;animation-duration:0.01ms !important;}
 }

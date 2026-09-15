@@ -19,22 +19,22 @@
 })();
 </script>
 
-<title>Contact — Vesper Lab</title>
-<meta name="description" content="Écrire à Vesper Lab : courriel, LinkedIn, délai de réponse annoncé.">
-<link rel="canonical" href="https://vesperlab.dev/contact/">
+<title>Accessibilité PDF : 5 conseils qui font écho — Vesper Lab</title>
+<meta name="description" content="Quelles que soient vos raisons, vous en avez forcément une bonne pour améliorer l'accessibilité de vos PDF.">
+<link rel="canonical" href="https://vesperlab.dev/blog/accessibilite-pdf-5-conseils/">
 <meta name="theme-color" content="#030504">
 
 <!-- Versions linguistiques réciproques -->
-<link rel="alternate" hreflang="fr" href="https://vesperlab.dev/contact/">
-<link rel="alternate" hreflang="en" href="https://vesperlab.dev/en/contact/">
-<link rel="alternate" hreflang="x-default" href="https://vesperlab.dev/contact/">
+<link rel="alternate" hreflang="fr" href="https://vesperlab.dev/blog/accessibilite-pdf-5-conseils/">
+<link rel="alternate" hreflang="en" href="https://vesperlab.dev/en/blog/accessibilite-pdf-5-conseils/">
+<link rel="alternate" hreflang="x-default" href="https://vesperlab.dev/blog/accessibilite-pdf-5-conseils/">
 
 <!-- Open Graph / partage -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_CA">
-<meta property="og:url" content="https://vesperlab.dev/contact/">
-<meta property="og:title" content="Contact — Vesper Lab">
-<meta property="og:description" content="Écrire à Vesper Lab : courriel, LinkedIn, délai de réponse annoncé.">
+<meta property="og:url" content="https://vesperlab.dev/blog/accessibilite-pdf-5-conseils/">
+<meta property="og:title" content="Accessibilité PDF : 5 conseils qui font écho — Vesper Lab">
+<meta property="og:description" content="Quelles que soient vos raisons, vous en avez forcément une bonne pour améliorer l'accessibilité de vos PDF.">
 <meta property="og:image" content="https://vesperlab.dev/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -53,13 +53,6 @@
 </head>
 <body>
 
-<!-- Lune fixe (immobile à l'écran) + voile : voir la section "Lune fixe" de
-     style.css. Décoratif, aria-hidden, ne doit jamais capter le focus/clic. -->
-<div class="moon-fixed" aria-hidden="true">
-  <div class="moon"><img class="moon-photo" src="/assets/img/moon.jpg" alt=""><div class="moon-shadow"></div></div>
-</div>
-<div class="page-scrim" aria-hidden="true"></div>
-
 <a class="skip-link" href="#main">Aller au contenu</a>
 
 <!-- En-tête : logo, nav 5 entrées (LAB = lien + sous-menu), bascule de langue,
@@ -67,7 +60,6 @@
      l'ouverture des menus sont pilotés par assets/js/header.js (progressive
      enhancement : sans JS, tout reste visible et cliquable). -->
 <header class="mp-header" id="site-header">
- <div class="mp-header-inner">
   <a class="site-logo" href="/" aria-label="Vesper Lab, retour à l'accueil">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1006 974" role="img" aria-labelledby="vl4">
   <title id="vl4">Vesper Lab</title>
@@ -96,17 +88,17 @@
             </button>
           </span>
         </li>
-        <li><a href="/contact/" aria-current="page">Contact</a></li>
+        <li><a href="/contact/">Contact</a></li>
       </ul>
       <ul class="lab-submenu" id="lab-submenu">
         <li><a href="/le-lab/outils/">Vesper Tools</a></li>
         <li><a href="/le-lab/realisations/">Portfolio</a></li>
-        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/blog/" aria-current="page">Blog</a></li>
       </ul>
     </nav>
 
     <div class="header-tools">
-      <a class="lang-switch" href="/en/contact/" lang="en" hreflang="en">en</a>
+      <a class="lang-switch" href="/en/blog/accessibilite-pdf-5-conseils/" lang="en" hreflang="en">en</a>
       <a class="a11y-options-link" href="#a11y-options" aria-label="Options d'accessibilité">
         <!-- Icône « options d'accessibilité », SVG Repo (licence MIT). Décorative : le nom
      accessible vient du bouton qui la contient (aria-label), d'où aria-hidden ici. -->
@@ -118,16 +110,16 @@
       </a>
     </div>
   </div>
- </div>
 </header>
 
 
 <main id="main" tabindex="-1">
-<!-- Fragment de contenu FR : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Squelette seulement — contenu à rédiger (voir roadmap Notion + docs/superpowers/specs/2026-09-09-site-multipage-specs-consolidees.md). -->
-<h1>Contact</h1>
-
-<p><!-- TODO : contenu --></p>
+<article class="post">
+<h1>Accessibilité PDF : 5 conseils qui font écho</h1>
+<p class="post-meta"><time datetime="2026-09-11">Publié le 11 septembre 2026</time></p>
+<p>Article en cours de rédaction.</p>
+<p>Quelles que soient vos raisons, vous en avez forcément une bonne pour améliorer l'accessibilité de vos PDF.</p>
+</article>
 </main>
 
 <footer class="mp-footer">

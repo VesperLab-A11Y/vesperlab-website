@@ -1,7 +1,8 @@
 {
   "_comment": "Inventaire des pages du site. Une entrée par page ; chaque page a une version fr et une version en, chacune avec son chemin d'URL, son <title> et sa meta description. Le fragment de contenu correspondant est src/pages/<key>.html (fr) et src/pages/en/<key>.html (en). L'ordre du tableau = l'ordre de la navigation.",
 
-  "navKeys": ["accueil", "apropos", "services", "lelab", "blog", "contact"],
+  "navKeys": ["accueil", "apropos", "services", "lelab", "contact"],
+  "labMenuKeys": ["lelab-outils", "lelab-realisations", "blog"],
 
   "pages": [
     {
@@ -46,6 +47,12 @@
       "key": "contact",
       "fr": { "path": "/contact/",     "title": "Contact — Vesper Lab",   "description": "Écrire à Vesper Lab : courriel, LinkedIn, délai de réponse annoncé." },
       "en": { "path": "/en/contact/",  "title": "Contact — Vesper Lab",   "description": "Get in touch with Vesper Lab: email, LinkedIn, stated response time." }
+    },
+    {
+      "key": "declaration",
+      "nav": false,
+      "fr": { "path": "/declaration-accessibilite/",  "title": "Déclaration d'accessibilité — Vesper Lab",  "description": "État de conformité WCAG 2.2 du site et limites connues." },
+      "en": { "path": "/en/accessibility-statement/", "title": "Accessibility statement — Vesper Lab",      "description": "WCAG 2.2 conformance status and known limitations of this site." }
     }
   ]
 }
