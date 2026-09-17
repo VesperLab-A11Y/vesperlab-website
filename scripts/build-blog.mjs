@@ -30,10 +30,10 @@
 //
 // Le Markdown du corps supporte, en plus des bases (titres, paragraphes,
 // gras/italique, liens, images, listes, code) : un sommaire (TOC) généré
-// automatiquement à partir des `##`, un encadré « Le saviez-vous ? » via
-// `> [!INFO]` en tête de citation, et des figures avec légende pour une image
-// seule sur sa ligne (`![alt](src "légende")`). Voir mdToHtml dans
-// lib/blog-content.mjs.
+// automatiquement à partir des `##`, un encadré « Zoom sur… » (accepte
+// plusieurs paragraphes et une liste) via `> [!INFO]` en tête de citation, et
+// des figures avec légende pour une image seule dans son paragraphe
+// (`![alt](src "légende")`). Voir mdToHtml dans lib/blog-content.mjs.
 //
 // Sorties, à la racine du dépôt :
 //   blog/<slug>/index.html            + en/blog/<slug>/index.html
@@ -54,17 +54,18 @@ const site = JSON.parse(read('src/site.json'));
 const ui = { fr: JSON.parse(read('i18n/ui.fr.json')), en: JSON.parse(read('i18n/ui.en.json')) };
 const layout = read('src/partials/layout.html');
 const blogPage = site.pages.find((p) => p.key === 'blog');
+const backIcon = read('assets/icons/back-arrow.svg').trim();
 const DATE_FMT = { fr: 'fr-CA', en: 'en-CA' };
 const LABEL = {
   fr: {
     published: 'Publié le', updated: 'Mis à jour le', empty: 'Aucun article pour le moment.',
-    toc: 'Sommaire', callout: 'Le saviez-vous ?', resources: 'Ressources',
-    back: '← Tous les articles', ctaText: 'Une question, une remarque ? Contactez-moi.', ctaHref: '/contact/',
+    toc: 'Sommaire', callout: 'Zoom sur…', resources: 'Ressources',
+    back: 'Tous les articles', ctaText: 'Une question, une remarque ? Contactez-moi.', ctaHref: '/contact/',
   },
   en: {
     published: 'Published', updated: 'Updated', empty: 'No articles yet.',
-    toc: 'Table of contents', callout: 'Did you know?', resources: 'Resources',
-    back: '← All articles', ctaText: 'Questions or comments? Get in touch.', ctaHref: '/en/contact/',
+    toc: 'Table of contents', callout: 'A closer look', resources: 'Resources',
+    back: 'All articles', ctaText: 'Questions or comments? Get in touch.', ctaHref: '/en/contact/',
   },
 };
 
@@ -110,7 +111,7 @@ for (const lang of ['fr', 'en']) {
     const { html: bodyHtml, headings } = mdToHtml(post.body, { calloutLabel: L.callout });
     const toc = renderToc(headings, L.toc);
     const resources = renderResources(post.meta.resources, L.resources);
-    const back = renderBackLink(blogRoot, L.back);
+    const back = renderBackLink(blogRoot, L.back, backIcon);
     const cta = renderCta(post.meta, L.ctaText, L.ctaHref);
     const title = esc(post.meta.title || post.slug);
     const postMeta =

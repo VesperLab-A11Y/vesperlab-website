@@ -1414,19 +1414,22 @@ main#main .blog-entry-body h2{
    docs/superpowers/specs/2026-09-17-blog-article-template-design.md
    ============================================================================ */
 .post{
-  max-width:42rem;
+  max-width:50rem;
   margin-inline:auto;
   padding-block:clamp(var(--space-10), 6vw, var(--space-16));
 }
 .post-back{
   display:inline-flex;
   align-items:center;
-  min-height:var(--min-hit);
-  color:var(--text-secondary);
-  text-decoration:underline;
+  justify-content:center;
+  width:57px;
+  height:57px;
+  color:var(--accent);
+  border-radius:50%;
   margin-bottom:var(--space-6);
 }
 .post-back:hover{color:var(--accent-hover);}
+.post-back svg{width:36px;height:36px;}
 
 .post h1{
   font-family:var(--font-display);
@@ -1499,7 +1502,13 @@ main#main .post-toc h2{margin-bottom:var(--space-3);}
 }
 .post .callout p:last-child{margin-bottom:0;}
 
-.post figure{margin:var(--space-8) 0;}
+.post figure{
+  margin:var(--space-8) 0;
+  border:1px solid var(--border-default);
+  border-radius:var(--radius-lg);
+  padding:var(--space-6);
+  background:var(--surface-card);
+}
 .post figure img{width:100%;border-radius:var(--radius-md);display:block;}
 .post figcaption{
   font-size:var(--font-size-caption);

@@ -93,7 +93,7 @@ test('mdToHtml : une citation normale reste un blockquote', () => {
 
 test('mdToHtml : callout par défaut sans options fournies', () => {
   const { html } = mdToHtml('> [!INFO]\n> Texte.');
-  assert.match(html, /<p class="callout-label">Le saviez-vous \?<\/p>/);
+  assert.match(html, /<p class="callout-label">Le saviez-vous \?<\/p>/);
 });
 
 test('mdToHtml : un [!INFO] vidé sans contenu ne contamine pas la citation suivante', () => {
@@ -103,6 +103,21 @@ test('mdToHtml : un [!INFO] vidé sans contenu ne contamine pas la citation suiv
   const { html } = mdToHtml('> [!INFO]\n\n> Une citation.');
   assert.match(html, /<blockquote>\n<p>Une citation\.<\/p>\n<\/blockquote>/);
   assert.equal(/<aside class="callout"/.test(html), false);
+});
+
+test('mdToHtml : un callout peut contenir plusieurs paragraphes séparés par une ligne "> " vide', () => {
+  const { html } = mdToHtml('> [!INFO]\n> Premier paragraphe.\n>\n> Second paragraphe.');
+  assert.match(html, /<aside class="callout" role="note">\n<p class="callout-label">Le saviez-vous \?<\/p>\n<p>Premier paragraphe\.<\/p>\n<p>Second paragraphe\.<\/p>\n<\/aside>/);
+});
+
+test('mdToHtml : un callout peut contenir une liste à puces', () => {
+  const { html } = mdToHtml('> [!INFO]\n> Intro.\n>\n> - Premier terme\n>\n> Explication du premier terme.\n>\n> - Second terme\n>\n> Explication du second terme.');
+  assert.match(html, /<p>Intro\.<\/p>\n<ul>\n  <li>Premier terme<\/li>\n<\/ul>\n<p>Explication du premier terme\.<\/p>\n<ul>\n  <li>Second terme<\/li>\n<\/ul>\n<p>Explication du second terme\.<\/p>/);
+});
+
+test('mdToHtml : un callout à un seul paragraphe garde le rendu inchangé', () => {
+  const { html } = mdToHtml('> [!INFO]\n> Un fait intéressant.', { calloutLabel: 'Le saviez-vous ?' });
+  assert.match(html, /<aside class="callout" role="note">\n<p class="callout-label">Le saviez-vous \?<\/p>\n<p>Un fait intéressant\.<\/p>\n<\/aside>/);
 });
 
 test('mdToHtml : une image seule sur sa ligne devient une figure avec légende', () => {
@@ -186,18 +201,18 @@ test('renderResources : sans URL, le titre est dans un span.resource-title', () 
 test('renderCta : utilise les valeurs par défaut si le front matter est vide', () => {
   const html = renderCta({}, 'Texte par défaut', '/contact/');
   assert.match(html, /<div class="post-cta">/);
-  assert.match(html, /<a class="button" href="\/contact\/">Texte par défaut<\/a>/);
+  assert.match(html, /<a class="button button-ghost" href="\/contact\/">Texte par défaut<\/a>/);
 });
 
 test('renderCta : le front matter peut surcharger texte et lien', () => {
   const html = renderCta({ cta_texte: 'Essaie mes outils', cta_lien: '/le-lab/outils/' }, 'Texte par défaut', '/contact/');
-  assert.match(html, /<a class="button" href="\/le-lab\/outils\/">Essaie mes outils<\/a>/);
+  assert.match(html, /<a class="button button-ghost" href="\/le-lab\/outils\/">Essaie mes outils<\/a>/);
 });
 
-test('renderBackLink : construit le lien de retour', () => {
+test('renderBackLink : construit le lien de retour, icône décorative + aria-label', () => {
   assert.equal(
-    renderBackLink('/blog/', '← Tous les articles'),
-    '<a class="post-back" href="/blog/">← Tous les articles</a>'
+    renderBackLink('/blog/', 'Tous les articles', '<svg>icône</svg>'),
+    '<a class="post-back" href="/blog/" aria-label="Tous les articles"><svg>icône</svg></a>'
   );
 });
 
@@ -225,10 +240,10 @@ test('pipeline complet : un article avec tout produit les blocs dans le bon ordr
   ].join('\n');
 
   const { meta, body } = parsePost(src);
-  const { html: bodyHtml, headings } = mdToHtml(body, { calloutLabel: 'Le saviez-vous ?' });
+  const { html: bodyHtml, headings } = mdToHtml(body, { calloutLabel: 'Zoom sur…' });
   const toc = renderToc(headings, 'Sommaire');
   const resources = renderResources(meta.resources, 'Ressources');
-  const back = renderBackLink('/blog/', '← Tous les articles');
+  const back = renderBackLink('/blog/', 'Tous les articles', '<svg>icône</svg>');
   const cta = renderCta(meta, 'Texte par défaut', '/contact/');
   const title = esc(meta.title);
   const postMeta = '<p class="post-meta"><time datetime="2026-09-17">Publié le 17 septembre 2026</time></p>';
@@ -255,7 +270,7 @@ test('pipeline complet : un article avec tout produit les blocs dans le bon ordr
 
   assert.equal(headings.length, 2);
   assert.match(bodyHtml, /<figcaption>Le parcours, simplifié<\/figcaption>/);
-  assert.match(page, /<a class="button" href="\/le-lab\/outils\/">Essaie mes outils<\/a>/);
+  assert.match(page, /<a class="button button-ghost" href="\/le-lab\/outils\/">Essaie mes outils<\/a>/);
 });
 
 process.exit(failures ? 1 : 0);

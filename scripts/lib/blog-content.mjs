@@ -11,9 +11,9 @@
 //   paramètres fournis par l'appelant) appellent esc() elles-mêmes sur
 //   chaque valeur insérée dans un attribut ou un texte : renderResources,
 //   renderCta, renderBackLink, et renderToc pour son titre de section.
-// - calloutLabel (mdToHtml) est une chaîne de confiance fournie par
-//   build-blog.mjs (voir LABEL dans build-blog.mjs), jamais du contenu
-//   d'article : elle est insérée telle quelle, sans esc().
+// - calloutLabel (mdToHtml) et icon (renderBackLink) sont des chaînes de
+//   confiance fournies par build-blog.mjs (LABEL, et un fichier SVG lu sur
+//   disque), jamais du contenu d'article : insérées telles quelles, sans esc().
 // ============================================================================
 
 export const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -55,6 +55,34 @@ function renderFigure(alt, src, caption) {
   return `<figure>\n${img}\n<figcaption>${caption}</figcaption>\n</figure>`;
 }
 
+// Rendu du corps d'un callout [!INFO] : paragraphes séparés par une ligne
+// « > » vide et listes à puces/numérotées, comme le corps principal, mais
+// sans titres/images/citations imbriquées (pas besoin pour l'instant).
+function renderCalloutBody(lines) {
+  const out = [];
+  let para = [], list = null, listTag = '';
+  const flushPara = () => { if (para.length) { out.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; } };
+  const flushList = () => { if (list) { out.push(`<${listTag}>\n` + list.map((li) => '  <li>' + inline(li) + '</li>').join('\n') + `\n</${listTag}>`); list = null; } };
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line) { flushPara(); flushList(); continue; }
+    const ul = line.match(/^[-*]\s+(.*)$/);
+    const ol = line.match(/^\d+\.\s+(.*)$/);
+    if (ul || ol) {
+      flushPara();
+      const tag = ul ? 'ul' : 'ol';
+      if (list && listTag !== tag) flushList();
+      listTag = tag; (list ||= []).push((ul || ol)[1]);
+      continue;
+    }
+    flushList();
+    para.push(line);
+  }
+  flushPara();
+  flushList();
+  return out.join('\n');
+}
+
 function uniqueSlug(base, used) {
   const root = base || 'section';
   let slug = root, i = 2;
@@ -64,7 +92,7 @@ function uniqueSlug(base, used) {
 }
 
 export function mdToHtml(md, options = {}) {
-  const calloutLabel = options.calloutLabel || 'Le saviez-vous ?';
+  const calloutLabel = options.calloutLabel || 'Le saviez-vous ?';
   const lines = md.replace(/\r\n/g, '\n').split('\n');
   const out = [];
   const headings = [];
@@ -83,7 +111,7 @@ export function mdToHtml(md, options = {}) {
   const flushQuote = () => {
     if (!quote.length) { quoteIsCallout = false; return; }
     if (quoteIsCallout) {
-      out.push('<aside class="callout" role="note">\n<p class="callout-label">' + calloutLabel + '</p>\n<p>' + inline(quote.join(' ')) + '</p>\n</aside>');
+      out.push('<aside class="callout" role="note">\n<p class="callout-label">' + calloutLabel + '</p>\n' + renderCalloutBody(quote) + '\n</aside>');
     } else {
       out.push('<blockquote>\n<p>' + inline(quote.join(' ')) + '</p>\n</blockquote>');
     }
@@ -193,11 +221,14 @@ export function renderResources(resources, headingText) {
 export function renderCta(meta, defaultText, defaultHref) {
   const href = meta.cta_lien || defaultHref;
   const text = meta.cta_texte || defaultText;
-  return `<div class="post-cta">\n  <a class="button" href="${esc(href)}">${esc(text)}</a>\n</div>`;
+  return `<div class="post-cta">\n  <a class="button button-ghost" href="${esc(href)}">${esc(text)}</a>\n</div>`;
 }
 
-export function renderBackLink(href, label) {
-  return `<a class="post-back" href="${esc(href)}">${esc(label)}</a>`;
+// `icon` est le SVG déjà lu sur disque par build-blog.mjs (blog-content.mjs
+// n'a pas d'accès fichier) : évite de dupliquer assets/icons/back-arrow.svg
+// dans le code.
+export function renderBackLink(href, label, icon) {
+  return `<a class="post-back" href="${esc(href)}" aria-label="${esc(label)}">${icon}</a>`;
 }
 
 // --- Assemblage de la page article -------------------------------------------
