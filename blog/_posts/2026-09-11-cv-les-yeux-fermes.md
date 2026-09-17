@@ -1,6 +1,8 @@
 ---
 title: Et si vous lisiez votre CV les yeux fermés ?
 description: Pourquoi un CV accessible passe mieux les filtres automatiques, et pourquoi ça ne concerne pas que les personnes handicapées.
+category: Réflexions
+tags: emploi, lecteurs d'écran, recrutement
 ---
 
 Article en cours de rédaction.

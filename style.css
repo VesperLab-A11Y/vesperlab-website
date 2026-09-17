@@ -913,10 +913,14 @@ main#main h3{
   min-height:var(--min-hit);
   padding:var(--space-3) var(--space-8);
   background:transparent;
-  border:1px solid var(--accent);
+  /* --accent-quiet (pas --accent) : même épaisseur 1px que .entry-card sur
+     Tools/Projets, mais un sauge plein contre le fond très sombre lit
+     toujours plus "épais" qu'un simple hairline — la teinte plus sourde
+     rapproche le poids visuel sans sortir de la gamme sauge (demande
+     Pauline du 2026-09-16). */
+  border:1px solid var(--accent-quiet);
   border-radius:var(--radius-md);
   color:var(--accent);
-  font-weight:700;
   font-size:var(--font-size-body);
   cursor:pointer;
   transition:background-color .15s ease, color .15s ease;
@@ -944,7 +948,7 @@ main#main h3{
 .apropos-frame-inner{
   overflow:hidden;
   min-height:0;
-  border:1px solid var(--accent);
+  border:1px solid var(--accent-quiet);
   border-radius:var(--radius-lg);
   /* Fond noir non-opaque : la lune (atténuée) continue de se deviner derrière
      la carte plutôt que d'être coupée net. */
@@ -960,3 +964,447 @@ main#main h3{
 @media (prefers-reduced-motion:reduce){
   .apropos-frame{transition:none;}
 }
+
+/* ============================================================================
+   Page Le Lab — aiguillage (étape 1, voir src/pages/lelab.html)
+   ============================================================================ */
+
+/* Lune atténuée, même logique que la page À propos : la page a déjà 2 blocs
+   de cartes (.mp-card), la lune n'a plus besoin d'être le seul repère. */
+.page-lelab .moon-fixed .moon{opacity:.4;}
+.page-lelab .page-scrim{opacity:.55;}
+
+/* Une seule colonne à toutes les tailles (choix délibéré, pas juste le repli
+   mobile) : la mise en grille 2/4 colonnes testée rendait chaque engagement
+   trop court pour se lire confortablement.
+   Séparation titre/contenu : un espacement seul (même police que le corps)
+   ne suffisait pas à distinguer "Ce à quoi je tiens" du premier engagement.
+   Remplacé par un filet (--border-default, même que .blog-card/.a11y-control
+   ailleurs sur le site) sous le titre, répété sous chaque engagement, avec un
+   rythme fixe en px (pas les jetons --space, valeurs choisies à l'essai avec
+   Pauline le 2026-09-16) : 15px de chaque côté du filet, et la même marge
+   (15px, pas de filet) sous le dernier engagement pour marquer la fin du
+   bloc, symétrique avec l'espace au-dessus du titre. */
+main#main > .engagements{padding-top:15px;}
+.engagements h2{
+  margin:0 0 15px;
+  padding-bottom:15px;
+  border-bottom:1px solid var(--border-default);
+}
+.engagements-grid{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:grid;
+  gap:0;
+}
+.engagements-grid li{
+  padding-bottom:15px;
+  margin-bottom:15px;
+  border-bottom:1px solid var(--border-default);
+}
+.engagements-grid li:last-child{
+  padding-bottom:0;
+  margin-bottom:15px;
+  border-bottom:none;
+}
+.engagement-head{
+  display:flex;
+  align-items:center;
+  gap:var(--space-3);
+  margin-bottom:var(--space-3);
+}
+.engagement-icon{
+  width:28px;
+  height:28px;
+  flex:none;
+  color:var(--accent);
+}
+.engagements-grid h3{margin:0;font-size:var(--font-size-body);}
+.engagements-grid p{margin:0;color:var(--text-secondary);font-size:var(--font-size-body-sm);}
+.engagements-grid p em{font-style:italic;color:var(--text-body);}
+
+.lab-ideas > .blog-grid{margin-bottom:0;}
+
+/* ============================================================================
+   Pages Vesper Tools / Projets — carte commune à déclencheur (étape 2, voir
+   src/pages/lelab-outils.html, src/pages/lelab-realisations.html)
+   ============================================================================
+   Carte "entry-card" : partie visible (badges, titre, phrase, chiffres clés
+   optionnels, action principale, mockup optionnel, bouton +) toujours
+   suffisante seule. Le panneau cause détail est masqué par défaut (attribut
+   hidden, jamais juste une opacité/hauteur nulle) et animé à l'ouverture avec
+   la même technique que .apropos-frame (grid-template-rows 0fr → 1fr sur un
+   conteneur, overflow:hidden sur son enfant direct). Contrairement à
+   À propos, chaque carte est indépendante : ouvrir l'une n'affecte pas les
+   autres (voir assets/js/entries.js). Pas de lune sur ces pages (voir
+   ".page-lelab-outils"/".page-lelab-realisations" plus bas), donc pas besoin
+   du "nudge" vers moon.js qu'apropos.js déclenche après coup. */
+
+.entry-list{
+  list-style:none;
+  /* Marge additionnelle avant la 1ʳᵉ carte (demande Pauline), et même marge
+     que ".apropos-frame" avant le footer (30px, filet sauge → footer) : ici
+     aussi rien n'enveloppe la liste dans une <section>, donc pas de
+     padding-bottom automatique à hériter. */
+  margin:var(--space-10) 0 30px;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:var(--space-8);
+}
+.entry-card{
+  border:1px solid var(--border-default);
+  border-radius:var(--radius-lg);
+  padding:clamp(var(--space-6), 4vw, var(--space-8));
+}
+.entry-badges{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--space-2);
+  margin-bottom:var(--space-4);
+}
+.entry-badge{
+  display:inline-flex;
+  align-items:center;
+  min-height:0;
+  padding:3px var(--space-4);
+  border:1px solid var(--border-strong);
+  border-radius:999px;
+  font-size:var(--font-size-caption);
+  color:var(--text-secondary);
+}
+.entry-badge--category{border-color:var(--accent);color:var(--accent);}
+
+.entry-main{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--space-6);
+  align-items:flex-start;
+}
+.entry-text{flex:1 1 20rem;min-width:0;}
+/* h2 sémantique (rien ne les précède sur ces pages, donc pas de saut de
+   niveau), mais taille visuelle d'un h3 : un titre de carte n'a pas besoin
+   du poids du h2 générique du site. Spécificité forcée par "main#main" pour
+   passer devant la règle globale "main#main h2". */
+main#main .entry-text h2{
+  margin:0 0 var(--space-2);
+  font-size:var(--font-size-h3);
+}
+.entry-tagline{margin:0 0 var(--space-4);color:var(--text-secondary);}
+.entry-stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--space-2) var(--space-6);
+  margin:0 0 var(--space-4);
+  padding:0;
+  list-style:none;
+}
+/* Chiffres clés : même traitement typo que .site-nav (police display,
+   graisse 600, majuscules, tracking), chiffre agrandi et en sauge pour
+   sauter aux yeux, description qui garde sa couleur/taille d'origine. */
+.entry-stats li{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  font-family:var(--font-display);
+  font-weight:600;
+  letter-spacing:.01em;
+  text-transform:uppercase;
+  font-size:clamp(1.5rem, 4vw, 2rem);
+  color:var(--accent);
+}
+.entry-stats li span{
+  display:block;
+  font-family:var(--font-display);
+  font-weight:600;
+  letter-spacing:.01em;
+  text-transform:uppercase;
+  font-size:var(--font-size-caption);
+  color:var(--text-faint);
+}
+
+.entry-mockup{
+  flex:0 0 auto;
+  width:11rem;
+  aspect-ratio:4/3;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:var(--space-3);
+  border:1px dashed var(--border-strong);
+  border-radius:var(--radius-md);
+  color:var(--text-faint);
+  font-size:var(--font-size-caption);
+  text-align:center;
+}
+
+/* Rangée [icône lien] [bouton +] : même gabarit de bouton carré pour les
+   deux, l'icône lien n'est un <a> que s'il y a vraiment un lien (sinon
+   <span aria-hidden>, non interactif — voir le commentaire dans les pages
+   de contenu). */
+.entry-controls{
+  display:flex;
+  gap:var(--space-3);
+  margin-top:var(--space-4);
+}
+.entry-icon-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:var(--min-hit);
+  height:var(--min-hit);
+  background:transparent;
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  color:var(--text-body);
+}
+.entry-icon-btn-svg{width:16px;height:16px;flex:none;}
+a.entry-icon-btn{cursor:pointer;}
+a.entry-icon-btn:hover{border-color:var(--accent);}
+button.entry-icon-btn{cursor:pointer;}
+button.entry-icon-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+.entry-link-icon{color:var(--accent);}
+/* Gris (pas blanc) volontairement : sur fond très sombre, un blanc plein
+   lirait presque aussi fort que le sage, et brouillerait la distinction
+   "il y a un lien" / "il n'y en a pas". */
+.entry-link-icon--none{color:var(--text-faint);}
+
+.entry-toggle-icon{transition:transform .2s ease;}
+.entry-toggle[aria-expanded="true"] .entry-toggle-icon{transform:rotate(45deg);}
+
+.entry-panel-wrap{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .3s ease;
+}
+.entry-panel-wrap.is-open{grid-template-rows:1fr;}
+.entry-panel-inner{overflow:hidden;min-height:0;}
+.entry-panel{
+  margin-top:var(--space-6);
+  padding-top:var(--space-6);
+  border-top:1px solid var(--border-default);
+}
+.entry-detail{
+  margin:0;
+  display:grid;
+  gap:var(--space-4);
+}
+.entry-detail dt{
+  font-weight:700;
+  color:var(--text-body);
+  margin:0 0 var(--space-1);
+}
+.entry-detail dd{margin:0;color:var(--text-secondary);}
+.entry-freeform{
+  margin:var(--space-4) 0 0;
+  padding-top:var(--space-4);
+  border-top:1px solid var(--border-default);
+  color:var(--text-secondary);
+  font-style:italic;
+}
+@media (prefers-reduced-motion:reduce){
+  .entry-panel-wrap{transition:none;}
+  .entry-toggle-icon{transition:none;}
+}
+
+/* Pas de lune sur les sous-onglets du Lab pour l'instant (note Pauline,
+   session du 2026-09-16) : la carte .entry-card porte déjà tout le contraste
+   nécessaire, la lune n'ajoute qu'un fond concurrent sur des pages qui seront
+   surtout des listes. */
+.page-lelab-outils .moon-fixed,
+.page-lelab-realisations .moon-fixed{display:none;}
+
+/* ============================================================================
+   Page Blog (étape 3, voir scripts/build-blog.mjs, src/pages/blog.html)
+   ============================================================================
+   Galerie "destructurée" (demande Pauline) : pas de champ taille dans le
+   front matter des articles, les variantes de gabarit (carte large / carte
+   haute) sont purement du nth-child CSS ci-dessous, sur un grid-auto-flow
+   dense pour combler les trous laissés par les cartes qui débordent de leur
+   piste. Chaque carte réutilise .mp-card (même fondu au scroll que
+   l'accueil, voir assets/js/moon.js — aucune inscription JS supplémentaire
+   nécessaire, la classe suffit) mais son masque ::before est réécrit :
+   celui de .mp-card est calibré pour un bloc pleine largeur, sur une carte
+   étroite il rognerait trop les coins. */
+
+/* ---- Recherche (bouton loupe + barre en toggle, voir assets/js/blog-search.js) ----
+   Vit dans .hero, juste après .lead-body : même emplacement que
+   .button-row sur l'accueil (demande Pauline du 2026-09-16), pas un bloc à
+   part avec sa propre marge. Le toggle s'ouvre à droite du bouton (grid-
+   template-columns 0fr → 1fr, même principe que .apropos-frame/
+   .entry-panel-wrap mais sur l'axe horizontal — l'attribut hidden porte
+   toujours l'accessibilité, pas juste la largeur 0). Contour sauge fin sur
+   le bouton loupe ; le champ reste sur le contour neutre par défaut, sinon
+   les deux contours sauge côte à côte se confondent. */
+.blog-search{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:var(--space-3);
+}
+.blog-search-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:var(--min-hit);
+  height:var(--min-hit);
+  flex:none;
+  padding:0;
+  background:transparent;
+  border:1px solid var(--accent);
+  border-radius:var(--radius-md);
+  color:var(--accent);
+  cursor:pointer;
+}
+.blog-search-toggle:hover{background:var(--surface-card);}
+.blog-search-toggle-svg{width:18px;height:18px;}
+.blog-search-panel-wrap{
+  display:grid;
+  grid-template-columns:0fr;
+  transition:grid-template-columns .3s ease;
+}
+.blog-search-panel-wrap.is-open{grid-template-columns:1fr;}
+.blog-search-panel-inner{overflow:hidden;min-width:0;}
+.blog-search-panel{
+  display:flex;
+  align-items:center;
+  gap:var(--space-3);
+  width:18rem;
+  max-width:70vw;
+}
+.blog-search-panel input[type="search"]{
+  flex:1;
+  min-width:0;
+  min-height:var(--min-hit);
+  padding:var(--space-3) var(--space-5);
+  background:var(--surface-input);
+  border:1px solid var(--border-default);
+  border-radius:var(--radius-md);
+  color:var(--text-body);
+  font:inherit;
+  font-size:var(--font-size-body-sm);
+}
+.blog-search-panel input[type="search"]:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.blog-search-submit{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:var(--min-hit);
+  height:var(--min-hit);
+  flex:none;
+  padding:0;
+  background:transparent;
+  border:1px solid var(--border-strong);
+  border-radius:var(--radius-md);
+  color:var(--accent);
+  cursor:pointer;
+}
+.blog-search-submit:hover{border-color:var(--accent);}
+.blog-search-submit-svg{width:18px;height:18px;}
+@media (prefers-reduced-motion:reduce){
+  .blog-search-panel-wrap{transition:none;}
+}
+
+.blog-gallery{
+  list-style:none;
+  margin:var(--space-10) 0 30px;
+  padding:0;
+  display:grid;
+  gap:var(--space-6);
+  grid-auto-flow:dense;
+  /* Sans ça, les cartes d'une même rangée s'étirent (align-items:stretch
+     par défaut) pour matcher la plus haute du lot — invisible en mobile
+     (une carte par rangée) mais très visible dès qu'on a plusieurs colonnes.
+     "start" laisse chaque carte à sa propre hauteur : les trous que ça
+     laisse sont voulus (effet mur de liège/moodboard, pas un mur plein). */
+  align-items:start;
+}
+@media (min-width:720px){
+  .blog-gallery{grid-template-columns:repeat(6, 1fr);grid-auto-rows:min-content;}
+  /* Rythme irrégulier sur un cycle de 7 cartes : 1 large (2 colonnes), le
+     reste au gabarit standard (1x1, largeur variable via auto-fit implicite
+     du 6-colonnes). Recommence tous les 7 éléments pour ne pas dépendre du
+     nombre total d'articles. Pas de grid-row:span : la hauteur de chaque
+     carte suit son propre contenu (voir .blog-entry-body plus bas) — un
+     span forcé laissait un vide entre les tags et le bas du cadre quand le
+     texte ne remplissait pas la hauteur imposée. */
+  .blog-gallery > .blog-entry{grid-column:span 2;}
+  .blog-gallery > .blog-entry:nth-child(7n+1){grid-column:span 4;}
+
+  /* Les lignes de la grille restent lisibles tant que tout démarre au même
+     niveau : on désynchronise le calage vertical (cycle de 3, indépendant
+     du cycle de largeur ci-dessus) pour un rendu "épinglé au mur", pas
+     aligné au cordeau — sans inclinaison (essayée puis retirée sur retour
+     Pauline du 2026-09-16 : le bazar d'alignement lui plaisait, pas la
+     rotation). La grande carte (span 4) reste l'ancre visuelle du lot : pas
+     décalée, sinon l'effet lit comme un bug plutôt qu'un choix — d'où la
+     règle après, qui l'emporte car déclarée plus tard. */
+  .blog-gallery > .blog-entry:nth-child(3n+2){align-self:center;}
+  .blog-gallery > .blog-entry:nth-child(3n){align-self:end;}
+  .blog-gallery > .blog-entry:nth-child(7n+1){align-self:start;}
+}
+.blog-entry{
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  flex-direction:column;
+  padding-inline:0; /* écrase .padding-inline de .mp-card : le padding vit
+    sur .blog-entry-body pour laisser l'image affleurer les bords */
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+}
+.blog-entry::before{
+  mask-image:radial-gradient(ellipse 90% 94% at 50% 50%, black 65%, transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 94% at 50% 50%, black 65%, transparent 100%);
+}
+.blog-entry-image{margin:0;line-height:0;}
+.blog-entry-image img{width:100%;max-height:220px;object-fit:cover;display:block;}
+.blog-entry-body{
+  padding:clamp(var(--space-6), 4vw, var(--space-8));
+  display:flex;
+  flex-direction:column;
+}
+/* Étiré à toute la largeur par défaut (align-items:stretch, hérité du
+   parent en colonne) alors que le contour doit épouser le texte de la
+   catégorie, pas la carte. */
+.blog-entry-body > .entry-badge{align-self:flex-start;}
+main#main .blog-entry-body h2{
+  margin:var(--space-4) 0 var(--space-2);
+  font-size:var(--font-size-h3);
+}
+.blog-entry-body h2 a{color:inherit;text-decoration:none;}
+.blog-entry-body h2 a:hover{text-decoration:underline;}
+.blog-entry-body .post-meta{
+  margin:0 0 var(--space-3);
+  color:var(--text-faint);
+  font-size:var(--font-size-caption);
+}
+.blog-entry-desc{
+  margin:0;
+  color:var(--text-secondary);
+  font-size:var(--font-size-body-sm);
+}
+.blog-tags{
+  list-style:none;
+  margin:var(--space-4) 0 0;
+  padding:0;
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--space-2);
+}
+.blog-tag{
+  padding:2px var(--space-3);
+  border:1px solid var(--border-default);
+  border-radius:999px;
+  color:var(--text-faint);
+  font-size:var(--font-size-caption);
+}
+
+/* Lune atténuée comme À propos (demande Pauline) : la galerie porte déjà
+   son propre contraste par carte, la lune reste une ambiance, pas le seul
+   repère. */
+.page-blog .moon-fixed .moon{opacity:.4;}
+.page-blog .page-scrim{opacity:.55;}

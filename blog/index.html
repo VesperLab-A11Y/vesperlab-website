@@ -99,7 +99,7 @@
       </ul>
       <ul class="lab-submenu" id="lab-submenu">
         <li><a href="/le-lab/outils/">Vesper Tools</a></li>
-        <li><a href="/le-lab/realisations/">Portfolio</a></li>
+        <li><a href="/le-lab/realisations/">Projets</a></li>
         <li><a href="/blog/" aria-current="page">Blog</a></li>
       </ul>
     </nav>
@@ -122,28 +122,70 @@
 
 
 <main id="main" tabindex="-1">
-<h1>Blog</h1>
-<ul class="post-list">
-  <li>
-    <article>
+<section class="hero">
+  <h1>Blog</h1>
+  <p class="lead-body">Des constats glanés en audit, des essais avec mes
+    propres outils, et les détours que prend l'accessibilité quand elle
+    sort du cadre des specs. Pas de calendrier fixe : je publie quand j'ai
+    quelque chose à dire.</p>
+  <div class="blog-search">
+    <button type="button" class="blog-search-toggle" aria-expanded="false" aria-controls="blog-search-panel" aria-label="Rechercher un article" data-label-open="Rechercher un article" data-label-close="Fermer la recherche">
+      <svg class="blog-search-toggle-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"/></svg>
+    </button>
+    <div class="blog-search-panel-wrap">
+      <div class="blog-search-panel-inner">
+        <form class="blog-search-panel" id="blog-search-panel" role="search" hidden>
+          <label for="blog-search-input" class="visually-hidden">Rechercher un article</label>
+          <input type="search" id="blog-search-input" name="q" placeholder="Rechercher un article…" autocomplete="off">
+          <button type="submit" class="blog-search-submit" aria-label="Lancer la recherche">
+            <svg class="blog-search-submit-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 7V8.2C20 9.88016 20 10.7202 19.673 11.362C19.3854 11.9265 18.9265 12.3854 18.362 12.673C17.7202 13 16.8802 13 15.2 13H4M4 13L8 9M4 13L8 17"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+    <p class="visually-hidden" id="blog-search-status" role="status" aria-live="polite"></p>
+  </div>
+</section>
+<ul class="blog-gallery">
+  <li class="blog-entry mp-card" data-search="entre voir et remarquer ce qu'on ne voit pas tant qu'on n'en a pas besoin, et pourquoi c'est un problème pour l'accessibilité. réflexions perception biais conception">
+    <div class="blog-entry-image"><img src="/assets/img/blog-placeholder-2.svg" alt="" loading="lazy"></div>
+    <div class="blog-entry-body">
+      <span class="entry-badge entry-badge--category">Réflexions</span>
       <h2><a href="/blog/entre-voir-et-remarquer/">Entre voir et remarquer</a></h2>
       <p class="post-meta"><time datetime="2026-09-11">11 septembre 2026</time></p>
-      <p>Ce qu'on ne voit pas tant qu'on n'en a pas besoin, et pourquoi c'est un problème pour l'accessibilité.</p>
-    </article>
+      <p class="blog-entry-desc">Ce qu'on ne voit pas tant qu'on n'en a pas besoin, et pourquoi c'est un problème pour l'accessibilité.</p>
+      <ul class="blog-tags">
+        <li class="blog-tag">perception</li>
+        <li class="blog-tag">biais</li>
+        <li class="blog-tag">conception</li>
+      </ul>
+    </div>
   </li>
-  <li>
-    <article>
+  <li class="blog-entry mp-card" data-search="et si vous lisiez votre cv les yeux fermés ? pourquoi un cv accessible passe mieux les filtres automatiques, et pourquoi ça ne concerne pas que les personnes handicapées. réflexions emploi lecteurs d'écran recrutement">
+    <div class="blog-entry-body">
+      <span class="entry-badge entry-badge--category">Réflexions</span>
       <h2><a href="/blog/cv-les-yeux-fermes/">Et si vous lisiez votre CV les yeux fermés ?</a></h2>
       <p class="post-meta"><time datetime="2026-09-11">11 septembre 2026</time></p>
-      <p>Pourquoi un CV accessible passe mieux les filtres automatiques, et pourquoi ça ne concerne pas que les personnes handicapées.</p>
-    </article>
+      <p class="blog-entry-desc">Pourquoi un CV accessible passe mieux les filtres automatiques, et pourquoi ça ne concerne pas que les personnes handicapées.</p>
+      <ul class="blog-tags">
+        <li class="blog-tag">emploi</li>
+        <li class="blog-tag">lecteurs d'écran</li>
+        <li class="blog-tag">recrutement</li>
+      </ul>
+    </div>
   </li>
-  <li>
-    <article>
+  <li class="blog-entry mp-card" data-search="accessibilité pdf : 5 conseils qui font écho quelles que soient vos raisons, vous en avez forcément une bonne pour améliorer l'accessibilité de vos pdf. guide pratique pdf documents bureautique">
+    <div class="blog-entry-body">
+      <span class="entry-badge entry-badge--category">Guide pratique</span>
       <h2><a href="/blog/accessibilite-pdf-5-conseils/">Accessibilité PDF : 5 conseils qui font écho</a></h2>
       <p class="post-meta"><time datetime="2026-09-11">11 septembre 2026</time></p>
-      <p>Quelles que soient vos raisons, vous en avez forcément une bonne pour améliorer l'accessibilité de vos PDF.</p>
-    </article>
+      <p class="blog-entry-desc">Quelles que soient vos raisons, vous en avez forcément une bonne pour améliorer l'accessibilité de vos PDF.</p>
+      <ul class="blog-tags">
+        <li class="blog-tag">PDF</li>
+        <li class="blog-tag">documents</li>
+        <li class="blog-tag">bureautique</li>
+      </ul>
+    </div>
   </li>
 </ul>
 </main>
@@ -186,7 +228,7 @@
         <h2>Mes autres projets</h2>
         <ul>
           <li>
-            <p class="footer-project-title">La dernière tasse de Carole</p>
+            <p class="footer-project-title">La dernière tasse de Caroline</p>
             <p class="footer-project-desc">Jeu de mystère tiré du jeu Stardew Valley. Bientôt.</p>
           </li>
           <li>
@@ -214,7 +256,7 @@
         <li><a href="/a-propos/">À propos</a></li>
         <li><a href="/le-lab/">Le Lab</a></li>
         <li><a href="/le-lab/outils/">Vesper Tools</a></li>
-        <li><a href="/le-lab/realisations/">Portfolio</a></li>
+        <li><a href="/le-lab/realisations/">Projets</a></li>
         <li><a href="/blog/">Blog</a></li>
         <li><a href="/contact/">Contact</a></li>
       </ul>
@@ -264,5 +306,7 @@
 <script defer src="/assets/js/site.js"></script>
 <script defer src="/assets/js/moon.js"></script>
 <script defer src="/assets/js/apropos.js"></script>
+<script defer src="/assets/js/entries.js"></script>
+<script defer src="/assets/js/blog-search.js"></script>
 </body>
 </html>

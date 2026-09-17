@@ -99,7 +99,7 @@
       </ul>
       <ul class="lab-submenu" id="lab-submenu">
         <li><a href="/le-lab/outils/">Vesper Tools</a></li>
-        <li><a href="/le-lab/realisations/">Portfolio</a></li>
+        <li><a href="/le-lab/realisations/">Projets</a></li>
         <li><a href="/blog/">Blog</a></li>
       </ul>
     </nav>
@@ -123,10 +123,117 @@
 
 <main id="main" tabindex="-1">
 <!-- Fragment de contenu FR : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Squelette seulement — contenu à rédiger (voir roadmap Notion + docs/superpowers/specs/2026-09-09-site-multipage-specs-consolidees.md). -->
-<h1>Le Lab</h1>
+     Étape 1 (voir session du 2026-09-16) : page d'aiguillage du Lab, même
+     gabarit que l'accueil (.hero + .mp-card). Les 3 boutons pointent vers les
+     sous-onglets déjà en place (Outils, Projets, Blog). Lune en fond, atténuée
+     comme sur À propos (voir ".page-lelab" dans style.css) pour ne pas
+     surcharger une page qui a déjà 2 blocs de cartes. -->
 
-<p><!-- TODO : contenu --></p>
+<section class="hero">
+  <h1>Ce qui se conçoit dans l'ombre finit par sortir au <em>jour</em>.</h1>
+  <p class="lead-body">Si Vesper n'est pas un studio, c'est à cause de sa
+    pluralité. Entre les diagnostics d'accessibilité, les outils que je code
+    (y compris pour mes propres audits), les projets ou ce que j'apprends en
+    chemin, un laboratoire semblait bien plus indiqué. Avec mes post-its
+    disséminés, l'éternel « 500 Internal Server Error » et ma blouse de
+    chimiste virtuelle, je publie en accès libre, en français et en
+    anglais.</p>
+  <!-- Libellés visibles volontairement différents des vrais noms d'onglets
+       (ton du Lab) ; aria-label restaure le nom réel là où ça diverge, pour
+       rester cohérent avec les libellés utilisés ailleurs dans la nav
+       (identification cohérente, WCAG 2.4.4/3.2.4). -->
+  <div class="button-row">
+    <a class="button button-ghost" href="/le-lab/outils/">Vesper Tools</a>
+    <a class="button button-ghost" href="/le-lab/realisations/" aria-label="Projets">Projets en vrac</a>
+    <a class="button button-ghost" href="/blog/" aria-label="Blog">Condensé de post-its</a>
+  </div>
+</section>
+
+<section class="engagements mp-card" aria-labelledby="h-engagements">
+  <h2 id="h-engagements">Ce à quoi je tiens</h2>
+  <ul class="engagements-grid">
+    <li>
+      <div class="engagement-head">
+        <svg class="engagement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <h3>Adopter plusieurs points de vue</h3>
+      </div>
+      <p>Je remarque les barrières parce que j'ai appris à les remarquer
+        depuis plusieurs regards : sous l'angle du soin, de la sociologie, du
+        design, et du code. Améliorer le champ des possibles commence par
+        comprendre ce qu'est un champ, ce qu'il fait là, comment le
+        fabriquer, comment il fonctionne, et comment il s'intègre au reste du
+        monde.</p>
+    </li>
+    <li>
+      <div class="engagement-head">
+        <svg class="engagement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/>
+        </svg>
+        <h3>Avoir un impact</h3>
+      </div>
+      <p>Je travaille <em>pour</em> le public, <em>avec</em> des
+        organisations qui veulent changer les choses. Rendre les secondes
+        visibles au premier, c'est déjà laisser une trace durable pour un web
+        plus accessible.</p>
+    </li>
+    <li>
+      <div class="engagement-head">
+        <svg class="engagement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="m3 11 18-5v12L3 14v-3z"/>
+          <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>
+        </svg>
+        <h3>Faire passer le message</h3>
+      </div>
+      <p>J'utilise ma voix pour vulgariser : articles, ateliers, explications
+        en français clair. J'encourage les actions concrètes, en m'appuyant
+        sur le processus de production du handicap (PPH), le modèle
+        social-environnemental du handicap.</p>
+    </li>
+    <li>
+      <div class="engagement-head">
+        <svg class="engagement-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+        <h3>Penser une accessibilité plurielle</h3>
+      </div>
+      <p>Je propose des outils gratuits, accessibles et open-source, tenus
+        aux mêmes exigences que les sites que j'audite, pour faciliter
+        l'accessibilité web en autodidacte. Tous mes projets et tous mes
+        contenus, y compris mes diagnostics d'accessibilité, sont pensés pour
+        être accessibles, pratiques, et utilisables les yeux fermés.</p>
+    </li>
+  </ul>
+</section>
+
+<section class="lab-ideas mp-card" aria-labelledby="h-ideas">
+  <h2 id="h-ideas">Mes dernières idées</h2>
+  <ul class="blog-grid">
+    <li>
+      <a class="blog-card" href="/le-lab/realisations/">
+        <h3>Bientôt : un premier projet</h3>
+        <p>Une étude de cas ou un projet personnel ouvert au public — à
+          venir.</p>
+      </a>
+    </li>
+    <li>
+      <a class="blog-card" href="/le-lab/outils/">
+        <h3>Bientôt : un premier outil</h3>
+        <p>Vesper Toolkit, Vesper Library ou un autre outil du Lab — à
+          venir.</p>
+      </a>
+    </li>
+    <li>
+      <a class="blog-card" href="/blog/">
+        <h3>Bientôt : un premier article</h3>
+        <p>Ce que j'apprends en marge des audits, publié au fil de l'eau — à
+          venir.</p>
+      </a>
+    </li>
+  </ul>
+</section>
 </main>
 
 <footer class="mp-footer">
@@ -167,7 +274,7 @@
         <h2>Mes autres projets</h2>
         <ul>
           <li>
-            <p class="footer-project-title">La dernière tasse de Carole</p>
+            <p class="footer-project-title">La dernière tasse de Caroline</p>
             <p class="footer-project-desc">Jeu de mystère tiré du jeu Stardew Valley. Bientôt.</p>
           </li>
           <li>
@@ -195,7 +302,7 @@
         <li><a href="/a-propos/">À propos</a></li>
         <li><a href="/le-lab/">Le Lab</a></li>
         <li><a href="/le-lab/outils/">Vesper Tools</a></li>
-        <li><a href="/le-lab/realisations/">Portfolio</a></li>
+        <li><a href="/le-lab/realisations/">Projets</a></li>
         <li><a href="/blog/">Blog</a></li>
         <li><a href="/contact/">Contact</a></li>
       </ul>
@@ -245,5 +352,7 @@
 <script defer src="/assets/js/site.js"></script>
 <script defer src="/assets/js/moon.js"></script>
 <script defer src="/assets/js/apropos.js"></script>
+<script defer src="/assets/js/entries.js"></script>
+<script defer src="/assets/js/blog-search.js"></script>
 </body>
 </html>

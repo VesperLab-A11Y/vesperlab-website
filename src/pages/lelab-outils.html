@@ -1,5 +1,136 @@
 <!-- Fragment de contenu FR : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Squelette seulement — contenu à rédiger (voir roadmap Notion + docs/superpowers/specs/2026-09-09-site-multipage-specs-consolidees.md). -->
-<h1>Outils</h1>
+     Étape 2 (session du 2026-09-16) : carte "entry-card" commune avec
+     Réalisations (voir style.css, assets/js/entries.js). Contenu réel pour
+     Vesper Toolkit et Vesper Library (dépôts GitHub, descriptions tirées de
+     leurs README) — licence non précisée dans ces deux dépôts pour
+     l'instant, signalé tel quel plutôt qu'inventé. Pas de badge catégorie
+     ici : toutes les cartes de cette page sont déjà des outils.
+     H1/accroche repris de .hero (même gabarit que Le Lab/À propos/accueil).
+     Un seul accès au lien GitHub par carte (icône GitHub à côté du bouton +,
+     voir .entry-link-icon dans style.css) : la mention texte séparée faisait
+     doublon, retirée sur retour Pauline du 2026-09-16. -->
 
-<p><!-- TODO : contenu --></p>
+<section class="hero">
+  <h1>Vesper Tools</h1>
+  <p class="lead-body">Les outils que je construis pour mes propres audits,
+    publiés en accès libre. Gratuits, sans compte, et tenus aux mêmes
+    exigences d'accessibilité que ce que j'audite.</p>
+</section>
+
+<ul class="entry-list">
+  <li class="entry-card">
+    <div class="entry-badges">
+      <span class="entry-badge">Publié</span>
+    </div>
+    <div class="entry-main">
+      <div class="entry-text">
+        <h2>Vesper Toolkit</h2>
+        <p class="entry-tagline">Une douzaine d'outils de test
+          d'accessibilité dans la barre de favoris — sans extension, sans
+          compte, sans donnée qui sort du navigateur.</p>
+      </div>
+      <div class="entry-mockup">Mockup à ajouter</div>
+    </div>
+    <div class="entry-controls">
+      <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Toolkit" aria-label="Voir Vesper Toolkit sur GitHub">
+        <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-toolkit" aria-label="Plus de détails sur Vesper Toolkit" data-label-open="Plus de détails sur Vesper Toolkit" data-label-close="Masquer les détails sur Vesper Toolkit">
+        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+    <div class="entry-panel-wrap">
+      <div class="entry-panel-inner">
+        <div class="entry-panel" id="panel-toolkit" hidden>
+          <dl class="entry-detail">
+            <div>
+              <dt>À quoi ça sert</dt>
+              <dd>Scanner l'accessibilité d'une page pendant que je code :
+                axe-core, contraste, ordre de tabulation, nom accessible,
+                hiérarchie des titres, étiquettes de formulaire, et plusieurs
+                autres outils ciblés.</dd>
+            </div>
+            <div>
+              <dt>Comment s'en servir</dt>
+              <dd>Glisser les favoris depuis la page d'installation
+                (<a href="https://toolkit.vesperlab.dev/">toolkit.vesperlab.dev</a>),
+                puis cliquer un bookmarklet sur la page à tester.</dd>
+            </div>
+            <div>
+              <dt>Ce que ça ne fait pas</dt>
+              <dd>Ne remplace pas un audit manuel : axe-core ne détecte
+                qu'une partie des critères WCAG, le reste reste au jugement
+                humain.</dd>
+            </div>
+            <div>
+              <dt>Technologie et licence</dt>
+              <dd>HTML/CSS/JS vanilla, aucune dépendance. Licence non
+                précisée pour l'instant sur le dépôt — à trancher.</dd>
+            </div>
+          </dl>
+          <p class="entry-freeform">Sonar, le référentiel WCAG intégré à la
+            barre de favoris, sera bientôt publié séparément en version
+            publique.</p>
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="entry-card">
+    <div class="entry-badges">
+      <span class="entry-badge">Publié</span>
+    </div>
+    <div class="entry-main">
+      <div class="entry-text">
+        <h2>Vesper Library</h2>
+        <p class="entry-tagline">Une bibliothèque de composants d'interface
+          accessibles : démo à essayer au clavier et au lecteur d'écran,
+          extrait de code, et liste de vérification WCAG pour chacun.</p>
+      </div>
+      <div class="entry-mockup">Mockup à ajouter</div>
+    </div>
+    <div class="entry-controls">
+      <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Library" aria-label="Voir Vesper Library sur GitHub">
+        <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-library" aria-label="Plus de détails sur Vesper Library" data-label-open="Plus de détails sur Vesper Library" data-label-close="Masquer les détails sur Vesper Library">
+        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+    <div class="entry-panel-wrap">
+      <div class="entry-panel-inner">
+        <div class="entry-panel" id="panel-library" hidden>
+          <dl class="entry-detail">
+            <div>
+              <dt>À quoi ça sert</dt>
+              <dd>29 composants d'interface courants (menus, formulaires,
+                dialogues, onglets…), chacun testé au lecteur d'écran, avec
+                le code de référence et les critères WCAG 2.2 à vérifier
+                point par point.</dd>
+            </div>
+            <div>
+              <dt>Comment s'en servir</dt>
+              <dd>Chercher un composant, copier l'extrait de code, ou
+                activer le Mode Rapport pour cocher les points vérifiés
+                pendant un audit et exporter une annexe.</dd>
+            </div>
+            <div>
+              <dt>Ce que ça ne fait pas</dt>
+              <dd>Ne couvre pas les composants très spécifiques à une
+                marque : les 29 entrées restent des patrons génériques, à
+                adapter au contexte.</dd>
+            </div>
+            <div>
+              <dt>Technologie et licence</dt>
+              <dd>Page statique HTML/CSS/JS, aucune dépendance, polices
+                auto-hébergées. Licence non précisée pour l'instant sur le
+                dépôt — à trancher.</dd>
+            </div>
+          </dl>
+          <p class="entry-freeform">Bilingue français/anglais : la bascule
+            de langue traduit tout le contenu, pas seulement l'interface.</p>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>
