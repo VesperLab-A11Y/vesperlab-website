@@ -1437,17 +1437,52 @@ main#main .blog-entry-body h2{
   margin:0 0 var(--space-3);
 }
 
+.post .post-meta{
+  margin:0 0 var(--space-6);
+  color:var(--text-secondary);
+}
+
 .post-toc{
   border:1px solid var(--border-default);
   border-radius:var(--radius-lg);
   padding:var(--space-6);
   margin-block:var(--space-8);
 }
-.post-toc h2{margin-bottom:var(--space-3);}
+/* Spécificité forcée par "main#main" pour passer devant la règle globale
+   "main#main h2" (même principe que main#main .entry-text h2 plus haut). */
+main#main .post-toc h2{margin-bottom:var(--space-3);}
 .post-toc ul{margin:0;padding-left:var(--space-6);}
 .post-toc li{margin-bottom:var(--space-2);}
 .post-toc a{color:var(--link);}
 .post-toc a:hover{color:var(--link-hover);}
+
+.post blockquote{
+  border-left:3px solid var(--border-default);
+  padding:var(--space-2) 0 var(--space-2) var(--space-6);
+  margin:var(--space-8) 0;
+  color:var(--text-secondary);
+}
+.post blockquote p:last-child{margin-bottom:0;}
+
+.post pre{
+  border:1px solid var(--border-default);
+  border-radius:var(--radius-md);
+  padding:var(--space-6);
+  margin:var(--space-8) 0;
+  overflow-x:auto;
+}
+.post code{
+  background:var(--surface-card);
+  border-radius:var(--radius-sm);
+  padding:0.15em 0.4em;
+}
+.post pre code{background:none;padding:0;}
+
+.post hr{
+  border:none;
+  border-top:1px solid var(--border-default);
+  margin:var(--space-10) 0;
+}
 
 .post .callout{
   border-left:3px solid var(--accent);
@@ -1482,6 +1517,9 @@ main#main .blog-entry-body h2{
 .post-resources li{margin-bottom:var(--space-2);color:var(--text-secondary);}
 .post-resources a{color:var(--link);}
 .post-resources a:hover{color:var(--link-hover);}
+/* Ressource sans URL : même poids visuel que le titre lié, sans le
+   soulignement/couleur de lien puisqu'il n'y a rien à cliquer. */
+.post-resources .resource-title{color:var(--text-body);}
 
 .post-cta{
   margin-top:var(--space-10);
