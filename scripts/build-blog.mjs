@@ -35,7 +35,7 @@
 import { readdirSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, read, render, i18nVars, OG_LOCALE } from './lib/template.mjs';
-import { esc, mdToHtml, parsePost, renderToc, renderResources } from './lib/blog-content.mjs';
+import { esc, mdToHtml, parsePost, renderToc, renderResources, renderCta, renderBackLink } from './lib/blog-content.mjs';
 
 const site = JSON.parse(read('src/site.json'));
 const ui = { fr: JSON.parse(read('i18n/ui.fr.json')), en: JSON.parse(read('i18n/ui.en.json')) };
@@ -43,8 +43,16 @@ const layout = read('src/partials/layout.html');
 const blogPage = site.pages.find((p) => p.key === 'blog');
 const DATE_FMT = { fr: 'fr-CA', en: 'en-CA' };
 const LABEL = {
-  fr: { published: 'Publié le', updated: 'Mis à jour le', empty: 'Aucun article pour le moment.', toc: 'Sommaire', callout: 'Le saviez-vous ?', resources: 'Ressources' },
-  en: { published: 'Published', updated: 'Updated', empty: 'No articles yet.', toc: 'Table of contents', callout: 'Did you know?', resources: 'Resources' },
+  fr: {
+    published: 'Publié le', updated: 'Mis à jour le', empty: 'Aucun article pour le moment.',
+    toc: 'Sommaire', callout: 'Le saviez-vous ?', resources: 'Ressources',
+    back: '← Tous les articles', ctaText: 'Une question, une remarque ? Contactez-moi.', ctaHref: '/contact/',
+  },
+  en: {
+    published: 'Published', updated: 'Updated', empty: 'No articles yet.',
+    toc: 'Table of contents', callout: 'Did you know?', resources: 'Resources',
+    back: '← All articles', ctaText: 'Questions or comments? Get in touch.', ctaHref: '/en/contact/',
+  },
 };
 
 
@@ -89,8 +97,11 @@ for (const lang of ['fr', 'en']) {
     const { html: bodyHtml, headings } = mdToHtml(post.body, { calloutLabel: L.callout });
     const toc = renderToc(headings, L.toc);
     const resources = renderResources(post.meta.resources, L.resources);
+    const back = renderBackLink(blogRoot, L.back);
+    const cta = renderCta(post.meta, L.ctaText, L.ctaHref);
     let article =
       `<article class="post">\n` +
+      back + '\n' +
       `<h1>${esc(post.meta.title || post.slug)}</h1>\n` +
       `<p class="post-meta"><time datetime="${post.date}">${L.published} ${human}</time>` +
       (post.meta.updated ? ` · <time datetime="${post.meta.updated}">${L.updated} ${post.meta.updated}</time>` : '') +
@@ -98,6 +109,7 @@ for (const lang of ['fr', 'en']) {
       (toc ? toc + '\n' : '') +
       bodyHtml.trim() + '\n' +
       (resources ? resources + '\n' : '') +
+      cta + '\n' +
       `</article>`;
 
     const other = lang === 'fr' ? 'en' : 'fr';

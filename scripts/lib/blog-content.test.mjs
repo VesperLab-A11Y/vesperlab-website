@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { esc, inline, mdToHtml, parsePost, slugify, renderToc, parseResourceLine, renderResources } from './blog-content.mjs';
+import { esc, inline, mdToHtml, parsePost, slugify, renderToc, parseResourceLine, renderResources, renderCta, renderBackLink } from './blog-content.mjs';
 
 let failures = 0;
 function test(name, fn) {
@@ -156,6 +156,24 @@ test('renderResources : lien -> texte cliquable, sans lien -> texte simple', () 
   assert.match(html, /<h2 id="post-resources-heading">Ressources<\/h2>/);
   assert.match(html, /<a href="https:\/\/www\.w3\.org\/TR\/WCAG22\/">WCAG 2\.2<\/a> — Référence normative/);
   assert.match(html, /<li>VoiceOver<\/li>/);
+});
+
+test('renderCta : utilise les valeurs par défaut si le front matter est vide', () => {
+  const html = renderCta({}, 'Texte par défaut', '/contact/');
+  assert.match(html, /<div class="post-cta">/);
+  assert.match(html, /<a class="button" href="\/contact\/">Texte par défaut<\/a>/);
+});
+
+test('renderCta : le front matter peut surcharger texte et lien', () => {
+  const html = renderCta({ cta_texte: 'Essaie mes outils', cta_lien: '/le-lab/outils/' }, 'Texte par défaut', '/contact/');
+  assert.match(html, /<a class="button" href="\/le-lab\/outils\/">Essaie mes outils<\/a>/);
+});
+
+test('renderBackLink : construit le lien de retour', () => {
+  assert.equal(
+    renderBackLink('/blog/', '← Tous les articles'),
+    '<a class="post-back" href="/blog/">← Tous les articles</a>'
+  );
 });
 
 process.exit(failures ? 1 : 0);

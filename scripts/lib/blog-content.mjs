@@ -165,3 +165,13 @@ export function renderResources(resources, headingText) {
   }).join('\n');
   return `<section class="post-resources" aria-labelledby="post-resources-heading">\n  <h2 id="post-resources-heading">${esc(headingText)}</h2>\n  <ul>\n${items}\n  </ul>\n</section>`;
 }
+
+export function renderCta(meta, defaultText, defaultHref) {
+  const href = meta.cta_lien || defaultHref;
+  const text = meta.cta_texte || defaultText;
+  return `<div class="post-cta">\n  <a class="button" href="${esc(href)}">${esc(text)}</a>\n</div>`;
+}
+
+export function renderBackLink(href, label) {
+  return `<a class="post-back" href="${esc(href)}">${esc(label)}</a>`;
+}
