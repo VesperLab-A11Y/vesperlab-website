@@ -24,6 +24,9 @@ export function slugify(s) {
     .replace(/^-+|-+$/g, '');
 }
 
+// --- Callout marker regex ---------------------------------------------------
+const CALLOUT_MARK_RE = /^\[!INFO\]\s*$/i;
+
 function uniqueSlug(base, used) {
   const root = base || 'section';
   let slug = root, i = 2;
@@ -32,15 +35,25 @@ function uniqueSlug(base, used) {
   return slug;
 }
 
-export function mdToHtml(md) {
+export function mdToHtml(md, options = {}) {
+  const calloutLabel = options.calloutLabel || 'Le saviez-vous ?';
   const lines = md.replace(/\r\n/g, '\n').split('\n');
   const out = [];
   const headings = [];
   const usedIds = new Set();
-  let para = [], list = null, listTag = '', quote = [], code = null;
+  let para = [], list = null, listTag = '', quote = [], quoteIsCallout = false, code = null;
   const flushPara = () => { if (para.length) { out.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; } };
   const flushList = () => { if (list) { out.push(`<${listTag}>\n` + list.map((li) => '  <li>' + inline(li) + '</li>').join('\n') + `\n</${listTag}>`); list = null; } };
-  const flushQuote = () => { if (quote.length) { out.push('<blockquote>\n<p>' + inline(quote.join(' ')) + '</p>\n</blockquote>'); quote = []; } };
+  const flushQuote = () => {
+    if (!quote.length) return;
+    if (quoteIsCallout) {
+      out.push('<aside class="callout" role="note">\n<p class="callout-label">' + calloutLabel + '</p>\n<p>' + inline(quote.join(' ')) + '</p>\n</aside>');
+    } else {
+      out.push('<blockquote>\n<p>' + inline(quote.join(' ')) + '</p>\n</blockquote>');
+    }
+    quote = [];
+    quoteIsCallout = false;
+  };
   const flushAll = () => { flushPara(); flushList(); flushQuote(); };
 
   for (const raw of lines) {
@@ -77,7 +90,12 @@ export function mdToHtml(md) {
       continue;
     }
     const q = line.match(/^>\s?(.*)$/);
-    if (q) { flushPara(); flushList(); quote.push(q[1]); continue; }
+    if (q) {
+      flushPara(); flushList();
+      if (!quote.length && CALLOUT_MARK_RE.test(q[1])) { quoteIsCallout = true; }
+      else quote.push(q[1]);
+      continue;
+    }
     flushList(); flushQuote(); para.push(line.trim());
   }
   flushAll();

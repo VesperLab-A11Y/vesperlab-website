@@ -69,4 +69,22 @@ test('renderToc : construit un nav accessible avec une ancre par titre', () => {
   assert.match(html, /<a href="#b">B<\/a>/);
 });
 
+test('mdToHtml : > [!INFO] devient un callout "le saviez-vous"', () => {
+  const { html } = mdToHtml('> [!INFO]\n> Un fait intéressant.', { calloutLabel: 'Le saviez-vous ?' });
+  assert.match(html, /<aside class="callout" role="note">/);
+  assert.match(html, /<p class="callout-label">Le saviez-vous \?<\/p>/);
+  assert.match(html, /<p>Un fait intéressant\.<\/p>\n<\/aside>/);
+  assert.equal(/<blockquote>/.test(html), false);
+});
+
+test('mdToHtml : une citation normale reste un blockquote', () => {
+  const { html } = mdToHtml('> Une citation ordinaire.');
+  assert.match(html, /<blockquote>\n<p>Une citation ordinaire\.<\/p>\n<\/blockquote>/);
+});
+
+test('mdToHtml : callout par défaut sans options fournies', () => {
+  const { html } = mdToHtml('> [!INFO]\n> Texte.');
+  assert.match(html, /<p class="callout-label">Le saviez-vous \?<\/p>/);
+});
+
 process.exit(failures ? 1 : 0);

@@ -43,8 +43,8 @@ const layout = read('src/partials/layout.html');
 const blogPage = site.pages.find((p) => p.key === 'blog');
 const DATE_FMT = { fr: 'fr-CA', en: 'en-CA' };
 const LABEL = {
-  fr: { published: 'Publié le', updated: 'Mis à jour le', empty: 'Aucun article pour le moment.', toc: 'Sommaire' },
-  en: { published: 'Published', updated: 'Updated', empty: 'No articles yet.', toc: 'Table of contents' },
+  fr: { published: 'Publié le', updated: 'Mis à jour le', empty: 'Aucun article pour le moment.', toc: 'Sommaire', callout: 'Le saviez-vous ?' },
+  en: { published: 'Published', updated: 'Updated', empty: 'No articles yet.', toc: 'Table of contents', callout: 'Did you know?' },
 };
 
 
@@ -86,7 +86,7 @@ for (const lang of ['fr', 'en']) {
   for (const post of posts) {
     const url = blogRoot + post.slug + '/';
     const human = new Date(post.date + 'T12:00:00Z').toLocaleDateString(DATE_FMT[lang], { year: 'numeric', month: 'long', day: 'numeric' });
-    const { html: bodyHtml, headings } = mdToHtml(post.body);
+    const { html: bodyHtml, headings } = mdToHtml(post.body, { calloutLabel: L.callout });
     const toc = renderToc(headings, L.toc);
     let article =
       `<article class="post">\n` +
