@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { esc, inline, mdToHtml, parsePost, slugify, renderToc, parseResourceLine, renderResources, renderCta, renderBackLink } from './blog-content.mjs';
+import { esc, inline, mdToHtml, parsePost, slugify, renderToc, parseResourceLine, renderResources, renderCta, renderBackLink, renderArticle } from './blog-content.mjs';
 
 let failures = 0;
 function test(name, fn) {
@@ -7,8 +7,8 @@ function test(name, fn) {
   catch (e) { console.error('✗ ' + name + '\n  ' + e.message); failures += 1; }
 }
 
-test('esc : échappe &, < et >', () => {
-  assert.equal(esc('a & b < c > d'), 'a &amp; b &lt; c &gt; d');
+test('esc : échappe &, <, > et "', () => {
+  assert.equal(esc('a & b < c > d "e"'), 'a &amp; b &lt; c &gt; d &quot;e&quot;');
 });
 
 test('inline : gras, italique, code, lien', () => {
@@ -69,6 +69,15 @@ test('renderToc : construit un nav accessible avec une ancre par titre', () => {
   assert.match(html, /<a href="#b">B<\/a>/);
 });
 
+test('renderToc : un titre contenant un lien Markdown ne produit pas de <a> imbriqué', () => {
+  // h.text est du HTML déjà rendu par inline() ; s'il contient un <a>
+  // (titre "## Voir [WCAG](https://w3.org)"), renderToc ne doit pas
+  // l'insérer tel quel dans son propre <a href="#...">.
+  const html = renderToc([{ id: 'voir-wcag', text: 'Voir <a href="https://w3.org">WCAG</a>' }], 'Sommaire');
+  assert.match(html, /<a href="#voir-wcag">Voir WCAG<\/a>/);
+  assert.equal(/<a href="#voir-wcag">.*<a /.test(html), false);
+});
+
 test('mdToHtml : > [!INFO] devient un callout "le saviez-vous"', () => {
   const { html } = mdToHtml('> [!INFO]\n> Un fait intéressant.', { calloutLabel: 'Le saviez-vous ?' });
   assert.match(html, /<aside class="callout" role="note">/);
@@ -85,6 +94,15 @@ test('mdToHtml : une citation normale reste un blockquote', () => {
 test('mdToHtml : callout par défaut sans options fournies', () => {
   const { html } = mdToHtml('> [!INFO]\n> Texte.');
   assert.match(html, /<p class="callout-label">Le saviez-vous \?<\/p>/);
+});
+
+test('mdToHtml : un [!INFO] vidé sans contenu ne contamine pas la citation suivante', () => {
+  // Un marqueur [!INFO] suivi immédiatement d'une ligne vide (bloc vide,
+  // flushé sans jamais recevoir de contenu) ne doit pas laisser
+  // quoteIsCallout à true pour la citation normale qui suit.
+  const { html } = mdToHtml('> [!INFO]\n\n> Une citation.');
+  assert.match(html, /<blockquote>\n<p>Une citation\.<\/p>\n<\/blockquote>/);
+  assert.equal(/<aside class="callout"/.test(html), false);
 });
 
 test('mdToHtml : une image seule sur sa ligne devient une figure avec légende', () => {
@@ -155,7 +173,14 @@ test('renderResources : lien -> texte cliquable, sans lien -> texte simple', () 
   assert.match(html, /<section class="post-resources" aria-labelledby="post-resources-heading">/);
   assert.match(html, /<h2 id="post-resources-heading">Ressources<\/h2>/);
   assert.match(html, /<a href="https:\/\/www\.w3\.org\/TR\/WCAG22\/">WCAG 2\.2<\/a> — Référence normative/);
-  assert.match(html, /<li>VoiceOver<\/li>/);
+  assert.match(html, /<li><span class="resource-title">VoiceOver<\/span><\/li>/);
+});
+
+test('renderResources : sans URL, le titre est dans un span.resource-title', () => {
+  const html = renderResources([
+    { title: 'VoiceOver', url: '', description: "Lecteur d'écran utilisé pour les tests" },
+  ], 'Ressources');
+  assert.match(html, /<li><span class="resource-title">VoiceOver<\/span> — Lecteur d'écran utilisé pour les tests<\/li>/);
 });
 
 test('renderCta : utilise les valeurs par défaut si le front matter est vide', () => {
@@ -205,8 +230,12 @@ test('pipeline complet : un article avec tout produit les blocs dans le bon ordr
   const resources = renderResources(meta.resources, 'Ressources');
   const back = renderBackLink('/blog/', '← Tous les articles');
   const cta = renderCta(meta, 'Texte par défaut', '/contact/');
+  const title = esc(meta.title);
+  const postMeta = '<p class="post-meta"><time datetime="2026-09-17">Publié le 17 septembre 2026</time></p>';
 
-  const page = `${back}\n<article class="post">\n<h1>${meta.title}</h1>\n${toc}\n${bodyHtml}\n${resources}\n${cta}\n</article>`;
+  // Assemblage via renderArticle, la même fonction que build-blog.mjs appelle
+  // réellement dans sa boucle principale — pas une reconstruction locale.
+  const page = renderArticle({ back, title, postMeta, toc, bodyHtml, resources, cta });
 
   // Ordre attendu, spec §6 : retour -> titre -> sommaire -> corps -> ressources -> CTA
   const iBack = page.indexOf('post-back');

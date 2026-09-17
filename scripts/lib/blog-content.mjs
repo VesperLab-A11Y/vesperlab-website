@@ -2,13 +2,30 @@
 // blog-content.mjs — transformations pures Markdown/front matter -> HTML.
 // Aucune I/O ici (pas de fs) : testable directement, sans exécuter le build.
 // ============================================================================
+//
+// Convention d'échappement HTML :
+// - Les fonctions qui reçoivent un fragment déjà extrait d'un texte source
+//   passé par esc() (ex. renderFigure, appelée depuis flushPara sur un
+//   résultat de esc(para[0])) l'utilisent tel quel : il est déjà échappé.
+// - Les fonctions qui reçoivent des valeurs brutes (front matter ou
+//   paramètres fournis par l'appelant) appellent esc() elles-mêmes sur
+//   chaque valeur insérée dans un attribut ou un texte : renderResources,
+//   renderCta, renderBackLink, et renderToc pour son titre de section.
+// - calloutLabel (mdToHtml) est une chaîne de confiance fournie par
+//   build-blog.mjs (voir LABEL dans build-blog.mjs), jamais du contenu
+//   d'article : elle est insérée telle quelle, sans esc().
+// ============================================================================
 
-export const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+export const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 // --- Markdown -> HTML (sous-ensemble suffisant pour un article) ---------------
 export function inline(s) {
+  // esc(s) tourne avant le parsing Markdown ci-dessous : un guillemet droit
+  // dans le titre d'une image devient donc &quot; avant que la regex
+  // n'atteigne cette portion — d'où &quot; (et non ") comme délimiteur ici
+  // et dans IMAGE_ONLY_RE plus bas.
   return esc(s)
-    .replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, a, u) => `<img src="${u}" alt="${a}">`)
+    .replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+&quot;.*?&quot;)?\)/g, (_, a, u) => `<img src="${u}" alt="${a}">`)
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, t, u) => `<a href="${u}">${t}</a>`)
     .replace(/`([^`]+)`/g, '<code>$1</code>')
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
@@ -28,7 +45,9 @@ export function slugify(s) {
 const CALLOUT_MARK_RE = /^\[!INFO\]\s*$/i;
 
 // --- Image-only regex et figure helper ---
-const IMAGE_ONLY_RE = /^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/;
+// Reçoit une ligne déjà passée par esc() (voir flushPara) : un guillemet
+// droit autour du titre est donc déjà &quot;, pas ".
+const IMAGE_ONLY_RE = /^!\[([^\]]*)\]\(([^)\s]+)(?:\s+&quot;(.*)&quot;)?\)$/;
 
 function renderFigure(alt, src, caption) {
   const img = `<img src="${src}" alt="${alt}" loading="lazy">`;
@@ -62,7 +81,7 @@ export function mdToHtml(md, options = {}) {
   };
   const flushList = () => { if (list) { out.push(`<${listTag}>\n` + list.map((li) => '  <li>' + inline(li) + '</li>').join('\n') + `\n</${listTag}>`); list = null; } };
   const flushQuote = () => {
-    if (!quote.length) return;
+    if (!quote.length) { quoteIsCallout = false; return; }
     if (quoteIsCallout) {
       out.push('<aside class="callout" role="note">\n<p class="callout-label">' + calloutLabel + '</p>\n<p>' + inline(quote.join(' ')) + '</p>\n</aside>');
     } else {
@@ -121,7 +140,12 @@ export function mdToHtml(md, options = {}) {
 
 export function renderToc(headings, headingText) {
   if (!headings.length) return '';
-  const items = headings.map((h) => `    <li><a href="#${h.id}">${h.text}</a></li>`).join('\n');
+  // Le texte de l'ancre est du texte simple : h.text est du HTML déjà rendu
+  // (inline() sur le titre), qui peut contenir un <a> si le titre contient un
+  // lien Markdown. On retire les balises pour éviter un <a> imbriqué dans le
+  // <a href="#..."> du sommaire — on perd le formatage (gras/lien) dans le
+  // sommaire, mais l'ancre reste du HTML valide.
+  const items = headings.map((h) => `    <li><a href="#${h.id}">${h.text.replace(/<[^>]+>/g, '')}</a></li>`).join('\n');
   return `<nav class="post-toc" aria-labelledby="post-toc-heading">\n  <h2 id="post-toc-heading">${esc(headingText)}</h2>\n  <ul>\n${items}\n  </ul>\n</nav>`;
 }
 
@@ -159,7 +183,7 @@ export function parsePost(src) {
 export function renderResources(resources, headingText) {
   if (!resources || !resources.length) return '';
   const items = resources.map((r) => {
-    const titleHtml = r.url ? `<a href="${esc(r.url)}">${esc(r.title)}</a>` : esc(r.title);
+    const titleHtml = r.url ? `<a href="${esc(r.url)}">${esc(r.title)}</a>` : `<span class="resource-title">${esc(r.title)}</span>`;
     const descHtml = r.description ? ` — ${esc(r.description)}` : '';
     return `    <li>${titleHtml}${descHtml}</li>`;
   }).join('\n');
@@ -174,4 +198,24 @@ export function renderCta(meta, defaultText, defaultHref) {
 
 export function renderBackLink(href, label) {
   return `<a class="post-back" href="${esc(href)}">${esc(label)}</a>`;
+}
+
+// --- Assemblage de la page article -------------------------------------------
+// Regroupe l'ordre des blocs (spec §6 : retour -> titre -> méta -> sommaire ->
+// corps -> ressources -> CTA) dans une fonction pure, testable, au lieu de le
+// dupliquer par concaténation directe dans build-blog.mjs. `title` et
+// `postMeta` sont déjà du HTML prêt à insérer (title = esc() du titre,
+// postMeta = le <p class="post-meta">...</p> déjà construit par l'appelant).
+export function renderArticle({ back, title, postMeta, toc, bodyHtml, resources, cta }) {
+  return (
+    `<article class="post">\n` +
+    back + '\n' +
+    `<h1>${title}</h1>\n` +
+    postMeta + '\n' +
+    (toc ? toc + '\n' : '') +
+    bodyHtml.trim() + '\n' +
+    (resources ? resources + '\n' : '') +
+    cta + '\n' +
+    `</article>`
+  );
 }
