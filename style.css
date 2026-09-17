@@ -1408,3 +1408,82 @@ main#main .blog-entry-body h2{
    repère. */
 .page-blog .moon-fixed .moon{opacity:.4;}
 .page-blog .page-scrim{opacity:.55;}
+
+/* ============================================================================
+   Article de blog (.post) — voir
+   docs/superpowers/specs/2026-09-17-blog-article-template-design.md
+   ============================================================================ */
+.post{
+  max-width:42rem;
+  margin-inline:auto;
+  padding-block:clamp(var(--space-10), 6vw, var(--space-16));
+}
+.post-back{
+  display:inline-flex;
+  align-items:center;
+  min-height:var(--min-hit);
+  color:var(--text-secondary);
+  text-decoration:underline;
+  margin-bottom:var(--space-6);
+}
+.post-back:hover{color:var(--accent-hover);}
+
+.post h1{
+  font-family:var(--font-display);
+  font-weight:600;
+  font-size:clamp(1.8rem, 4.6vw, 2.5rem);
+  line-height:var(--leading-tight);
+  letter-spacing:var(--tracking-display);
+  margin:0 0 var(--space-3);
+}
+
+.post-toc{
+  border:1px solid var(--border-default);
+  border-radius:var(--radius-lg);
+  padding:var(--space-6);
+  margin-block:var(--space-8);
+}
+.post-toc h2{margin-bottom:var(--space-3);}
+.post-toc ul{margin:0;padding-left:var(--space-6);}
+.post-toc li{margin-bottom:var(--space-2);}
+.post-toc a{color:var(--link);}
+.post-toc a:hover{color:var(--link-hover);}
+
+.post .callout{
+  border-left:3px solid var(--accent);
+  background:var(--surface-card);
+  border-radius:var(--radius-md);
+  padding:var(--space-6);
+  margin-block:var(--space-8);
+}
+.post .callout-label{
+  font-family:var(--font-display);
+  font-weight:600;
+  color:var(--accent);
+  margin:0 0 var(--space-2);
+}
+.post .callout p:last-child{margin-bottom:0;}
+
+.post figure{margin:var(--space-8) 0;}
+.post figure img{width:100%;border-radius:var(--radius-md);display:block;}
+.post figcaption{
+  font-size:var(--font-size-caption);
+  color:var(--text-muted);
+  margin-top:var(--space-3);
+  text-align:center;
+}
+
+.post-resources{
+  border-top:1px solid var(--border-default);
+  padding-top:var(--space-8);
+  margin-top:var(--space-10);
+}
+.post-resources ul{margin:0;padding-left:var(--space-6);}
+.post-resources li{margin-bottom:var(--space-2);color:var(--text-secondary);}
+.post-resources a{color:var(--link);}
+.post-resources a:hover{color:var(--link-hover);}
+
+.post-cta{
+  margin-top:var(--space-10);
+  text-align:center;
+}
