@@ -8,7 +8,7 @@ export const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace
 // --- Markdown -> HTML (sous-ensemble suffisant pour un article) ---------------
 export function inline(s) {
   return esc(s)
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, a, u) => `<img src="${u}" alt="${a}">`)
+    .replace(/!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g, (_, a, u) => `<img src="${u}" alt="${a}">`)
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, t, u) => `<a href="${u}">${t}</a>`)
     .replace(/`([^`]+)`/g, '<code>$1</code>')
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
@@ -27,6 +27,15 @@ export function slugify(s) {
 // --- Callout marker regex ---------------------------------------------------
 const CALLOUT_MARK_RE = /^\[!INFO\]\s*$/i;
 
+// --- Image-only regex et figure helper ---
+const IMAGE_ONLY_RE = /^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/;
+
+function renderFigure(alt, src, caption) {
+  const img = `<img src="${src}" alt="${alt}" loading="lazy">`;
+  if (!caption) return `<figure>\n${img}\n</figure>`;
+  return `<figure>\n${img}\n<figcaption>${caption}</figcaption>\n</figure>`;
+}
+
 function uniqueSlug(base, used) {
   const root = base || 'section';
   let slug = root, i = 2;
@@ -42,7 +51,15 @@ export function mdToHtml(md, options = {}) {
   const headings = [];
   const usedIds = new Set();
   let para = [], list = null, listTag = '', quote = [], quoteIsCallout = false, code = null;
-  const flushPara = () => { if (para.length) { out.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; } };
+  const flushPara = () => {
+    if (!para.length) return;
+    if (para.length === 1) {
+      const imgOnly = esc(para[0]).match(IMAGE_ONLY_RE);
+      if (imgOnly) { out.push(renderFigure(imgOnly[1], imgOnly[2], imgOnly[3])); para = []; return; }
+    }
+    out.push('<p>' + inline(para.join(' ')) + '</p>');
+    para = [];
+  };
   const flushList = () => { if (list) { out.push(`<${listTag}>\n` + list.map((li) => '  <li>' + inline(li) + '</li>').join('\n') + `\n</${listTag}>`); list = null; } };
   const flushQuote = () => {
     if (!quote.length) return;

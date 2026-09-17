@@ -87,4 +87,21 @@ test('mdToHtml : callout par défaut sans options fournies', () => {
   assert.match(html, /<p class="callout-label">Le saviez-vous \?<\/p>/);
 });
 
+test('mdToHtml : une image seule sur sa ligne devient une figure avec légende', () => {
+  const { html } = mdToHtml('![Un chat](chat.jpg "Mon chat au soleil")');
+  assert.match(html, /<figure>\n<img src="chat\.jpg" alt="Un chat" loading="lazy">\n<figcaption>Mon chat au soleil<\/figcaption>\n<\/figure>/);
+});
+
+test('mdToHtml : une image seule sans titre devient une figure sans légende', () => {
+  const { html } = mdToHtml('![Un chat](chat.jpg)');
+  assert.match(html, /<figure>\n<img src="chat\.jpg" alt="Un chat" loading="lazy">\n<\/figure>/);
+  assert.equal(/<figcaption>/.test(html), false);
+});
+
+test('mdToHtml : une image mêlée à du texte reste inline, sans légende', () => {
+  const { html } = mdToHtml('Regarde ce chat ![Un chat](chat.jpg "Légende ignorée") sur la photo.');
+  assert.match(html, /<p>Regarde ce chat <img src="chat\.jpg" alt="Un chat"> sur la photo\.<\/p>/);
+  assert.equal(/<figure>|<figcaption>/.test(html), false);
+});
+
 process.exit(failures ? 1 : 0);
