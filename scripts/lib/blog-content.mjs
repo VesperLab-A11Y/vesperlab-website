@@ -126,13 +126,42 @@ export function renderToc(headings, headingText) {
 }
 
 // --- Front matter -----------------------------------------------------------
+export function parseResourceLine(raw) {
+  const parts = raw.split('|');
+  const title = (parts[0] || '').trim();
+  const url = (parts[1] || '').trim();
+  const description = parts.slice(2).join('|').trim();
+  return { title, url, description };
+}
+
 export function parsePost(src) {
   const m = src.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
   if (!m) return { meta: {}, body: src };
   const meta = {};
-  for (const line of m[1].split('\n')) {
+  const frontLines = m[1].split('\n');
+  for (let i = 0; i < frontLines.length; i += 1) {
+    const line = frontLines[i];
+    if (/^resources:\s*$/.test(line)) {
+      const items = [];
+      while (i + 1 < frontLines.length && /^\s{2}-\s+(.*)$/.test(frontLines[i + 1])) {
+        i += 1;
+        items.push(frontLines[i].match(/^\s{2}-\s+(.*)$/)[1]);
+      }
+      meta.resources = items.map(parseResourceLine);
+      continue;
+    }
     const kv = line.match(/^(\w+):\s*(.*)$/);
     if (kv) meta[kv[1]] = kv[2].trim();
   }
   return { meta, body: m[2] };
+}
+
+export function renderResources(resources, headingText) {
+  if (!resources || !resources.length) return '';
+  const items = resources.map((r) => {
+    const titleHtml = r.url ? `<a href="${esc(r.url)}">${esc(r.title)}</a>` : esc(r.title);
+    const descHtml = r.description ? ` — ${esc(r.description)}` : '';
+    return `    <li>${titleHtml}${descHtml}</li>`;
+  }).join('\n');
+  return `<section class="post-resources" aria-labelledby="post-resources-heading">\n  <h2 id="post-resources-heading">${esc(headingText)}</h2>\n  <ul>\n${items}\n  </ul>\n</section>`;
 }

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { esc, inline, mdToHtml, parsePost, slugify, renderToc } from './blog-content.mjs';
+import { esc, inline, mdToHtml, parsePost, slugify, renderToc, parseResourceLine, renderResources } from './blog-content.mjs';
 
 let failures = 0;
 function test(name, fn) {
@@ -102,6 +102,60 @@ test('mdToHtml : une image mêlée à du texte reste inline, sans légende', () 
   const { html } = mdToHtml('Regarde ce chat ![Un chat](chat.jpg "Légende ignorée") sur la photo.');
   assert.match(html, /<p>Regarde ce chat <img src="chat\.jpg" alt="Un chat"> sur la photo\.<\/p>/);
   assert.equal(/<figure>|<figcaption>/.test(html), false);
+});
+
+test('parseResourceLine : titre, lien et description', () => {
+  assert.deepEqual(
+    parseResourceLine('WCAG 2.2 | https://www.w3.org/TR/WCAG22/ | Référence normative'),
+    { title: 'WCAG 2.2', url: 'https://www.w3.org/TR/WCAG22/', description: 'Référence normative' }
+  );
+});
+
+test('parseResourceLine : sans lien', () => {
+  assert.deepEqual(
+    parseResourceLine("VoiceOver | | Lecteur d'écran utilisé pour les tests"),
+    { title: 'VoiceOver', url: '', description: "Lecteur d'écran utilisé pour les tests" }
+  );
+});
+
+test('parseResourceLine : une description peut contenir un "|"', () => {
+  assert.deepEqual(
+    parseResourceLine('Titre | https://x.test | avant | après'),
+    { title: 'Titre', url: 'https://x.test', description: 'avant | après' }
+  );
+});
+
+test('parsePost : bloc resources multi-lignes, mêlé à des champs simples', () => {
+  const src = '---\ntitle: Test\nresources:\n  - WCAG 2.2 | https://www.w3.org/TR/WCAG22/ | Référence normative\n  - VoiceOver | | Lecteur utilisé\ncategory: Réflexions\n---\nCorps.';
+  const { meta, body } = parsePost(src);
+  assert.equal(meta.title, 'Test');
+  assert.equal(meta.category, 'Réflexions');
+  assert.equal(body, 'Corps.');
+  assert.deepEqual(meta.resources, [
+    { title: 'WCAG 2.2', url: 'https://www.w3.org/TR/WCAG22/', description: 'Référence normative' },
+    { title: 'VoiceOver', url: '', description: 'Lecteur utilisé' },
+  ]);
+});
+
+test('parsePost : sans bloc resources, meta.resources est absent', () => {
+  const { meta } = parsePost('---\ntitle: Test\n---\nCorps.');
+  assert.equal('resources' in meta, false);
+});
+
+test('renderResources : absent ou vide -> chaîne vide', () => {
+  assert.equal(renderResources(undefined, 'Ressources'), '');
+  assert.equal(renderResources([], 'Ressources'), '');
+});
+
+test('renderResources : lien -> texte cliquable, sans lien -> texte simple', () => {
+  const html = renderResources([
+    { title: 'WCAG 2.2', url: 'https://www.w3.org/TR/WCAG22/', description: 'Référence normative' },
+    { title: 'VoiceOver', url: '', description: '' },
+  ], 'Ressources');
+  assert.match(html, /<section class="post-resources" aria-labelledby="post-resources-heading">/);
+  assert.match(html, /<h2 id="post-resources-heading">Ressources<\/h2>/);
+  assert.match(html, /<a href="https:\/\/www\.w3\.org\/TR\/WCAG22\/">WCAG 2\.2<\/a> — Référence normative/);
+  assert.match(html, /<li>VoiceOver<\/li>/);
 });
 
 process.exit(failures ? 1 : 0);
