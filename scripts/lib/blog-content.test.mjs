@@ -176,4 +176,57 @@ test('renderBackLink : construit le lien de retour', () => {
   );
 });
 
+test('pipeline complet : un article avec tout produit les blocs dans le bon ordre', () => {
+  const src = [
+    '---',
+    'title: Article de test',
+    'resources:',
+    '  - WCAG 2.2 | https://www.w3.org/TR/WCAG22/ | Référence normative',
+    'cta_texte: Essaie mes outils',
+    'cta_lien: /le-lab/outils/',
+    '---',
+    '## Première section',
+    '',
+    'Un paragraphe.',
+    '',
+    '![Un schéma](schema.svg "Le parcours, simplifié")',
+    '',
+    '> [!INFO]',
+    '> Un fait intéressant.',
+    '',
+    '## Deuxième section',
+    '',
+    'Encore du texte.',
+  ].join('\n');
+
+  const { meta, body } = parsePost(src);
+  const { html: bodyHtml, headings } = mdToHtml(body, { calloutLabel: 'Le saviez-vous ?' });
+  const toc = renderToc(headings, 'Sommaire');
+  const resources = renderResources(meta.resources, 'Ressources');
+  const back = renderBackLink('/blog/', '← Tous les articles');
+  const cta = renderCta(meta, 'Texte par défaut', '/contact/');
+
+  const page = `${back}\n<article class="post">\n<h1>${meta.title}</h1>\n${toc}\n${bodyHtml}\n${resources}\n${cta}\n</article>`;
+
+  // Ordre attendu, spec §6 : retour -> titre -> sommaire -> corps -> ressources -> CTA
+  const iBack = page.indexOf('post-back');
+  const iH1 = page.indexOf('<h1>');
+  const iToc = page.indexOf('post-toc');
+  const iFigure = page.indexOf('<figure>');
+  const iCallout = page.indexOf('callout');
+  const iResources = page.indexOf('post-resources');
+  const iCta = page.indexOf('post-cta');
+
+  assert.ok(iBack < iH1, 'le bouton retour précède le titre');
+  assert.ok(iH1 < iToc, 'le titre précède le sommaire');
+  assert.ok(iToc < iFigure, 'le sommaire précède le corps');
+  assert.ok(iFigure < iCallout, 'la figure précède le callout');
+  assert.ok(iCallout < iResources, 'le callout précède les ressources');
+  assert.ok(iResources < iCta, 'les ressources précèdent le CTA');
+
+  assert.equal(headings.length, 2);
+  assert.match(bodyHtml, /<figcaption>Le parcours, simplifié<\/figcaption>/);
+  assert.match(page, /<a class="button" href="\/le-lab\/outils\/">Essaie mes outils<\/a>/);
+});
+
 process.exit(failures ? 1 : 0);
