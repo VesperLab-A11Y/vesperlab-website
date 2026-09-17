@@ -35,7 +35,7 @@
 import { readdirSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, read, render, i18nVars, OG_LOCALE } from './lib/template.mjs';
-import { esc, mdToHtml, parsePost } from './lib/blog-content.mjs';
+import { esc, mdToHtml, parsePost, renderToc } from './lib/blog-content.mjs';
 
 const site = JSON.parse(read('src/site.json'));
 const ui = { fr: JSON.parse(read('i18n/ui.fr.json')), en: JSON.parse(read('i18n/ui.en.json')) };
@@ -43,8 +43,8 @@ const layout = read('src/partials/layout.html');
 const blogPage = site.pages.find((p) => p.key === 'blog');
 const DATE_FMT = { fr: 'fr-CA', en: 'en-CA' };
 const LABEL = {
-  fr: { published: 'Publié le', updated: 'Mis à jour le', empty: 'Aucun article pour le moment.' },
-  en: { published: 'Published', updated: 'Updated', empty: 'No articles yet.' },
+  fr: { published: 'Publié le', updated: 'Mis à jour le', empty: 'Aucun article pour le moment.', toc: 'Sommaire' },
+  en: { published: 'Published', updated: 'Updated', empty: 'No articles yet.', toc: 'Table of contents' },
 };
 
 
@@ -86,13 +86,16 @@ for (const lang of ['fr', 'en']) {
   for (const post of posts) {
     const url = blogRoot + post.slug + '/';
     const human = new Date(post.date + 'T12:00:00Z').toLocaleDateString(DATE_FMT[lang], { year: 'numeric', month: 'long', day: 'numeric' });
+    const { html: bodyHtml, headings } = mdToHtml(post.body);
+    const toc = renderToc(headings, L.toc);
     let article =
       `<article class="post">\n` +
       `<h1>${esc(post.meta.title || post.slug)}</h1>\n` +
       `<p class="post-meta"><time datetime="${post.date}">${L.published} ${human}</time>` +
       (post.meta.updated ? ` · <time datetime="${post.meta.updated}">${L.updated} ${post.meta.updated}</time>` : '') +
       `</p>\n` +
-      mdToHtml(post.body).trim() + `\n</article>`;
+      (toc ? toc + '\n' : '') +
+      bodyHtml.trim() + `\n</article>`;
 
     const other = lang === 'fr' ? 'en' : 'fr';
     const vars = {

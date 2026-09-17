@@ -15,9 +15,28 @@ export function inline(s) {
     .replace(/(^|[^*])\*([^*]+)\*/g, '$1<em>$2</em>');
 }
 
+// --- Slugification et TOC ---------------------------------------------------
+export function slugify(s) {
+  return s
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+}
+
+function uniqueSlug(base, used) {
+  const root = base || 'section';
+  let slug = root, i = 2;
+  while (used.has(slug)) { slug = `${root}-${i}`; i += 1; }
+  used.add(slug);
+  return slug;
+}
+
 export function mdToHtml(md) {
   const lines = md.replace(/\r\n/g, '\n').split('\n');
   const out = [];
+  const headings = [];
+  const usedIds = new Set();
   let para = [], list = null, listTag = '', quote = [], code = null;
   const flushPara = () => { if (para.length) { out.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; } };
   const flushList = () => { if (list) { out.push(`<${listTag}>\n` + list.map((li) => '  <li>' + inline(li) + '</li>').join('\n') + `\n</${listTag}>`); list = null; } };
@@ -34,7 +53,19 @@ export function mdToHtml(md) {
     if (line.trim() === '```') { flushAll(); code = []; continue; }
     if (!line.trim()) { flushAll(); continue; }
     const h = line.match(/^(#{2,6})\s+(.*)$/); // h1 = titre de l'article, pas dans le corps
-    if (h) { flushAll(); out.push(`<h${h[1].length}>` + inline(h[2]) + `</h${h[1].length}>`); continue; }
+    if (h) {
+      flushAll();
+      const level = h[1].length;
+      const text = h[2];
+      if (level === 2) {
+        const id = uniqueSlug(slugify(text), usedIds);
+        headings.push({ id, text: inline(text) });
+        out.push(`<h2 id="${id}">` + inline(text) + `</h2>`);
+      } else {
+        out.push(`<h${level}>` + inline(text) + `</h${level}>`);
+      }
+      continue;
+    }
     if (/^(-{3,}|\*{3,})$/.test(line.trim())) { flushAll(); out.push('<hr>'); continue; }
     const ul = line.match(/^[-*]\s+(.*)$/);
     const ol = line.match(/^\d+\.\s+(.*)$/);
@@ -50,7 +81,13 @@ export function mdToHtml(md) {
     flushList(); flushQuote(); para.push(line.trim());
   }
   flushAll();
-  return out.join('\n');
+  return { html: out.join('\n'), headings };
+}
+
+export function renderToc(headings, headingText) {
+  if (!headings.length) return '';
+  const items = headings.map((h) => `    <li><a href="#${h.id}">${h.text}</a></li>`).join('\n');
+  return `<nav class="post-toc" aria-labelledby="post-toc-heading">\n  <h2 id="post-toc-heading">${esc(headingText)}</h2>\n  <ul>\n${items}\n  </ul>\n</nav>`;
 }
 
 // --- Front matter -----------------------------------------------------------
