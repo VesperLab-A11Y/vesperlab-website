@@ -15,27 +15,40 @@
 //   category:     Catégorie affichée en badge sur la galerie (optionnel)
 //   tags:         Mots-clefs séparés par des virgules (optionnel)
 //   image:        Chemin d'une image de galerie, PAS forcément une
-//                 illustration de l'article (optionnel — voir mdToHtml/
-//                 parsePost : le parsing du front matter est générique,
-//                 aucun changement de code n'est nécessaire pour ajouter
-//                 un champ, seule la génération de la galerie plus bas lit
-//                 category/tags/image explicitement)
+//                 illustration de l'article (optionnel)
+//   cta_texte:    Texte du bouton d'appel à l'action en fin d'article
+//                 (optionnel, sinon texte par défaut — voir LABEL ci-dessous)
+//   cta_lien:     Lien du bouton d'appel à l'action (optionnel, idem)
+//   resources:    Liste multi-lignes « Titre | URL | Description » sous
+//                 forme de puces indentées de 2 espaces (optionnel — voir
+//                 parseResourceLine/parsePost dans lib/blog-content.mjs)
+//
+// La plupart des champs du front matter sont lus de façon générique (simples
+// paires clé: valeur, voir parsePost), sauf `resources` qui a un traitement
+// spécial multi-lignes : ajouter un futur champ multi-lignes demanderait le
+// même genre de code dédié dans parsePost.
+//
+// Le Markdown du corps supporte, en plus des bases (titres, paragraphes,
+// gras/italique, liens, images, listes, code) : un sommaire (TOC) généré
+// automatiquement à partir des `##`, un encadré « Le saviez-vous ? » via
+// `> [!INFO]` en tête de citation, et des figures avec légende pour une image
+// seule sur sa ligne (`![alt](src "légende")`). Voir mdToHtml dans
+// lib/blog-content.mjs.
 //
 // Sorties, à la racine du dépôt :
 //   blog/<slug>/index.html            + en/blog/<slug>/index.html
 //   blog/index.html (galerie)         + en/blog/index.html
 //   blog/feed.xml (RSS, FR)
 //
-// Le rendu Markdown couvre ce dont un article a besoin (titres, paragraphes,
-// gras/italique, liens, images, listes, citations, code, filets). Pour du
-// CommonMark complet : `npm i -D marked` puis remplacer mdToHtml() par un appel
-// à marked — le reste du script ne change pas.
+// Le rendu Markdown couvre ce dont un article a besoin. Pour du CommonMark
+// complet : `npm i -D marked` puis remplacer mdToHtml() par un appel à marked
+// — le reste du script ne change pas.
 // ============================================================================
 
 import { readdirSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT, read, render, i18nVars, OG_LOCALE } from './lib/template.mjs';
-import { esc, mdToHtml, parsePost, renderToc, renderResources, renderCta, renderBackLink } from './lib/blog-content.mjs';
+import { esc, mdToHtml, parsePost, renderToc, renderResources, renderCta, renderBackLink, renderArticle } from './lib/blog-content.mjs';
 
 const site = JSON.parse(read('src/site.json'));
 const ui = { fr: JSON.parse(read('i18n/ui.fr.json')), en: JSON.parse(read('i18n/ui.en.json')) };
@@ -99,18 +112,12 @@ for (const lang of ['fr', 'en']) {
     const resources = renderResources(post.meta.resources, L.resources);
     const back = renderBackLink(blogRoot, L.back);
     const cta = renderCta(post.meta, L.ctaText, L.ctaHref);
-    let article =
-      `<article class="post">\n` +
-      back + '\n' +
-      `<h1>${esc(post.meta.title || post.slug)}</h1>\n` +
+    const title = esc(post.meta.title || post.slug);
+    const postMeta =
       `<p class="post-meta"><time datetime="${post.date}">${L.published} ${human}</time>` +
       (post.meta.updated ? ` · <time datetime="${post.meta.updated}">${L.updated} ${post.meta.updated}</time>` : '') +
-      `</p>\n` +
-      (toc ? toc + '\n' : '') +
-      bodyHtml.trim() + '\n' +
-      (resources ? resources + '\n' : '') +
-      cta + '\n' +
-      `</article>`;
+      `</p>`;
+    const article = renderArticle({ back, title, postMeta, toc, bodyHtml, resources, cta });
 
     const other = lang === 'fr' ? 'en' : 'fr';
     const vars = {
