@@ -220,6 +220,12 @@ main#main,
   padding:var(--space-3) var(--space-8);
   background:var(--accent);
   color:var(--accent-on);
+  /* font:inherit d'abord : un <button> n'hérite pas de la police du body par
+     défaut (contrairement à <a>), il prend la police système du navigateur.
+     Repéré via .entry-toggle sur "Voir mes réseaux" (2026-09-18), le seul
+     <button class="button"> du site jusqu'ici — .button-ghost etc. n'étaient
+     testés que sur des <a>. */
+  font:inherit;
   font-weight:700;
   text-decoration:none;
   border-radius:var(--radius-md);
@@ -1534,3 +1540,68 @@ main#main .post-toc h2{margin-bottom:var(--space-3);}
   margin-top:var(--space-10);
   text-align:center;
 }
+
+/* ============================================================================
+   Page Contact — voir src/pages/contact.html
+   ============================================================================ */
+
+/* Lune atténuée, même logique que À propos/Le Lab/Blog : la carte
+   ci-dessous fait déjà office de repère fort. */
+.page-contact .moon-fixed .moon{opacity:.4;}
+.page-contact .page-scrim{opacity:.55;}
+
+/* Les deux CTA (Suivre / Écrire) partagent une seule carte .mp-card standard
+   (fond translucide qui se renforce au scroll, comme .blog-teaser sur
+   l'accueil) : une colonne par CTA, séparées par un filet plutôt qu'un
+   espace seul (même besoin de démarcation nette que .engagements-grid).
+   Le fond sauge fixe de .mp-card--lab a été essayé en premier (repère fort,
+   cohérent avec Le Lab) mais jugé trop clair par Pauline (2026-09-18) — la
+   carte neutre convient mieux ici.
+   Grille (pas flex) pour que le passage 1 → 2 colonnes se déclenche
+   exactement au même seuil que le filet (même mécanique et même seuil,
+   720px, que .apropos-row/.cols) plutôt que de dépendre du flex-basis, qui
+   peut empiler les colonnes tout en gardant le filet vertical, à cheval
+   entre les deux mises en page. */
+.contact-cta{
+  display:grid;
+  gap:var(--space-10);
+}
+@media (min-width:720px){
+  .contact-cta{grid-template-columns:1fr 1fr;}
+}
+/* --border-default (14% d'opacité) est calibré pour trancher sur un fond
+   plein (--surface-page/-card à pleine opacité) : sur .mp-card, le fond n'est
+   translucide qu'en proportion de --card-fade (0 → 1 selon la proximité au
+   centre de l'écran, voir assets/js/moon.js), qui n'est pas forcément élevé
+   ici puisque la carte est en haut de page. Résultat : filet quasi invisible
+   en usage réel (retour Pauline du 2026-09-18, invisible en fenêtre privée,
+   même si visible dans un aperçu où le fondu était déjà monté). --text-faint
+   est opaque et assez sombre pour rester discret : contraste garanti quel
+   que soit l'état du fondu. */
+.contact-cta-col + .contact-cta-col{
+  border-top:1px solid var(--text-faint);
+  padding-top:var(--space-10);
+}
+@media (min-width:720px){
+  .contact-cta-col + .contact-cta-col{
+    border-top:none;
+    padding-top:0;
+    border-left:1px solid var(--text-faint);
+    padding-left:var(--space-10);
+  }
+}
+.contact-cta-col h2{
+  /* Séparation nette titre/texte du CTA (demande Pauline), même filet que
+     .engagements h2, recalé sur --text-faint pour la même raison que
+     ci-dessus. */
+  padding-bottom:var(--space-5);
+  margin-bottom:var(--space-5);
+  border-bottom:1px solid var(--text-faint);
+}
+
+/* Flux RSS : carte pleine largeur sous .contact-cta, même style (.mp-card
+   standard), pour offrir une façon de suivre le travail sans répéter les
+   icônes déjà dans le pied de page (retour Pauline du 2026-09-18). */
+.contact-rss h2{margin-bottom:var(--space-3);}
+.contact-rss p{max-width:42rem;color:var(--text-secondary);}
+.contact-rss .button-row{margin-top:var(--space-6);}
