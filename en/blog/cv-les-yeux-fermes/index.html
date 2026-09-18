@@ -19,22 +19,22 @@
 })();
 </script>
 
-<title>Tools — Vesper Lab</title>
-<meta name="description" content="Vesper Toolkit, Vesper Library and the other open-source tools by Vesper Lab.">
-<link rel="canonical" href="https://vesperlab.dev/en/the-lab/tools/">
+<title>Et si vous lisiez votre CV les yeux fermés ? — Vesper Lab</title>
+<meta name="description" content="Pourquoi un CV accessible passe mieux les filtres automatiques, et pourquoi ça ne concerne pas que les personnes handicapées.">
+<link rel="canonical" href="https://vesperlab.dev/en/blog/cv-les-yeux-fermes/">
 <meta name="theme-color" content="#030504">
 
 <!-- Versions linguistiques réciproques -->
-<link rel="alternate" hreflang="fr" href="https://vesperlab.dev/le-lab/outils/">
-<link rel="alternate" hreflang="en" href="https://vesperlab.dev/en/the-lab/tools/">
-<link rel="alternate" hreflang="x-default" href="https://vesperlab.dev/le-lab/outils/">
+<link rel="alternate" hreflang="fr" href="https://vesperlab.dev/blog/cv-les-yeux-fermes/">
+<link rel="alternate" hreflang="en" href="https://vesperlab.dev/en/blog/cv-les-yeux-fermes/">
+<link rel="alternate" hreflang="x-default" href="https://vesperlab.dev/blog/cv-les-yeux-fermes/">
 
 <!-- Open Graph / partage -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_CA">
-<meta property="og:url" content="https://vesperlab.dev/en/the-lab/tools/">
-<meta property="og:title" content="Tools — Vesper Lab">
-<meta property="og:description" content="Vesper Toolkit, Vesper Library and the other open-source tools by Vesper Lab.">
+<meta property="og:url" content="https://vesperlab.dev/en/blog/cv-les-yeux-fermes/">
+<meta property="og:title" content="Et si vous lisiez votre CV les yeux fermés ? — Vesper Lab">
+<meta property="og:description" content="Pourquoi un CV accessible passe mieux les filtres automatiques, et pourquoi ça ne concerne pas que les personnes handicapées.">
 <meta property="og:image" content="https://vesperlab.dev/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -51,7 +51,7 @@
 <link rel="stylesheet" href="/styles/tokens.css">
 <link rel="stylesheet" href="/style.css">
 </head>
-<body class="page-lelab-outils">
+<body class="page-blog">
 
 <!-- Lune fixe (immobile à l'écran) + voile : voir la section "Lune fixe" de
      style.css. Décoratif, aria-hidden, ne doit jamais capter le focus/clic. -->
@@ -98,14 +98,14 @@
         <li><a href="/en/contact/">Contact</a></li>
       </ul>
       <ul class="lab-submenu" id="lab-submenu">
-        <li><a href="/en/the-lab/tools/" aria-current="page">Vesper Tools</a></li>
+        <li><a href="/en/the-lab/tools/">Vesper Tools</a></li>
         <li><a href="/en/the-lab/case-studies/">Portfolio</a></li>
-        <li><a href="/en/blog/">Blog</a></li>
+        <li><a href="/en/blog/" aria-current="page">Blog</a></li>
       </ul>
     </nav>
 
     <div class="header-tools">
-      <a class="lang-switch" href="/le-lab/outils/" lang="fr" hreflang="fr">fr</a>
+      <a class="lang-switch" href="/blog/cv-les-yeux-fermes/" lang="fr" hreflang="fr">fr</a>
       <a class="a11y-options-link" href="#a11y-options" aria-label="Accessibility options">
         <!-- Icône « options d'accessibilité », SVG Repo (licence MIT). Décorative : le nom
      accessible vient du bouton qui la contient (aria-label), d'où aria-hidden ici. -->
@@ -125,160 +125,75 @@
 <div class="translation-notice">
   <p>This page hasn't been translated into English yet. You're reading the French original below.</p>
   <p>I translate each page by hand, so it takes a while. Want it now?</p>
-  <a class="button button-ghost" href="https://vesperlab-dev.translate.goog/le-lab/outils/?_x_tr_sl=fr&_x_tr_tl=en&_x_tr_hl=en">Translate this page with Google Translate</a>
-</div><!-- Fragment de contenu FR : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Étape 2 (session du 2026-09-16) : carte "entry-card" commune avec
-     Réalisations (voir style.css, assets/js/entries.js). Contenu réel pour
-     Vesper Toolkit et Vesper Library (dépôts GitHub, descriptions tirées de
-     leurs README). Pas de badge catégorie ici : toutes les cartes de cette page sont déjà des outils.
-     H1/accroche repris de .hero (même gabarit que Le Lab/À propos/accueil).
-     Un seul accès au lien GitHub par carte (icône GitHub à côté du bouton +,
-     voir .entry-link-icon dans style.css)
-
-     Ajouter le mockup d'une carte (.entry-mockup) :
-     1. Déposer l'image dans assets/img/lelab/ (créé, vide pour l'instant).
-        Nom de fichier : <slug-de-l-outil>-mockup.png (ou .jpg), ex.
-        vesper-toolkit-mockup.png. Capture d'écran nette, format ~4/3
-        (largeur:hauteur), pas besoin de la redécouper au pixel près :
-        object-fit:cover s'en charge (voir style.css, règle .entry-mockup img).
-     2. Remplacer le contenu de la div .entry-mockup de la carte visée :
-          <div class="entry-mockup">Mockup à ajouter</div>
-        devient :
-          <div class="entry-mockup">
-            <img src="/assets/img/lelab/vesper-toolkit-mockup.png" alt="">
-          </div>
-     3. Texte alternatif (attribut alt) : ce mockup illustre un outil déjà
-        décrit juste à côté (h2 + .entry-tagline) — donc alt="" (image
-        décorative, un lecteur d'écran ne s'y arrête pas). Si un jour une
-        capture montre une info qui n'est écrite nulle part ailleurs sur la
-        carte, alt="" ne convient plus : décrire alors ce qu'elle montre,
-        en une phrase courte, comme dans le blog (voir alt des captures dans
-        blog/_posts/2026-09-17-essayer-evoluer-recommencer.md).
-     4. Reconstruire le site : npm run build (régénère le-lab/outils/index.html
-        depuis ce fragment). -->
-
-<section class="hero">
-  <h1>Vesper Tools</h1>
-  <p class="lead-body">Les outils que je construis pour mes propres audits,
-    publiés en accès libre. Gratuits, sans compte, et tenus aux mêmes
-    exigences d'accessibilité que ce que j'audite.</p>
-</section>
-
-<ul class="entry-list">
-  <li class="entry-card">
-    <div class="entry-badges">
-      <span class="entry-badge">Publié</span>
-    </div>
-    <div class="entry-main">
-      <div class="entry-text">
-        <h2>Vesper Toolkit</h2>
-        <p class="entry-tagline">Une douzaine d'outils de test
-          d'accessibilité dans la barre de favoris. Sans extension, sans
-          inscription, sans donnée qui sort du navigateur.</p>
-      </div>
-      <div class="entry-mockup"><img src="/assets/img/lelab/mockup-toolkit-en.png" alt=""></div>
-    </div>
-    <div class="entry-controls">
-      <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Toolkit" aria-label="Voir Vesper Toolkit sur GitHub">
-        <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      </a>
-      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-toolkit" aria-label="Plus de détails sur Vesper Toolkit" data-label-open="Plus de détails sur Vesper Toolkit" data-label-close="Masquer les détails sur Vesper Toolkit">
-        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
-      </button>
-    </div>
-    <div class="entry-panel-wrap">
-      <div class="entry-panel-inner">
-        <div class="entry-panel" id="panel-toolkit" hidden>
-          <dl class="entry-detail">
-            <div>
-              <dt>À quoi ça sert</dt>
-              <dd>Faire des scans automatisés d'une page pour me faire un premier avis :
-                axe-core, contraste, ordre de tabulation, nom accessible,
-                hiérarchie des titres, étiquettes de formulaire, et plusieurs
-                autres outils ciblés.</dd>
-            </div>
-            <div>
-              <dt>Comment s'en servir</dt>
-              <dd>Glisser les favoris depuis la page d'installation
-                (<a href="https://toolkit.vesperlab.dev/">toolkit.vesperlab.dev</a>),
-                puis cliquer un bookmarklet sur la page à tester.</dd>
-            </div>
-            <div>
-              <dt>Ce que ça ne fait pas</dt>
-              <dd>Ne remplace pas une vérification manuelle : axe-core ne détecte
-                qu'une partie des critères WCAG, le reste reste au jugement
-                humain.</dd>
-            </div>
-            <div>
-              <dt>Technologie et licence</dt>
-              <dd>HTML/CSS/JS vanilla, aucune dépendance.</dd>
-            </div>
-          </dl>
-          <p class="entry-freeform">Toolkit propose également le Viewer, un lecteur axe-core robuste, pour afficher
-            vos résultats de scans et les exporter. 
-          </p>
-        </div>
-      </div>
-    </div>
-  </li>
-
-  <li class="entry-card">
-    <div class="entry-badges">
-      <span class="entry-badge">Publié</span>
-    </div>
-    <div class="entry-main">
-      <div class="entry-text">
-        <h2>Vesper Library</h2>
-        <p class="entry-tagline">Une bibliothèque de composants d'interface
-          accessibles : démo à essayer au clavier et au lecteur d'écran,
-          extrait de code, et liste de vérification WCAG pour chacun.</p>
-      </div>
-      <div class="entry-mockup"><img src="/assets/img/lelab/mockup-library-fr.png" alt=""></div>
-    </div>
-    <div class="entry-controls">
-      <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Library" aria-label="Voir Vesper Library sur GitHub">
-        <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      </a>
-      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-library" aria-label="Plus de détails sur Vesper Library" data-label-open="Plus de détails sur Vesper Library" data-label-close="Masquer les détails sur Vesper Library">
-        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
-      </button>
-    </div>
-    <div class="entry-panel-wrap">
-      <div class="entry-panel-inner">
-        <div class="entry-panel" id="panel-library" hidden>
-          <dl class="entry-detail">
-            <div>
-              <dt>À quoi ça sert</dt>
-              <dd>29 composants d'interface courants (menus, formulaires,
-                dialogues, onglets…), chacun testé au lecteur d'écran, avec
-                le code de référence et les critères WCAG 2.2 à vérifier
-                point par point.</dd>
-            </div>
-            <div>
-              <dt>Comment s'en servir</dt>
-              <dd>Chercher un composant, copier l'extrait de code, ou
-                activer le Mode Rapport pour cocher les points vérifiés
-                pendant un diagnostic et exporter votre annexe.</dd>
-            </div>
-            <div>
-              <dt>Ce que ça ne fait pas</dt>
-              <dd>Ne couvre pas les composants très spécifiques à une
-                marque : les 29 entrées restent des patrons génériques, à
-                adapter au contexte.</dd>
-            </div>
-            <div>
-              <dt>Technologie et licence</dt>
-              <dd>Page statique HTML/CSS/JS, aucune dépendance, polices
-                auto-hébergées.</dd>
-            </div>
-          </dl>
-          <p class="entry-freeform">Bilingue français/anglais : la bascule
-            de langue traduit tout le contenu, pas seulement l'interface.</p>
-        </div>
-      </div>
-    </div>
-  </li>
+  <a class="button button-ghost" href="https://vesperlab-dev.translate.goog/blog/cv-les-yeux-fermes/?_x_tr_sl=fr&_x_tr_tl=en&_x_tr_hl=en">Translate this page with Google Translate</a>
+</div><article class="post">
+<a class="post-back" href="/en/blog/" aria-label="All articles"><!-- Icône « retour », flèche adaptée de SVG Repo (licence MIT), anneau repris
+     de a11y-options.svg pour rester cohérent avec l'icône d'options
+     d'accessibilité de la nav. Décorative : le nom accessible vient du lien
+     qui la contient (aria-label), d'où aria-hidden ici. -->
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="currentColor">
+  <path d="M24,2A22,22,0,1,0,46,24,21.9,21.9,0,0,0,24,2Zm0,40A18,18,0,1,1,42,24,18.1,18.1,0,0,1,24,42Z"/>
+  <g transform="matrix(0.035,0,0,0.035,5.135,6.08)">
+    <path d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"/>
+    <path d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"/>
+  </g>
+</svg></a>
+<h1>Et si vous lisiez votre CV les yeux fermés ?</h1>
+<p class="post-meta"><time datetime="2026-09-11">Published September 11, 2026</time></p>
+<nav class="post-toc" aria-labelledby="post-toc-heading">
+  <h2 id="post-toc-heading">Table of contents</h2>
+  <ul>
+    <li><a href="#ah-oui-ca-parait-logique">&quot;Ah oui, ça paraît logique&quot;</a></li>
+    <li><a href="#ats-qu-est-ce-que-c-est">ATS, qu'est-ce que c'est ?</a></li>
+    <li><a href="#andre-et-alice-cherchent-une-job">André et Alice cherchent une job</a></li>
+    <li><a href="#andre-vs-alice">André vs Alice</a></li>
+    <li><a href="#la-veste-rose">La veste rose</a></li>
+  </ul>
+</nav>
+<p>Lorsque j'ai commencé mon parcours certifiant, j'avais déjà une idée, encore assez vague, du concept de l'accessibilité des documents. Je savais que la plupart des documents proposés en ligne n'étaient pas accessibles, car j'étais très friande des technologies de Text-To-Speech pendant mes études de sociologie (pour écouter mes cours depuis l'ambulance) et que la moitié de mes cours étaient inaudibles. Mais je n'avais aucune idée que mon propre CV serait tout aussi illisible.</p>
+<aside class="callout" role="note">
+<p class="callout-label">A closer look</p>
+<p>Si l'on utilise ici le terme « CV », son nom complet est tiré du latin curriculum vitae. Il est utilisé pour désigner un sommaire de l'expérience professionnelle et académique d'un individu. C'est le terme utilisé en recrutement en France, là où le CV est court, et tient traditionnellement sur une page. En Amérique du Nord, selon Wikipédia, on utilise plutôt le terme resume pour le même document, là où le CV désigne un sommaire bien plus complet et détaillé. Curriculum étant le latin pour « la course » ou « la carrière », et vitae désignant la vie, on traduirait (grossièrement) en français par « le cours de la vie ».</p>
+</aside>
+<p>Avec une situation difficile sur le marché du travail (8,3 % en taux de chômage en France en 2026, 6,4 % au Canada, 4,1 % aux États-Unis, des statistiques qui ne prennent pas en compte un certain nombre d'éléments et qui seraient sous-évaluées), le CV est la vitrine du candidat et son seul moyen de convaincre un recruteur de poursuivre la discussion. Quand j'ai dû rendre mon propre CV accessible, la réponse du scan était sans équivoque. Et tout à coup, j'ai compris pourquoi il n'avait jamais passé la première étape de recrutement.</p>
+<h2 id="ah-oui-ca-parait-logique">&quot;Ah oui, ça paraît logique&quot;</h2>
+<p>Je ne sais pas combien de fois, au cours de mon parcours, mes chats m'ont entendu prononcer cette phrase. Souvent, c'est une réaction qui m'apparaît quand je n'avais pas fait le lien entre deux choses, alors que je suis (normalement) très rapide pour faire des connexions. Quand, après un long silence, je lâche un &quot;Ah bah oui…&quot;, un chat relève souvent la tête, prêt pour ce qui va suivre. Plus j'en apprends sur l'accessibilité numérique, plus ils m'entendent la répéter. Et quand j'ai scanné mon CV hyper défaillant en termes d'accessibilité avec un scan ATS et que le résultat était mauvais, les oreilles de mon public étaient tournées vers moi. Mon but est de provoquer la même réaction chez vous (et chez vos chats).</p>
+<p>Parce que oui, ça paraît effectivement logique. J'ai expliqué dans <a href="/blog/accessibilite-pdf-5-conseils/">mon article sur l'accessibilité des documents PDF</a> que les technologies d'assistance, qui transforment votre texte en son, utilisent la sémantique pour repérer le type de contenu. J'ai aussi expliqué qu'un PDF inaccessible se présente comme une image, rendant sa sémantique illisible, et n'est donc pas lisible non plus par les technologies de Text-To-Speech, ou est difficilement compréhensible pour les assistants IA. Ainsi, si un scan d'accessibilité m'a presque fait la morale à travers l'écran, il était fort à parier qu'un test ATS me ferait le même effet. Je me suis souvenue de toutes ces offres pour lesquelles j'étais la parfaite candidate, qui n'ont jamais abouti à plus qu'un email un peu condescendant. Est-ce que les ATS arrivaient seulement à extraire mon nom depuis mon parfait CV au design irréprochable ?</p>
+<h2 id="ats-qu-est-ce-que-c-est">ATS, qu'est-ce que c'est ?</h2>
+<p>ATS est l'acronyme de &quot;Applicant Tracking System&quot; (ou &quot;système de suivi des candidatures&quot;, en français). C'est un genre de logiciel qui assiste les services de recrutement en leur permettant de trier les candidatures, suivre le processus de recrutement, ou ici, la fonction qui nous intéresse particulièrement, d'extraire les données du CV. Il a été largement adopté par les grandes entreprises (97,4 % des 500 plus grandes entreprises, selon le Rapport d'usage des ATS de Jobscan) et il est au centre des préoccupations auprès des personnes qui cherchent un emploi. Il est en revanche difficile de trouver des sources et statistiques fiables en ligne. Le secteur est en pleine croissance, porté par l'implémentation de l'intelligence artificielle, mais peu de données solides circulent encore.</p>
+<h2 id="andre-et-alice-cherchent-une-job">André et Alice cherchent une job</h2>
+<p>À l'heure des réseaux sociaux, il est maintenant possible d'apprendre par les personnes concernées des moyens de contourner les barrières mises en place par les processus de recrutement. C'est justement pour essayer de se rendre visible auprès de véritables êtres humains que le &quot;CV business&quot; a fait son grand retour sur le bureau des Ressources Humaines, en totale opposition au &quot;CV Canva&quot;. Si les appellations peuvent vous faire sourire mais que vous n'avez aucune idée de quoi je parle, laissez-moi les humaniser pour vous :</p>
+<p>Le &quot;CV Canva&quot;, c'est André. Toute sa vie, on lui a répété que pour être embauché, il devait attirer l'œil. Il se doit de respirer la couleur, d'enjoliver ses compétences avec une jolie police d'écriture, d'aligner ses dates au pixel près, et de montrer le meilleur de sa personnalité dès le premier regard. Pour la personne qui veut le recruter, son apparence montre le soin qu'il a apporté au processus de recrutement, son intérêt pour le poste, et sa capacité à passer beaucoup de temps sur une tâche pour convaincre. Sauf que pour pouvoir sortir avec ses couleurs, André doit d'abord passer par la porte du dressing. Et pas de chance, ça le rend muet.</p>
+<p>Le &quot;CV business&quot;, c'est Alice. Alice va droit au but, sans détour. Alice est propre sur elle, tirée à quatre épingles mais sans fioriture, droite dans ses bottes. Elle dit ce qu'elle pense, sans s'encombrer du superflu. Il est attendu d'elle qu'elle soit claire, concise, directe, précise, et qu'elle n'exprime surtout pas un quelconque signe particulier. On lui dit que pour être embauchée, on ne doit pas perdre de temps avec elle, alors elle est méthodique et prévoyante. Et comme Alice va droit au but, quand elle va en entretien d'embauche, elle file par la porte d'entrée. Un peu simple, mais avec toute sa voix.</p>
+<p>Et le logiciel ATS, qui serait-il ? Eh bien il serait Sandrine, une personne aveugle ! Imaginez donc : André est superbement coloré et sa tenue montre effectivement qu'il a porté énormément d'attention à sa candidature en prenant du temps pour son apparence. Sauf que Sandrine est aveugle, et qu'André ne peut pas lui parler de son expérience. En fait, André ne peut même pas prévenir Sandrine que c'est bien lui, en face d'elle. Alice, dans la pièce à côté, n'est pas conventionnellement séduisante (ni très stylée), mais Sandrine a au moins pu discuter avec elle, et peut comprendre rapidement qu'elle est compétente pour le poste.</p>
+<p>La rumeur raconte (sans pouvoir la confirmer avec des sources fiables) que pour son offre, elle a reçu 100 propositions : 75 André, 25 Alice. Si elle n'a pas pu entendre les coordonnées des André, elle ne les a sûrement pas appelés pour les rencontrer.</p>
+<h2 id="andre-vs-alice">André vs Alice</h2>
+<p>Alors, est-ce qu'André est voué à se faire ignorer par Sandrine ? Est-ce qu'Alice est condamnée à l'uniforme jean/tee-shirt noir/baskets blanches jusqu'à la fin de sa carrière ? Heureusement, ni le monde, ni Sandrine ne sont aussi binaires.</p>
+<ul>
+  <li>Pourquoi André devient-il muet ?</li>
 </ul>
+<p>Le parallèle entre André et la porte du dressing vient de la plateforme qui a prêté son nom au &quot;CV Canva&quot;. Canva, site web et app de design adoré pour sa simplicité, est régulièrement utilisé pour construire des CV. Or les personnes qui utilisent le site n'ont aucun moyen de paramétrer (ou même de vérifier) l'accessibilité de leurs designs, car la plupart du temps, ils ne comportent aucune balise sémantique. Ainsi, une exportation, notamment au format PDF dans notre cas, ne sera pas balisée et, comme nous le savons, sera illisible. Si les &quot;CV Canva&quot; sont si souvent ignorés par les logiciels ATS, c'est parce qu'ils ne peuvent simplement pas accéder à leur contenu pour en exporter des données (puis les filtrer). Dans notre comparaison, André, qui a enfilé sa tenue sur Canva, est passé par la porte du dressing lors de l'exportation, et en a perdu sa voix face à Sandrine qui, en tant qu'ATS, l'a ignoré faute de pouvoir le lire.</p>
+<ul>
+  <li>Est-ce qu'on peut rendre sa voix à André ?</li>
+</ul>
+<p>Techniquement, on peut, mais c'est peut-être plus facile de le déshabiller totalement et de changer l'emplacement de son dressing. Vous n'avez pas la possibilité de baliser directement votre futur CV depuis Canva, et en dehors d'Adobe Acrobat, peu d'alternatives sont disponibles pour baliser manuellement un PDF. Vous pourriez trouver des logiciels pour les baliser automatiquement grâce à un scan, mais la technologie est encore peu précise. Si vous utilisez Canva pour un élément précis de votre CV (une icône par exemple), vous pourriez vous en passer au profit de votre visibilité. Les designs particulièrement difficiles (comme les éléments flottants) seront, dans tous les cas, inaccessibles. Cela peut valoir le coup de scanner votre CV sur un simulateur ATS et de voir de vos propres yeux sur quelle base vous partez. J'utilise personnellement ATS Screener, mais d'autres alternatives sont disponibles en ligne (attention à vos données !)</p>
+<ul>
+  <li>Peut-on être stylé comme André, et visible comme Alice ?</li>
+</ul>
+<p>On peut, si on écrit son CV correctement ! Sur un logiciel de traitement de texte, utiliser les balises au moment opportun, et mettre à jour les métadonnées changeront déjà beaucoup. En respectant les bonnes pratiques d'accessibilité, vous pouvez même optimiser votre CV comme un site web : ajouter des mots-clefs et les adapter à l'offre que vous visez, c'est favoriser le scan par l'ATS et donc, en soi, faire du SEO. C'est aussi une piste pour l'avenir avec la montée en puissance de l'utilisation de l'IA par les services de recrutement, car si votre CV n'est pas lisible par votre assistant IA, il est fort à parier que son cousin ne pourra pas le lire non plus ! Enfin, dans un monde où seules les Alice se présentent devant un véritable humain, vous sortirez sûrement du lot simplement en portant une veste rose.</p>
+<h2 id="la-veste-rose">La veste rose</h2>
+<p>Les technologies d'ATS, leur utilisation par les entreprises, et les fonctions IA présentes et à venir, sont des environnements opaques. Les logiciels ne sont pas ouverts au grand public, et il est fort à parier que cela deviendra la norme, bientôt, de scanner les mots-clefs de votre curriculum dès son téléchargement sur une plateforme de recherche d'emploi. Néanmoins, grâce à cet article, et en complément des autres, vous devriez pouvoir vous rendre visible numériquement et prendre des habitudes qui se révèleront de plus en plus utiles à mesure que les technologies évoluent.</p>
+<section class="post-resources" aria-labelledby="post-resources-heading">
+  <h2 id="post-resources-heading">Resources</h2>
+  <ul>
+    <li><span class="resource-title">ATS Screener</span> — Simulateur utilisé personnellement pour scanner un CV</li>
+    <li><span class="resource-title">Rapport d'usage des ATS</span> — Jobscan, cité pour le taux d'adoption des ATS par les grandes entreprises</li>
+  </ul>
+</section>
+<div class="post-cta">
+  <a class="button button-ghost" href="/en/contact/">Questions or comments? Get in touch.</a>
+</div>
+</article>
 </main>
 
 <footer class="mp-footer">

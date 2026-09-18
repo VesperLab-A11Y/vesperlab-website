@@ -47,7 +47,7 @@
 
 import { readdirSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { ROOT, read, render, i18nVars, OG_LOCALE } from './lib/template.mjs';
+import { ROOT, read, render, i18nVars, OG_LOCALE, renderTranslationBanner } from './lib/template.mjs';
 import { esc, mdToHtml, parsePost, renderToc, renderResources, renderCta, renderBackLink, renderArticle } from './lib/blog-content.mjs';
 
 const site = JSON.parse(read('src/site.json'));
@@ -98,9 +98,20 @@ function navVars(lang, activePath) {
 let count = 0;
 const feedItems = [];
 
+// Articles FR sans équivalent EN (blog/_posts/en/AAAA-MM-JJ-<slug>.md absent) :
+// repli sur le contenu FR + bandeau (voir renderTranslationBanner), plutôt
+// que de ne pas générer la page EN du tout. Slugs déjà traduits calculés une
+// fois, avant la boucle fr/en, pour marquer les articles FR concernés.
+const frPostsAll = readPosts('blog/_posts');
+const enSlugs = new Set(readPosts('blog/_posts/en').map((p) => p.slug));
+
 for (const lang of ['fr', 'en']) {
   const postsDir = lang === 'fr' ? 'blog/_posts' : 'blog/_posts/en';
-  const posts = readPosts(postsDir);
+  let posts = readPosts(postsDir);
+  if (lang === 'en') {
+    const fallbacks = frPostsAll.filter((p) => !enSlugs.has(p.slug)).map((p) => ({ ...p, fallback: true }));
+    posts = posts.concat(fallbacks).sort((a, b) => (a.date < b.date ? 1 : -1));
+  }
   const blogRoot = blogPage[lang].path; // /blog/ ou /en/blog/
   const L = LABEL[lang];
 
@@ -119,6 +130,10 @@ for (const lang of ['fr', 'en']) {
       (post.meta.updated ? ` · <time datetime="${post.meta.updated}">${L.updated} ${post.meta.updated}</time>` : '') +
       `</p>`;
     const article = renderArticle({ back, title, postMeta, toc, bodyHtml, resources, cta });
+    // Repli FR (voir la constitution de "posts" plus haut) : bandeau au-dessus
+    // de l'article, contenu FR inchangé en dessous — même patron que
+    // build-site.mjs pour Tools/Réalisations.
+    const main = post.fallback ? renderTranslationBanner(blogPage.fr.path + post.slug + '/') + article : article;
 
     const other = lang === 'fr' ? 'en' : 'fr';
     const vars = {
@@ -131,7 +146,7 @@ for (const lang of ['fr', 'en']) {
       pathEn: (lang === 'en' ? blogRoot : site.pages.find((p) => p.key === 'blog').en.path) + post.slug + '/',
       langToggleHref: (blogPage[other].path) + post.slug + '/',
       langToggleLang: other,
-      main: article,
+      main,
     };
     const outPath = url.replace(/^\/|\/$/g, '') + '/index.html';
     mkdirSync(join(ROOT, outPath.replace(/\/index\.html$/, '')), { recursive: true });
@@ -165,6 +180,7 @@ for (const lang of ['fr', 'en']) {
         return `  <li class="blog-entry mp-card" data-search="${esc(searchText)}">\n` +
           (p.meta.image ? `    <div class="blog-entry-image"><img src="${esc(p.meta.image)}" alt="" loading="lazy"></div>\n` : '') +
           `    <div class="blog-entry-body">\n` +
+          (p.fallback ? `      <span class="entry-badge">Not translated yet</span>\n` : '') +
           (p.meta.category ? `      <span class="entry-badge entry-badge--category">${esc(p.meta.category)}</span>\n` : '') +
           `      <h2><a href="${blogRoot}${p.slug}/">${esc(p.meta.title || p.slug)}</a></h2>\n` +
           `      <p class="post-meta"><time datetime="${p.date}">${human}</time></p>\n` +

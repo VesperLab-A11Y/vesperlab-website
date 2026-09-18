@@ -122,11 +122,144 @@
 
 
 <main id="main" tabindex="-1">
-<!-- Fragment de contenu EN : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Squelette seulement — contenu à rédiger (voir roadmap Notion + docs/superpowers/specs/2026-09-09-site-multipage-specs-consolidees.md). -->
-<h1>Case studies</h1>
+<div class="translation-notice">
+  <p>This page hasn't been translated into English yet. You're reading the French original below.</p>
+  <p>I translate each page by hand, so it takes a while. Want it now?</p>
+  <a class="button button-ghost" href="https://vesperlab-dev.translate.goog/le-lab/realisations/?_x_tr_sl=fr&_x_tr_tl=en&_x_tr_hl=en">Translate this page with Google Translate</a>
+</div><!-- Fragment de contenu FR : intérieur de <main>. Assemblé par scripts/build-site.mjs.
+     Étape 2 (session du 2026-09-16) : même carte "entry-card" que Outils
+     (voir style.css, assets/js/entries.js), avec des champs de détail
+     différents selon la catégorie (diagnostic vs projet perso — voir les dt
+     dans chaque .entry-detail). Le diagnostic est un exercice fictif : nom
+     de site inventé, badge de statut explicite plutôt qu'un
+     Terminé/En pause, note d'anonymisation dans le panneau. Chiffres clés
+     remontés dans la partie visible (.entry-stats), pas seulement dans le
+     panneau : demande initiale de Pauline ("des chiffres importants"
+     visibles), qui va plus loin que le brief d'origine sur ce point précis
+     — à ajuster si elle préfère les garder dans le panneau.
+     H1/accroche repris de .hero (même gabarit que Le Lab/À propos/accueil).
+     Ni l'une ni l'autre de ces deux entrées n'a de lien externe pour
+     l'instant : l'icône lien est un <span aria-hidden="true"> neutre
+     (blanc), pas un <a> — voir le commentaire sur .entry-link-icon dans
+     style.css. Rien n'est annoncé au lecteur d'écran pour son absence :
+     un lien qui n'existe pas n'a rien à décrire. -->
 
-<p><!-- TODO : contenu --></p>
+<section class="hero">
+  <h1>Projets</h1>
+  <p class="lead-body">Mes diagnostics fictifs et mes projets personnels,
+    ouverts au public. Plusieurs catégories, un seul principe : le principal
+    se lit sans rien ouvrir, les détails sont pour les curieux.</p>
+</section>
+
+<ul class="entry-list">
+  <li class="entry-card">
+    <div class="entry-badges">
+      <span class="entry-badge entry-badge--category">Diagnostic fictif</span>
+      <span class="entry-badge">Étude de cas fictive</span>
+    </div>
+    <div class="entry-main">
+      <div class="entry-text">
+        <h2>Audit fictif : site vitrine d'un cabinet comptable</h2>
+        <p class="entry-tagline">Un exercice d'audit complet mené sur un
+          site et un contenu inventés, pour illustrer ma méthode et mon
+          format de rapport.</p>
+        <ul class="entry-stats">
+          <li>3<span>constats critiques</span></li>
+          <li>6<span>constats majeurs</span></li>
+          <li>9<span>constats mineurs</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="entry-controls">
+      <span class="entry-icon-btn entry-link-icon entry-link-icon--none" aria-hidden="true">
+        <svg class="entry-icon-btn-svg" viewBox="0 0 512 512" focusable="false"><path fill="currentColor" transform="translate(85.333333, 64.000000)" d="M128,63.999444 L128,106.666444 L42.6666667,106.666667 L42.6666667,320 L256,320 L256,234.666444 L298.666,234.666444 L298.666667,362.666667 L4.26325641e-14,362.666667 L4.26325641e-14,64 L128,63.999444 Z M362.666667,1.42108547e-14 L362.666667,170.666667 L320,170.666667 L320,72.835 L143.084945,249.751611 L112.915055,219.581722 L289.83,42.666 L192,42.6666667 L192,1.42108547e-14 L362.666667,1.42108547e-14 Z"/></svg>
+      </span>
+      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-audit-comptable" aria-label="Plus de détails sur l'audit fictif du cabinet comptable" data-label-open="Plus de détails sur l'audit fictif du cabinet comptable" data-label-close="Masquer les détails sur l'audit fictif du cabinet comptable">
+        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+    <div class="entry-panel-wrap">
+      <div class="entry-panel-inner">
+        <div class="entry-panel" id="panel-audit-comptable" hidden>
+          <dl class="entry-detail">
+            <div>
+              <dt>Périmètre audité</dt>
+              <dd>Page d'accueil, formulaire de contact et page de tarifs,
+                sur desktop et mobile.</dd>
+            </div>
+            <div>
+              <dt>Un constat représentatif</dt>
+              <dd>Critique — Formulaire de contact sans étiquettes
+                explicites : les champs courriel et message ne sont associés
+                à aucun <code>&lt;label&gt;</code>, seulement repérables par
+                leur position visuelle. Au lecteur d'écran, seul un champ de
+                texte anonyme est annoncé.</dd>
+            </div>
+            <div>
+              <dt>Note d'anonymisation</dt>
+              <dd>Site, organisation et contenu entièrement fictifs,
+                construits pour l'exercice. Aucune donnée ni aucun nom réels
+                n'y figurent.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="entry-card">
+    <div class="entry-badges">
+      <span class="entry-badge entry-badge--category">Projet perso</span>
+      <span class="entry-badge">Bientôt</span>
+    </div>
+    <div class="entry-main">
+      <div class="entry-text">
+        <h2>La dernière tasse de Caroline</h2>
+        <p class="entry-tagline">Jeu de mystère inspiré de Stardew Valley —
+          une tasse a disparu, et tout le village a un alibi douteux.</p>
+      </div>
+    </div>
+    <div class="entry-controls">
+      <span class="entry-icon-btn entry-link-icon entry-link-icon--none" aria-hidden="true">
+        <svg class="entry-icon-btn-svg" viewBox="0 0 512 512" focusable="false"><path fill="currentColor" transform="translate(85.333333, 64.000000)" d="M128,63.999444 L128,106.666444 L42.6666667,106.666667 L42.6666667,320 L256,320 L256,234.666444 L298.666,234.666444 L298.666667,362.666667 L4.26325641e-14,362.666667 L4.26325641e-14,64 L128,63.999444 Z M362.666667,1.42108547e-14 L362.666667,170.666667 L320,170.666667 L320,72.835 L143.084945,249.751611 L112.915055,219.581722 L289.83,42.666 L192,42.6666667 L192,1.42108547e-14 L362.666667,1.42108547e-14 Z"/></svg>
+      </span>
+      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-caroline" aria-label="Plus de détails sur La dernière tasse de Caroline" data-label-open="Plus de détails sur La dernière tasse de Caroline" data-label-close="Masquer les détails sur La dernière tasse de Caroline">
+        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+    <div class="entry-panel-wrap">
+      <div class="entry-panel-inner">
+        <div class="entry-panel" id="panel-caroline" hidden>
+          <dl class="entry-detail">
+            <div>
+              <dt>Pourquoi</dt>
+              <dd>Pour apprendre la conception de jeu en dehors de l'audit,
+                sur un thème confortable après des journées denses en
+                accessibilité.</dd>
+            </div>
+            <div>
+              <dt>Ce que j'ai construit</dt>
+              <dd>Pour l'instant : la trame narrative et les personnages. Le
+                prototype jouable arrive.</dd>
+            </div>
+            <div>
+              <dt>Ce que j'en tire</dt>
+              <dd>Une occasion de pratiquer l'écriture interactive, loin du
+                vocabulaire WCAG.</dd>
+            </div>
+            <div>
+              <dt>État actuel</dt>
+              <dd>En cours.</dd>
+            </div>
+          </dl>
+          <p class="entry-freeform">Pensé accessible dès le départ : ce sera
+            aussi un terrain d'essai pour mes propres critères, hors
+            contexte professionnel.</p>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>
 </main>
 
 <footer class="mp-footer">

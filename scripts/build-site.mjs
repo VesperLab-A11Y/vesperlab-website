@@ -25,7 +25,7 @@
 
 import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { ROOT, read, render, i18nVars, OG_LOCALE } from './lib/template.mjs';
+import { ROOT, read, render, i18nVars, OG_LOCALE, isUntranslated, renderTranslationBanner } from './lib/template.mjs';
 
 const site = JSON.parse(read('src/site.json'));
 const ui = { fr: JSON.parse(read('i18n/ui.fr.json')), en: JSON.parse(read('i18n/ui.en.json')) };
@@ -74,7 +74,18 @@ for (const lang of LANGS) {
       vars['nav.' + p.key] = pathByKey[p.key] || '#';
       vars['aria.' + p.key] = page.key === p.key ? ' aria-current="page"' : '';
     }
-    vars.main = render(read(fragPath), vars).trim();
+    // Repli FR + bandeau tant que le fragment EN est un squelette non
+    // rédigé (voir isUntranslated/renderTranslationBanner) : Tools et
+    // Réalisations sont dans ce cas pour l'instant, contenu écrit par
+    // Pauline elle-même, hors scope de la traduction du 2026-09-18. Le
+    // repli disparaît tout seul dès que le fragment EN a du vrai contenu.
+    const rawFrag = read(fragPath);
+    if (lang === 'en' && isUntranslated(rawFrag)) {
+      const frFrag = read(`src/pages/${page.key}.html`);
+      vars.main = renderTranslationBanner(page.fr.path) + render(frFrag, vars).trim();
+    } else {
+      vars.main = render(rawFrag, vars).trim();
+    }
 
     const outPath = outFor(meta.path, lang);
     mkdirSync(join(ROOT, dirname(outPath)), { recursive: true });

@@ -19,22 +19,22 @@
 })();
 </script>
 
-<title>Tools — Vesper Lab</title>
-<meta name="description" content="Vesper Toolkit, Vesper Library and the other open-source tools by Vesper Lab.">
-<link rel="canonical" href="https://vesperlab.dev/en/the-lab/tools/">
+<title>Accessibilité PDF : 5 conseils qui font écho — Vesper Lab</title>
+<meta name="description" content="Quelles que soient vos raisons, vous en avez forcément une bonne pour améliorer l'accessibilité de vos PDF.">
+<link rel="canonical" href="https://vesperlab.dev/en/blog/accessibilite-pdf-5-conseils/">
 <meta name="theme-color" content="#030504">
 
 <!-- Versions linguistiques réciproques -->
-<link rel="alternate" hreflang="fr" href="https://vesperlab.dev/le-lab/outils/">
-<link rel="alternate" hreflang="en" href="https://vesperlab.dev/en/the-lab/tools/">
-<link rel="alternate" hreflang="x-default" href="https://vesperlab.dev/le-lab/outils/">
+<link rel="alternate" hreflang="fr" href="https://vesperlab.dev/blog/accessibilite-pdf-5-conseils/">
+<link rel="alternate" hreflang="en" href="https://vesperlab.dev/en/blog/accessibilite-pdf-5-conseils/">
+<link rel="alternate" hreflang="x-default" href="https://vesperlab.dev/blog/accessibilite-pdf-5-conseils/">
 
 <!-- Open Graph / partage -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_CA">
-<meta property="og:url" content="https://vesperlab.dev/en/the-lab/tools/">
-<meta property="og:title" content="Tools — Vesper Lab">
-<meta property="og:description" content="Vesper Toolkit, Vesper Library and the other open-source tools by Vesper Lab.">
+<meta property="og:url" content="https://vesperlab.dev/en/blog/accessibilite-pdf-5-conseils/">
+<meta property="og:title" content="Accessibilité PDF : 5 conseils qui font écho — Vesper Lab">
+<meta property="og:description" content="Quelles que soient vos raisons, vous en avez forcément une bonne pour améliorer l'accessibilité de vos PDF.">
 <meta property="og:image" content="https://vesperlab.dev/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -51,7 +51,7 @@
 <link rel="stylesheet" href="/styles/tokens.css">
 <link rel="stylesheet" href="/style.css">
 </head>
-<body class="page-lelab-outils">
+<body class="page-blog">
 
 <!-- Lune fixe (immobile à l'écran) + voile : voir la section "Lune fixe" de
      style.css. Décoratif, aria-hidden, ne doit jamais capter le focus/clic. -->
@@ -98,14 +98,14 @@
         <li><a href="/en/contact/">Contact</a></li>
       </ul>
       <ul class="lab-submenu" id="lab-submenu">
-        <li><a href="/en/the-lab/tools/" aria-current="page">Vesper Tools</a></li>
+        <li><a href="/en/the-lab/tools/">Vesper Tools</a></li>
         <li><a href="/en/the-lab/case-studies/">Portfolio</a></li>
-        <li><a href="/en/blog/">Blog</a></li>
+        <li><a href="/en/blog/" aria-current="page">Blog</a></li>
       </ul>
     </nav>
 
     <div class="header-tools">
-      <a class="lang-switch" href="/le-lab/outils/" lang="fr" hreflang="fr">fr</a>
+      <a class="lang-switch" href="/blog/accessibilite-pdf-5-conseils/" lang="fr" hreflang="fr">fr</a>
       <a class="a11y-options-link" href="#a11y-options" aria-label="Accessibility options">
         <!-- Icône « options d'accessibilité », SVG Repo (licence MIT). Décorative : le nom
      accessible vient du bouton qui la contient (aria-label), d'où aria-hidden ici. -->
@@ -125,160 +125,89 @@
 <div class="translation-notice">
   <p>This page hasn't been translated into English yet. You're reading the French original below.</p>
   <p>I translate each page by hand, so it takes a while. Want it now?</p>
-  <a class="button button-ghost" href="https://vesperlab-dev.translate.goog/le-lab/outils/?_x_tr_sl=fr&_x_tr_tl=en&_x_tr_hl=en">Translate this page with Google Translate</a>
-</div><!-- Fragment de contenu FR : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Étape 2 (session du 2026-09-16) : carte "entry-card" commune avec
-     Réalisations (voir style.css, assets/js/entries.js). Contenu réel pour
-     Vesper Toolkit et Vesper Library (dépôts GitHub, descriptions tirées de
-     leurs README). Pas de badge catégorie ici : toutes les cartes de cette page sont déjà des outils.
-     H1/accroche repris de .hero (même gabarit que Le Lab/À propos/accueil).
-     Un seul accès au lien GitHub par carte (icône GitHub à côté du bouton +,
-     voir .entry-link-icon dans style.css)
-
-     Ajouter le mockup d'une carte (.entry-mockup) :
-     1. Déposer l'image dans assets/img/lelab/ (créé, vide pour l'instant).
-        Nom de fichier : <slug-de-l-outil>-mockup.png (ou .jpg), ex.
-        vesper-toolkit-mockup.png. Capture d'écran nette, format ~4/3
-        (largeur:hauteur), pas besoin de la redécouper au pixel près :
-        object-fit:cover s'en charge (voir style.css, règle .entry-mockup img).
-     2. Remplacer le contenu de la div .entry-mockup de la carte visée :
-          <div class="entry-mockup">Mockup à ajouter</div>
-        devient :
-          <div class="entry-mockup">
-            <img src="/assets/img/lelab/vesper-toolkit-mockup.png" alt="">
-          </div>
-     3. Texte alternatif (attribut alt) : ce mockup illustre un outil déjà
-        décrit juste à côté (h2 + .entry-tagline) — donc alt="" (image
-        décorative, un lecteur d'écran ne s'y arrête pas). Si un jour une
-        capture montre une info qui n'est écrite nulle part ailleurs sur la
-        carte, alt="" ne convient plus : décrire alors ce qu'elle montre,
-        en une phrase courte, comme dans le blog (voir alt des captures dans
-        blog/_posts/2026-09-17-essayer-evoluer-recommencer.md).
-     4. Reconstruire le site : npm run build (régénère le-lab/outils/index.html
-        depuis ce fragment). -->
-
-<section class="hero">
-  <h1>Vesper Tools</h1>
-  <p class="lead-body">Les outils que je construis pour mes propres audits,
-    publiés en accès libre. Gratuits, sans compte, et tenus aux mêmes
-    exigences d'accessibilité que ce que j'audite.</p>
-</section>
-
-<ul class="entry-list">
-  <li class="entry-card">
-    <div class="entry-badges">
-      <span class="entry-badge">Publié</span>
-    </div>
-    <div class="entry-main">
-      <div class="entry-text">
-        <h2>Vesper Toolkit</h2>
-        <p class="entry-tagline">Une douzaine d'outils de test
-          d'accessibilité dans la barre de favoris. Sans extension, sans
-          inscription, sans donnée qui sort du navigateur.</p>
-      </div>
-      <div class="entry-mockup"><img src="/assets/img/lelab/mockup-toolkit-en.png" alt=""></div>
-    </div>
-    <div class="entry-controls">
-      <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Toolkit" aria-label="Voir Vesper Toolkit sur GitHub">
-        <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      </a>
-      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-toolkit" aria-label="Plus de détails sur Vesper Toolkit" data-label-open="Plus de détails sur Vesper Toolkit" data-label-close="Masquer les détails sur Vesper Toolkit">
-        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
-      </button>
-    </div>
-    <div class="entry-panel-wrap">
-      <div class="entry-panel-inner">
-        <div class="entry-panel" id="panel-toolkit" hidden>
-          <dl class="entry-detail">
-            <div>
-              <dt>À quoi ça sert</dt>
-              <dd>Faire des scans automatisés d'une page pour me faire un premier avis :
-                axe-core, contraste, ordre de tabulation, nom accessible,
-                hiérarchie des titres, étiquettes de formulaire, et plusieurs
-                autres outils ciblés.</dd>
-            </div>
-            <div>
-              <dt>Comment s'en servir</dt>
-              <dd>Glisser les favoris depuis la page d'installation
-                (<a href="https://toolkit.vesperlab.dev/">toolkit.vesperlab.dev</a>),
-                puis cliquer un bookmarklet sur la page à tester.</dd>
-            </div>
-            <div>
-              <dt>Ce que ça ne fait pas</dt>
-              <dd>Ne remplace pas une vérification manuelle : axe-core ne détecte
-                qu'une partie des critères WCAG, le reste reste au jugement
-                humain.</dd>
-            </div>
-            <div>
-              <dt>Technologie et licence</dt>
-              <dd>HTML/CSS/JS vanilla, aucune dépendance.</dd>
-            </div>
-          </dl>
-          <p class="entry-freeform">Toolkit propose également le Viewer, un lecteur axe-core robuste, pour afficher
-            vos résultats de scans et les exporter. 
-          </p>
-        </div>
-      </div>
-    </div>
-  </li>
-
-  <li class="entry-card">
-    <div class="entry-badges">
-      <span class="entry-badge">Publié</span>
-    </div>
-    <div class="entry-main">
-      <div class="entry-text">
-        <h2>Vesper Library</h2>
-        <p class="entry-tagline">Une bibliothèque de composants d'interface
-          accessibles : démo à essayer au clavier et au lecteur d'écran,
-          extrait de code, et liste de vérification WCAG pour chacun.</p>
-      </div>
-      <div class="entry-mockup"><img src="/assets/img/lelab/mockup-library-fr.png" alt=""></div>
-    </div>
-    <div class="entry-controls">
-      <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Library" aria-label="Voir Vesper Library sur GitHub">
-        <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      </a>
-      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-library" aria-label="Plus de détails sur Vesper Library" data-label-open="Plus de détails sur Vesper Library" data-label-close="Masquer les détails sur Vesper Library">
-        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
-      </button>
-    </div>
-    <div class="entry-panel-wrap">
-      <div class="entry-panel-inner">
-        <div class="entry-panel" id="panel-library" hidden>
-          <dl class="entry-detail">
-            <div>
-              <dt>À quoi ça sert</dt>
-              <dd>29 composants d'interface courants (menus, formulaires,
-                dialogues, onglets…), chacun testé au lecteur d'écran, avec
-                le code de référence et les critères WCAG 2.2 à vérifier
-                point par point.</dd>
-            </div>
-            <div>
-              <dt>Comment s'en servir</dt>
-              <dd>Chercher un composant, copier l'extrait de code, ou
-                activer le Mode Rapport pour cocher les points vérifiés
-                pendant un diagnostic et exporter votre annexe.</dd>
-            </div>
-            <div>
-              <dt>Ce que ça ne fait pas</dt>
-              <dd>Ne couvre pas les composants très spécifiques à une
-                marque : les 29 entrées restent des patrons génériques, à
-                adapter au contexte.</dd>
-            </div>
-            <div>
-              <dt>Technologie et licence</dt>
-              <dd>Page statique HTML/CSS/JS, aucune dépendance, polices
-                auto-hébergées.</dd>
-            </div>
-          </dl>
-          <p class="entry-freeform">Bilingue français/anglais : la bascule
-            de langue traduit tout le contenu, pas seulement l'interface.</p>
-        </div>
-      </div>
-    </div>
-  </li>
+  <a class="button button-ghost" href="https://vesperlab-dev.translate.goog/blog/accessibilite-pdf-5-conseils/?_x_tr_sl=fr&_x_tr_tl=en&_x_tr_hl=en">Translate this page with Google Translate</a>
+</div><article class="post">
+<a class="post-back" href="/en/blog/" aria-label="All articles"><!-- Icône « retour », flèche adaptée de SVG Repo (licence MIT), anneau repris
+     de a11y-options.svg pour rester cohérent avec l'icône d'options
+     d'accessibilité de la nav. Décorative : le nom accessible vient du lien
+     qui la contient (aria-label), d'où aria-hidden ici. -->
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="currentColor">
+  <path d="M24,2A22,22,0,1,0,46,24,21.9,21.9,0,0,0,24,2Zm0,40A18,18,0,1,1,42,24,18.1,18.1,0,0,1,24,42Z"/>
+  <g transform="matrix(0.035,0,0,0.035,5.135,6.08)">
+    <path d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"/>
+    <path d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"/>
+  </g>
+</svg></a>
+<h1>Accessibilité PDF : 5 conseils qui font écho</h1>
+<p class="post-meta"><time datetime="2026-09-11">Published September 11, 2026</time></p>
+<nav class="post-toc" aria-labelledby="post-toc-heading">
+  <h2 id="post-toc-heading">Table of contents</h2>
+  <ul>
+    <li><a href="#pdf-quezako">PDF : Quézako ?</a></li>
+    <li><a href="#changer-de-chaussures">Changer de chaussures</a></li>
+    <li><a href="#partir-sur-une-base-solide">Partir sur une base solide</a></li>
+    <li><a href="#reparer-quand-c-est-possible">Réparer quand c'est possible</a></li>
+    <li><a href="#testez-par-vous-meme">Testez par vous-même</a></li>
+    <li><a href="#qu-est-ce-qu-on-en-retient">Qu'est-ce qu'on en retient ?</a></li>
+  </ul>
+</nav>
+<p>Les documents PDF sont des acteurs récurrents du film de notre vie. On les utilise au travail, pour communiquer avec l'administration, pour payer nos factures électroniques, ou pour signer nos contrats en ligne. Pourtant, ils sont les grands mal-aimés de l'accessibilité. Être si essentiel qu'on en oublie sa présence : voilà le plus grand des compliments. Or, un document pas, peu ou mal tagué, peut devenir une véritable barrière, au lieu de l'aide précieuse qu'il est censé apporter.</p>
+<p>Rendre un PDF accessible, c'est s'assurer de laisser une porte ouverte, au lieu de laisser le vent décider de l'angle d'ouverture qu'elle adoptera. Cela permet à un public qui utilise des technologies d'assistance d'accéder à votre contenu sans difficulté. Il devient aussi possible d'utiliser des fonctions de Text-To-Speech, un marché en pleine expansion. Proposé en ligne, un document PDF accessible est aussi une mine d'or pour le SEO. Quelles que soient vos raisons, vous en avez forcément une bonne pour améliorer l'accessibilité de vos PDF.</p>
+<aside class="callout" role="note">
+<p class="callout-label">A closer look</p>
+<p>Le marché du Text-to-Speech connaît une croissance projetée de 23 % par an jusqu'en 2035 (<a href="https://www.expertmarketresearch.com/reports/text-to-speech-market">source</a>).</p>
+</aside>
+<h2 id="pdf-quezako">PDF : Quézako ?</h2>
+<p>Le PDF (Portable Document Format) est un format largement utilisé dans le monde pour partager des documents grâce à sa facilité d'accès et de lecture par les navigateurs et logiciels. Il est rendu accessible aux technologies (d'assistance, de text-to-speech, d'intelligence artificielle…) grâce à sa sémantique.</p>
+<p>Sur le web comme dans la création d'un document, on utilise des tags sémantiques pour indiquer la nature de l'élément. Par exemple, sur le web, on utilisera &lt;h1&gt; pour le plus gros des titres, &lt;img&gt; pour indiquer la présence d'une image, &lt;a&gt; pour un lien, et &lt;p&gt; pour un paragraphe. Ces tags servent à indiquer au navigateur quel comportement adopter, mais servent aussi d'indications précises pour les différentes technologies. Ainsi, une personne qui utilise un lecteur d'écran, saura rapidement quels sont les titres présents, et pourra les utiliser pour comprendre le contenu et naviguer. Les documents PDF utilisent la même structure sémantique. La personne qui accède au document peut alors, de la même manière, repérer les titres, et naviguer vers les bonnes sections.</p>
+<p>Il y a plusieurs manières de créer un PDF, et toutes ne permettent pas de créer des documents correctement tagués. Par exemple, scanner un document produit un PDF qui est reconnu comme une image : ni un lecteur d'écran, ni une application de TTS ne pourront lire le contenu de la page, et il est fort à parier que votre agent IA ne comprenne pas tout. Dans le cas où vous utilisez une technologie de tag automatique (comme Acrobat) pour corriger ça, il est possible qu'elle-même ne saisisse pas les nuances. Vous pourriez alors le faire manuellement, en espérant que le document ne contienne pas 80 pages de tableaux. Il est parfois plus facile, ou plus rapide, de recréer un document de bout en bout !</p>
+<h2 id="changer-de-chaussures">Changer de chaussures</h2>
+<p>En français, on utilise l'expression &quot;Se mettre dans les chaussures (de quelqu'un)&quot; pour illustrer l'utilisation de l'empathie. L'empathie est la capacité émotionnelle de se mettre à la place d'une autre personne, pour comprendre ses sentiments et sa situation. Chez VesperLab, c'est un de nos principaux piliers, l'empathie fait partie intégrante de chaque audit et accompagne la création de nos outils. Pourquoi ? Et bien, simplement parce qu'on ne peut pas concevoir correctement quelque chose si on ne se met jamais à la place de celles et ceux qui vont l'utiliser. Et l'empathie n'est pas un réflexe, mais un muscle qu'on travaille.</p>
+<p>Concevoir (avec) l'accessibilité, c'est accepter de retirer ses chaussures, et enfiler celles du voisin. Et on ne naît pas toutes et tous avec les mêmes chaussures, en fonction de là d'où on vient, de comment on marche, des terrains qu'on foule, ou simplement de si on est physiquement capables d'utiliser nos pieds. Statistiquement, il est fort à parier que vous regorgiez de différentes paires de chaussures dans votre entourage. Parler avec leurs propriétaires et les écouter parler des chemins qu'ils et elles parcourent est déjà un pas vers l'empathie. Lire, écouter, entendre, toucher, essayer et comprendre les expériences des autres ouvre plus facilement le champ de vos possibles. Et qui sait, cela pourrait même changer votre manière d'appréhender votre manière d'écrire votre document (ou votre code).</p>
+<h2 id="partir-sur-une-base-solide">Partir sur une base solide</h2>
+<p>J'ai expliqué plus haut qu'un document PDF accessible est un document (correctement) écrit avec des balises sémantiques. Si j'ai abordé rapidement leur utilisation en HTML, ces mêmes balises sont disponibles sur les logiciels de traitement de texte. La suite Word est particulièrement reconnue pour son exportation en PDF, ainsi que la suite Libre, là où la suite Google, elle, présente des lacunes. Avant de vous lancer, renseignez-vous pour éviter les mauvaises surprises. Votre logiciel peut même posséder un scan d'accessibilité intégré pour vous permettre de vérifier avant l'exportation.</p>
+<p>En premier lieu, mettez à jour les métadonnées de votre document. Renseignez dans le champ concerné, souvent depuis les options du fichier, le titre et la langue, a minima. En second lieu, adoptez l'habitude d'utiliser les balises : dans les options de mise en page d'un document, par exemple, vous pouvez choisir d'utiliser un modèle de titre. Ces modèles sont personnalisables en fonction de vos choix de design, et reproduisent correctement les tags associés, là où adapter simplement la police et la taille de votre titre en partant d'un simple paragraphe ne permettra pas de se repérer correctement. Lors de l'insertion d'une image, un clic-droit ouvre souvent l'accès vers l'ajout d'un texte alternatif, qui remplace sa fonction pour le public qui ne pourrait pas la voir. De même, un graphique ou un camembert multicolore sans indication visuelle n'est pas très utile si on ne peut pas discerner les couleurs.</p>
+<p>Beaucoup de fonctions proposées sont des raccourcis qui, si elles sautent parfois une étape, effacent votre travail d'accessibilité. Par exemple, la fonction &quot;Dessiner un tableau&quot; amène souvent un manque de labellisation du contenu des cellules, le rendant incompréhensible. L'exportation subit le même sort : veillez à passer par le chemin &quot;officiel&quot; plutôt que le chemin officieux (par la boite d'impression), qui peut produire une image au lieu d'un document balisé. Plus vous apportez du soin à l'utilisation de la sémantique, plus votre document final sera correctement balisé à la fin. Et plus vous vous forcez à utiliser ces fonctions, plus naturel et rapide deviendra le geste.</p>
+<h2 id="reparer-quand-c-est-possible">Réparer quand c'est possible</h2>
+<p>Heureusement, toutes les situations n'engagent pas la réécriture complète d'un document. Néanmoins, les solutions sont très limitées pour rendre un PDF accessible depuis son format.</p>
+<ul>
+  <li>Est-ce que le document d'origine est en votre possession ?</li>
 </ul>
+<p>Si le PDF entre vos mains est un document que vous (ou votre équipe) avez écrit, il est possible que vous puissiez corriger la source. Remettez en ordre votre document via votre traitement de texte avant de tenter une nouvelle exportation. L'opération peut être rapide en utilisant les paramètres de style, sélectionner, appliquer à tous…</p>
+<ul>
+  <li>Est-ce que vous disposez d'un logiciel de traitement PDF ?</li>
+</ul>
+<p>Le marché souffre d'un véritable manque d'options d'accessibilité dans les lecteurs PDF intégrés. Il est parfois possible de modifier les métadonnées de votre document depuis les options, mais concernant le contenu, il n'existe, à ma connaissance, qu'Adobe Acrobat qui est reconnu pour son balisage automatique. Les agents IA ne sont pas (encore) efficaces pour la tâche, mais des alternatives basées sur leurs modèles commencent à voir le jour, comme le logiciel open-source <a href="https://opendataloader.org/docs#why-opendataloader">OpenDataLoader</a>.</p>
+<ul>
+  <li>Est-ce que vous pouvez proposer une alternative ?</li>
+</ul>
+<p>Je ne suis pas partisane de proposer une alternative à une population visée sous prétexte que leur accorder un accès équitable est une tâche trop compliquée. Néanmoins, il est parfois nécessaire de proposer une alternative, parce qu'avoir une porte différente est mieux que d'être coincé-e face au mur sans pouvoir l'escalader. Dans votre cas, vous pouvez proposer des annexes accessibles à votre PDF (en associant une feuille de calcul pour remplacer un tableau mal balisé, en proposant un document regroupant les descriptions longues des graphiques, en apportant une annexe contenant le sommaire, les titres…).</p>
+<h2 id="testez-par-vous-meme">Testez par vous-même</h2>
+<p>Si vous faites vos premiers pas en accessibilité, il est fort à parier que vous ne savez ni par où commencer, ni quels sont les impacts concrets de vos décisions. Mais suivre tous mes conseils à la lettre induit une relecture du second point, et d'enfiler une paire de chaussures différente. Sans tester, vous ne pouvez pas savoir si vos actions sont importantes ou efficaces.</p>
+<p>Une fois votre nouveau PDF prêt, vous pouvez le tester par vous-même. C'est l'occasion, peut-être, de faire vos premiers pas avec un lecteur d'écran. Si le temps vous manque, vous pouvez scanner gratuitement vos documents via <a href="https://check.axes4.com/en">AxeCheck</a> ou un autre outil d'accessibilité PDF (lisez les conditions, et attention à vos données), mais un scan automatisé demande toujours des vérifications manuelles. Si vous utilisez des fonctions Text-To-Speech, vérifier le balisage par ce biais est aussi un moyen de vérifier la navigation, quand le logiciel le permet. Enfin, votre lecteur de document peut déjà vous donner des indications sur son accessibilité, par la fonction Recherche (qui ne peut pas fonctionner si le document a un format d'image), le sommaire… Utiliser la touche Tab dans un document est aussi une claire indication : il permet de naviguer entre les titres, les liens, les contenus… et est utilisé par les technologies d'assistance. Enfin, si vous disposez d'Adobe Acrobat, vous pouvez lancer un scan automatisé avant de valider votre PDF pour distribution.</p>
+<figure>
+<img src="/assets/img/blog-placeholder-2.svg" alt="Exemple d'illustration démonstrative — à remplacer par une vraie capture d'écran" loading="lazy">
+<figcaption>Légende de démonstration — remplace-moi par une capture d'écran réelle</figcaption>
+</figure>
+<h2 id="qu-est-ce-qu-on-en-retient">Qu'est-ce qu'on en retient ?</h2>
+<ul>
+  <li>Tous les traitements de texte et tous les chemins d'exportation ne mènent pas vers un PDF accessible. Il faut être curieux de ses outils, chercher les options d'accessibilité, et s'assurer de suivre les bons processus. Il faut utiliser la sémantique pour écrire son document, veiller à lui donner un titre et spécifier sa langue, et porter attention aux éléments purement visuels (comme les images qui ont besoin d'un alt texte, et les graphiques difficiles).</li>
+  <li>Il est parfois plus facile et/ou rapide de recommencer que de rectifier. Les logiciels qui proposent le balisage sont encore difficiles d'accès, le balisage automatique demande une vérification humaine, et le balisage manuel peut être très chronophage en fonction de la taille du fichier.</li>
+  <li>Un PDF correctement balisé a plusieurs fonctions : il peut être lu par les technologies d'assistance, et ainsi devenir accessible aux personnes aveugles, ou sourdes-aveugles. Mais il devient aussi plus pratique à l'utilisation : vous pouvez chercher dans son contenu, utiliser Tab, naviguer via les titres... Si vous pouvez chercher en son sein, ainsi le peuvent les assistants IA et les moteurs de recherche. Il devient aussi compréhensible par vos outils et les fonctions de Text-to-Speech.</li>
+</ul>
+<section class="post-resources" aria-labelledby="post-resources-heading">
+  <h2 id="post-resources-heading">Resources</h2>
+  <ul>
+    <li><a href="https://www.expertmarketresearch.com/reports/text-to-speech-market">Text-to-Speech Market Report</a> — Croissance projetée du marché TTS, citée dans l'article</li>
+    <li><a href="https://opendataloader.org/docs#why-opendataloader">OpenDataLoader</a> — Alternative open-source basée sur l'IA pour le balisage automatique de PDF</li>
+    <li><a href="https://check.axes4.com/en">AxeCheck</a> — Scan gratuit d'accessibilité PDF</li>
+    <li><span class="resource-title">Adobe Acrobat</span> — Seul logiciel reconnu, à ma connaissance, pour un balisage automatique fiable</li>
+  </ul>
+</section>
+<div class="post-cta">
+  <a class="button button-ghost" href="/en/contact/">Questions or comments? Get in touch.</a>
+</div>
+</article>
 </main>
 
 <footer class="mp-footer">

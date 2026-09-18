@@ -1621,3 +1621,24 @@ main#main .post-toc h2{margin-bottom:var(--space-3);}
 .contact-rss h2{margin-bottom:var(--space-3);}
 .contact-rss p{max-width:42rem;color:var(--text-secondary);}
 .contact-rss .button-row{margin-top:var(--space-6);}
+
+/* ============================================================================
+   Bandeau de repli FR (pages EN non traduites) — voir
+   scripts/lib/template.mjs (renderTranslationBanner), branché depuis
+   build-site.mjs (Tools/Réalisations) et build-blog.mjs (articles sans
+   équivalent EN). Même langage visuel que .post .callout (filet à gauche +
+   carte pleine, pas de fondu au scroll : ce bandeau doit rester lisible dès
+   l'arrivée sur la page, pas seulement une fois centré à l'écran). -->
+.translation-notice{
+  border-left:3px solid var(--accent);
+  background:var(--surface-card);
+  border-radius:var(--radius-md);
+  padding:var(--space-6);
+  margin-bottom:var(--space-8);
+}
+.translation-notice p{
+  margin:0 0 var(--space-4);
+  color:var(--text-secondary);
+}
+.translation-notice p:last-of-type{margin-bottom:0;}
+.translation-notice .button{margin-top:var(--space-4);}

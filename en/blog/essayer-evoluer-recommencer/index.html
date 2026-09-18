@@ -19,22 +19,22 @@
 })();
 </script>
 
-<title>Tools — Vesper Lab</title>
-<meta name="description" content="Vesper Toolkit, Vesper Library and the other open-source tools by Vesper Lab.">
-<link rel="canonical" href="https://vesperlab.dev/en/the-lab/tools/">
+<title>Essayer, évoluer, recommencer — Vesper Lab</title>
+<meta name="description" content="Évoluer, c'est bien. Mettre à profit ce qu'on a appris, c'est encore mieux. Je prends le temps de corriger un de mes anciens projets, et voici ce que j'ai trouvé.">
+<link rel="canonical" href="https://vesperlab.dev/en/blog/essayer-evoluer-recommencer/">
 <meta name="theme-color" content="#030504">
 
 <!-- Versions linguistiques réciproques -->
-<link rel="alternate" hreflang="fr" href="https://vesperlab.dev/le-lab/outils/">
-<link rel="alternate" hreflang="en" href="https://vesperlab.dev/en/the-lab/tools/">
-<link rel="alternate" hreflang="x-default" href="https://vesperlab.dev/le-lab/outils/">
+<link rel="alternate" hreflang="fr" href="https://vesperlab.dev/blog/essayer-evoluer-recommencer/">
+<link rel="alternate" hreflang="en" href="https://vesperlab.dev/en/blog/essayer-evoluer-recommencer/">
+<link rel="alternate" hreflang="x-default" href="https://vesperlab.dev/blog/essayer-evoluer-recommencer/">
 
 <!-- Open Graph / partage -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_CA">
-<meta property="og:url" content="https://vesperlab.dev/en/the-lab/tools/">
-<meta property="og:title" content="Tools — Vesper Lab">
-<meta property="og:description" content="Vesper Toolkit, Vesper Library and the other open-source tools by Vesper Lab.">
+<meta property="og:url" content="https://vesperlab.dev/en/blog/essayer-evoluer-recommencer/">
+<meta property="og:title" content="Essayer, évoluer, recommencer — Vesper Lab">
+<meta property="og:description" content="Évoluer, c'est bien. Mettre à profit ce qu'on a appris, c'est encore mieux. Je prends le temps de corriger un de mes anciens projets, et voici ce que j'ai trouvé.">
 <meta property="og:image" content="https://vesperlab.dev/assets/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 
@@ -51,7 +51,7 @@
 <link rel="stylesheet" href="/styles/tokens.css">
 <link rel="stylesheet" href="/style.css">
 </head>
-<body class="page-lelab-outils">
+<body class="page-blog">
 
 <!-- Lune fixe (immobile à l'écran) + voile : voir la section "Lune fixe" de
      style.css. Décoratif, aria-hidden, ne doit jamais capter le focus/clic. -->
@@ -98,14 +98,14 @@
         <li><a href="/en/contact/">Contact</a></li>
       </ul>
       <ul class="lab-submenu" id="lab-submenu">
-        <li><a href="/en/the-lab/tools/" aria-current="page">Vesper Tools</a></li>
+        <li><a href="/en/the-lab/tools/">Vesper Tools</a></li>
         <li><a href="/en/the-lab/case-studies/">Portfolio</a></li>
-        <li><a href="/en/blog/">Blog</a></li>
+        <li><a href="/en/blog/" aria-current="page">Blog</a></li>
       </ul>
     </nav>
 
     <div class="header-tools">
-      <a class="lang-switch" href="/le-lab/outils/" lang="fr" hreflang="fr">fr</a>
+      <a class="lang-switch" href="/blog/essayer-evoluer-recommencer/" lang="fr" hreflang="fr">fr</a>
       <a class="a11y-options-link" href="#a11y-options" aria-label="Accessibility options">
         <!-- Icône « options d'accessibilité », SVG Repo (licence MIT). Décorative : le nom
      accessible vient du bouton qui la contient (aria-label), d'où aria-hidden ici. -->
@@ -125,160 +125,119 @@
 <div class="translation-notice">
   <p>This page hasn't been translated into English yet. You're reading the French original below.</p>
   <p>I translate each page by hand, so it takes a while. Want it now?</p>
-  <a class="button button-ghost" href="https://vesperlab-dev.translate.goog/le-lab/outils/?_x_tr_sl=fr&_x_tr_tl=en&_x_tr_hl=en">Translate this page with Google Translate</a>
-</div><!-- Fragment de contenu FR : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Étape 2 (session du 2026-09-16) : carte "entry-card" commune avec
-     Réalisations (voir style.css, assets/js/entries.js). Contenu réel pour
-     Vesper Toolkit et Vesper Library (dépôts GitHub, descriptions tirées de
-     leurs README). Pas de badge catégorie ici : toutes les cartes de cette page sont déjà des outils.
-     H1/accroche repris de .hero (même gabarit que Le Lab/À propos/accueil).
-     Un seul accès au lien GitHub par carte (icône GitHub à côté du bouton +,
-     voir .entry-link-icon dans style.css)
-
-     Ajouter le mockup d'une carte (.entry-mockup) :
-     1. Déposer l'image dans assets/img/lelab/ (créé, vide pour l'instant).
-        Nom de fichier : <slug-de-l-outil>-mockup.png (ou .jpg), ex.
-        vesper-toolkit-mockup.png. Capture d'écran nette, format ~4/3
-        (largeur:hauteur), pas besoin de la redécouper au pixel près :
-        object-fit:cover s'en charge (voir style.css, règle .entry-mockup img).
-     2. Remplacer le contenu de la div .entry-mockup de la carte visée :
-          <div class="entry-mockup">Mockup à ajouter</div>
-        devient :
-          <div class="entry-mockup">
-            <img src="/assets/img/lelab/vesper-toolkit-mockup.png" alt="">
-          </div>
-     3. Texte alternatif (attribut alt) : ce mockup illustre un outil déjà
-        décrit juste à côté (h2 + .entry-tagline) — donc alt="" (image
-        décorative, un lecteur d'écran ne s'y arrête pas). Si un jour une
-        capture montre une info qui n'est écrite nulle part ailleurs sur la
-        carte, alt="" ne convient plus : décrire alors ce qu'elle montre,
-        en une phrase courte, comme dans le blog (voir alt des captures dans
-        blog/_posts/2026-09-17-essayer-evoluer-recommencer.md).
-     4. Reconstruire le site : npm run build (régénère le-lab/outils/index.html
-        depuis ce fragment). -->
-
-<section class="hero">
-  <h1>Vesper Tools</h1>
-  <p class="lead-body">Les outils que je construis pour mes propres audits,
-    publiés en accès libre. Gratuits, sans compte, et tenus aux mêmes
-    exigences d'accessibilité que ce que j'audite.</p>
-</section>
-
-<ul class="entry-list">
-  <li class="entry-card">
-    <div class="entry-badges">
-      <span class="entry-badge">Publié</span>
-    </div>
-    <div class="entry-main">
-      <div class="entry-text">
-        <h2>Vesper Toolkit</h2>
-        <p class="entry-tagline">Une douzaine d'outils de test
-          d'accessibilité dans la barre de favoris. Sans extension, sans
-          inscription, sans donnée qui sort du navigateur.</p>
-      </div>
-      <div class="entry-mockup"><img src="/assets/img/lelab/mockup-toolkit-en.png" alt=""></div>
-    </div>
-    <div class="entry-controls">
-      <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Toolkit" aria-label="Voir Vesper Toolkit sur GitHub">
-        <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      </a>
-      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-toolkit" aria-label="Plus de détails sur Vesper Toolkit" data-label-open="Plus de détails sur Vesper Toolkit" data-label-close="Masquer les détails sur Vesper Toolkit">
-        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
-      </button>
-    </div>
-    <div class="entry-panel-wrap">
-      <div class="entry-panel-inner">
-        <div class="entry-panel" id="panel-toolkit" hidden>
-          <dl class="entry-detail">
-            <div>
-              <dt>À quoi ça sert</dt>
-              <dd>Faire des scans automatisés d'une page pour me faire un premier avis :
-                axe-core, contraste, ordre de tabulation, nom accessible,
-                hiérarchie des titres, étiquettes de formulaire, et plusieurs
-                autres outils ciblés.</dd>
-            </div>
-            <div>
-              <dt>Comment s'en servir</dt>
-              <dd>Glisser les favoris depuis la page d'installation
-                (<a href="https://toolkit.vesperlab.dev/">toolkit.vesperlab.dev</a>),
-                puis cliquer un bookmarklet sur la page à tester.</dd>
-            </div>
-            <div>
-              <dt>Ce que ça ne fait pas</dt>
-              <dd>Ne remplace pas une vérification manuelle : axe-core ne détecte
-                qu'une partie des critères WCAG, le reste reste au jugement
-                humain.</dd>
-            </div>
-            <div>
-              <dt>Technologie et licence</dt>
-              <dd>HTML/CSS/JS vanilla, aucune dépendance.</dd>
-            </div>
-          </dl>
-          <p class="entry-freeform">Toolkit propose également le Viewer, un lecteur axe-core robuste, pour afficher
-            vos résultats de scans et les exporter. 
-          </p>
-        </div>
-      </div>
-    </div>
-  </li>
-
-  <li class="entry-card">
-    <div class="entry-badges">
-      <span class="entry-badge">Publié</span>
-    </div>
-    <div class="entry-main">
-      <div class="entry-text">
-        <h2>Vesper Library</h2>
-        <p class="entry-tagline">Une bibliothèque de composants d'interface
-          accessibles : démo à essayer au clavier et au lecteur d'écran,
-          extrait de code, et liste de vérification WCAG pour chacun.</p>
-      </div>
-      <div class="entry-mockup"><img src="/assets/img/lelab/mockup-library-fr.png" alt=""></div>
-    </div>
-    <div class="entry-controls">
-      <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Library" aria-label="Voir Vesper Library sur GitHub">
-        <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      </a>
-      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-library" aria-label="Plus de détails sur Vesper Library" data-label-open="Plus de détails sur Vesper Library" data-label-close="Masquer les détails sur Vesper Library">
-        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
-      </button>
-    </div>
-    <div class="entry-panel-wrap">
-      <div class="entry-panel-inner">
-        <div class="entry-panel" id="panel-library" hidden>
-          <dl class="entry-detail">
-            <div>
-              <dt>À quoi ça sert</dt>
-              <dd>29 composants d'interface courants (menus, formulaires,
-                dialogues, onglets…), chacun testé au lecteur d'écran, avec
-                le code de référence et les critères WCAG 2.2 à vérifier
-                point par point.</dd>
-            </div>
-            <div>
-              <dt>Comment s'en servir</dt>
-              <dd>Chercher un composant, copier l'extrait de code, ou
-                activer le Mode Rapport pour cocher les points vérifiés
-                pendant un diagnostic et exporter votre annexe.</dd>
-            </div>
-            <div>
-              <dt>Ce que ça ne fait pas</dt>
-              <dd>Ne couvre pas les composants très spécifiques à une
-                marque : les 29 entrées restent des patrons génériques, à
-                adapter au contexte.</dd>
-            </div>
-            <div>
-              <dt>Technologie et licence</dt>
-              <dd>Page statique HTML/CSS/JS, aucune dépendance, polices
-                auto-hébergées.</dd>
-            </div>
-          </dl>
-          <p class="entry-freeform">Bilingue français/anglais : la bascule
-            de langue traduit tout le contenu, pas seulement l'interface.</p>
-        </div>
-      </div>
-    </div>
-  </li>
+  <a class="button button-ghost" href="https://vesperlab-dev.translate.goog/blog/essayer-evoluer-recommencer/?_x_tr_sl=fr&_x_tr_tl=en&_x_tr_hl=en">Translate this page with Google Translate</a>
+</div><article class="post">
+<a class="post-back" href="/en/blog/" aria-label="All articles"><!-- Icône « retour », flèche adaptée de SVG Repo (licence MIT), anneau repris
+     de a11y-options.svg pour rester cohérent avec l'icône d'options
+     d'accessibilité de la nav. Décorative : le nom accessible vient du lien
+     qui la contient (aria-label), d'où aria-hidden ici. -->
+<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" fill="currentColor">
+  <path d="M24,2A22,22,0,1,0,46,24,21.9,21.9,0,0,0,24,2Zm0,40A18,18,0,1,1,42,24,18.1,18.1,0,0,1,24,42Z"/>
+  <g transform="matrix(0.035,0,0,0.035,5.135,6.08)">
+    <path d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"/>
+    <path d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"/>
+  </g>
+</svg></a>
+<h1>Essayer, évoluer, recommencer</h1>
+<p class="post-meta"><time datetime="2026-09-17">Published September 17, 2026</time></p>
+<nav class="post-toc" aria-labelledby="post-toc-heading">
+  <h2 id="post-toc-heading">Table of contents</h2>
+  <ul>
+    <li><a href="#apprendre">Apprendre</a></li>
+    <li><a href="#essayer">Essayer</a></li>
+    <li><a href="#recommencer">Recommencer</a></li>
+    <li><a href="#ce-qui-reste-a-apprendre">Ce qui reste à apprendre</a></li>
+  </ul>
+</nav>
+<p>Si vous questionnez mon entourage à mon sujet, beaucoup vous diront qu'il est parfois difficile de me suivre. J'ai beaucoup d'idées, j'adore apprendre, et en tant qu'aînée de ma fratrie, j'ai rapidement intégré l'adage &quot;on n'est jamais mieux servie que par soi-même&quot;. De ce fait, quand j'ai un projet à réaliser, je m'attelle souvent à le créer de A à Z. En toute logique, je suis la seule à récolter les fruits de mon travail, et la seule responsable de ses imperfections. Ça a été d'autant plus difficile à avaler quand j'ai testé mon propre travail pour la première fois.</p>
+<p>L'écriture n'est pas un passe-temps que j'ai développé avec Vesper. En fait, j'ai commencé à écrire très jeune, puis j'ai doucement fait évoluer ma pratique vers une écriture plus académique à l'université, le copywriting grâce au design UX, pour enfin mettre à jour tout ça grâce au langage épicène. Ainsi, l'un de mes projets créatifs préférés est mon Murder Mystery Game¹ sur le thème de mon jeu favori, Stardew Valley². J'ai passé une après-midi en terrasse sur Canva, et j'ai fait mener l'enquête à mon partenaire le lendemain. J'avais ensuite dans l'idée d'y jouer en groupe et, pourquoi pas, de le proposer en ligne. C'est de loin ma création préférée. Autant dire que j'étais très peu réceptive aux critiques à son sujet.</p>
+<p>Quand j'ai commencé à en apprendre plus sur l'accessibilité des PDF, il n'a pas refait immédiatement surface dans mon esprit. En fait, c'est jusqu'à ce que j'accède à Adobe InDesign³ pour la première fois que je l'avais mis dans un coin de ma tête. Et puis, comme la pratique est essentielle et que j'adore appuyer sur tous les boutons d'un nouveau logiciel, j'ai réfléchi à un de mes documents PDF qui serait potentiellement mal balisé et que je pourrais reproduire. J'ai ouvert la fenêtre d'importation, et il m'attendait là, sagement, dans un coin sombre de mes dossiers. Jusqu'à ce que je l'observe sous toutes les coutures, lampe de chirurgienne sur le front, pour le remettre à sa juste place : dans la lumière.</p>
+<aside class="callout" role="note">
+<p class="callout-label">A closer look</p>
+<p>Quelques explications pour les termes numérotés ci-dessus. Elles ne sont pas obligatoires pour poursuivre, mais pourraient vous faire découvrir un nouveau passe-temps.</p>
+<ul>
+  <li>¹ Murder Mystery Game, quézako ?</li>
 </ul>
+<p>Un murder mystery game est, dans sa traduction littérale, un jeu de meurtre mystère. C'est un jeu où, traditionnellement, un groupe mène l'enquête pour résoudre un meurtre fictif en utilisant un support (un jeu de plateau, des feuilles, un jeu vidéo…). Heureusement, le principe est adaptable à beaucoup de situations qui n'induisent pas de cadavre, alors vous pouvez jouer en famille. Principalement, on y joue en direct et de façon immersive pour une expérience similaire à un escape game (jeu d'évasion).</p>
+<p>Plus simplement : un scénario (souvent avec une victime) et des indices, le but est de trouver le coupable. Ici, le jeu se présente sous la forme d'un PDF d'une trentaine de pages, incluant une introduction du scénario, une fiche pour prendre des notes, plusieurs indices et interrogatoires qui eux-mêmes mènent à d'autres développements, une fiche pour le coupable, et une fiche détaillée pour la personne qui gère la narration du jeu (souvent, moi). J'ai adapté mon scénario à l'univers d'un jeu vidéo, ce qui m'a permis de me baser sur le design du jeu original pour mettre en page mon propre jeu.</p>
+<ul>
+  <li>² Stardew Quoi ?</li>
+</ul>
+<p>Stardew Valley est un jeu vidéo sorti en 2016, qui vous propose de gérer votre petite ferme à Pelican Town que vous héritez de votre grand-père. Vous cultivez vos plantations, élevez vos animaux, faites connaissance avec les autres habitant.e.s du village, et explorez des grottes en évitant les monstres. Au fur et à mesure, le jeu a développé autour de lui une véritable communauté, très soudée autour de son créateur ConcernedApe. Très innocent au premier abord, ses développeurs ont quand même glissé quelques clins d'œil et ont créé un univers assez profond pour voir émerger de nombreuses théories.</p>
+<ul>
+  <li>³ Jargon logiciel</li>
+</ul>
+<p>Canva est un site web/une application créative qui propose des outils, des templates, des packs d'icônes, et des fonctions IA pour vous aider à créer des designs qui vous correspondent. Il est accessible en ligne, et une partie de son utilisation est gratuite. J'en ai parlé précédemment, notamment dans <a href="/blog/cv-les-yeux-fermes/">mon article sur le CV</a>.</p>
+<p>La suite Adobe est un lot de logiciels (quasiment) incontournables, malgré son prix important, pour créer des PDF accessibles. Malheureusement, le manque d'accès à des équivalents gratuits, open-source et/ou tout aussi efficaces, ne permet pas de m'en passer pour le moment. Si vous souhaitez plus de renseignements, je vous conseille de faire vos propres recherches, en particulier au sujet des conditions d'utilisation et de l'IA générative. Je fais toutefois un point d'honneur à proposer des alternatives, quand j'en ai.</p>
+<p>Acrobat et InDesign sont deux logiciels de la suite Adobe. Acrobat est un lecteur de documents qui permet d'éditer des PDF, et dispose (pour le moment) des meilleures options d'accessibilité. Il permet également de faire un scan automatisé et d'afficher l'ordre de lecture. InDesign, lui, permet de créer lesdits PDF, et de les exporter correctement. L'intérêt de ces deux logiciels ensemble pour l'article d'aujourd'hui est que je vais utiliser Acrobat pour vérifier le PDF existant, puis le nouveau PDF, tandis que j'utiliserai InDesign pour créer le PDF entre les deux.</p>
+</aside>
+<h2 id="apprendre">Apprendre</h2>
+<p>Il y a deux ans, lors de la création de ce jeu, j'étais très compétente sur Canva. Sans vouloir (trop) me vanter, j'ai été cette personne que tout le bureau appelle pour demander comment ajouter une boite de texte sur Canva. Tout naturellement, je me suis beaucoup tournée vers lui quand j'avais besoin d'un moyen rapide de créer ou de corriger. Et avec un peu de recul, je savais déjà qu'il allait échouer lamentablement aux tests, avant même de les lancer.</p>
+<p>Pour avoir un aperçu général et savoir où (et comment) creuser ensuite, j'ai commencé par lancer, non pas un, mais deux scans automatisés : le premier en générant un rapport d'accessibilité sur Acrobat, et le second sur le site d'AxeCheck. Les résultats chiffrés ne sont pas vraiment comparables, observez plutôt.</p>
+<figure>
+<img src="/assets/img/blog/essayer-evoluer-recommencer/screenshot-axecheck-avant.png" alt="Tableau de résultats AxeCheck : catégorie « Basic Requirements » avec des échecs sur ISO 32000-1 (91), Fonts (71), Content (8612) et Natural language (38471)" loading="lazy">
+<figcaption>Sur l'image, la première partie des résultats du scan AxeCheck. Je vois que le document échoue à plusieurs endroits, en particulier dans son contenu, ou dans la naturalité du langage. Grâce à ces résultats, vous savez que vous n'êtes pas vraiment accessible, mais vous ne savez pas où.</figcaption>
+</figure>
+<figure>
+<img src="/assets/img/blog/essayer-evoluer-recommencer/screenshot-acrobat-avant.png" alt="Rapport d'accessibilité Acrobat, section Contenu de page : toutes les règles sont en opération réussie sauf « Contenu balisé » et « Ordre de tabulation », en échec" loading="lazy">
+<figcaption>Sur l'image, une partie des résultats du rapport d'accessibilité d'Acrobat. Il est moins impressionnant visuellement, mais il présente en réalité des erreurs similaires de manière plus dissimulée : la mention « Echec de l'opération » à côté de la règle « Contenu balisé » n'a l'air de rien au premier abord, mais elle indique en réalité du contenu qui n'est pas accessible du tout. Et on ne sait toujours pas où…</figcaption>
+</figure>
+<p>Je n'ai donc, en réalité, pas appris grand-chose. Je savais que mon PDF ne passerait pas les tests, car je sais que le document source n'est lui-même pas accessible. Je sais que j'ai des erreurs, et ce qu'elles concernent. Mais si certaines sont assez simples à deviner (comme l'absence de texte alternatif sur les images, qui me demande de l'ajouter manuellement à chaque image), d'autres sont difficiles à corriger sans Acrobat (comme l'ordre de tabulation et de lecture), et d'autres demandent une vérification manuelle de chaque balise pour trouver les absentes. Pourtant, je suis surprise d'apprendre que mon document est en partie accessible, là où j'étais convaincue qu'une exportation Canva produirait automatiquement un PDF illisible. Mea culpa, ça m'aura au moins appris quelque chose.</p>
+<h2 id="essayer">Essayer</h2>
+<p>Le plus simple pour moi à ce stade, c'est de faire une confiance aveugle à Acrobat et rendre mon PDF accessible. Le logiciel dispose d'un balisage automatisé qui pourrait permettre de pallier l'absence de balises sans devoir tout vérifier manuellement pour le moment. Je sais aussi, grâce aux deux scans précédents, que les métadonnées de mon document sont vides. Il faut que je modifie l'ordre de lecture pour qu'il soit logique, ce qui a l'avantage de rendre la narration crédible dans un logiciel de Text-To-Speech, pas mal quand on est que deux pour jouer. Enfin, il faut que j'intègre moi-même chaque texte alternatif, ce qui n'est pas faisable depuis Canva. Cela ne devrait pas être trop difficile. Non ?</p>
+<figure>
+<img src="/assets/img/blog/essayer-evoluer-recommencer/screenshot-balisage-auto.png" alt="Résumé du rapport de balisage automatique d'Acrobat, listant 16 pages de fiabilité réduite et 55 illustrations sans texte de remplacement" loading="lazy">
+<figcaption>Pour commencer, j'applique le balisage automatique. Ça commence mal : selon Acrobat, 16 pages sur les 30 pages du document demandent une vérification manuelle car le logiciel admet lui-même que c'est un peu illisible pour lui. Il m'indique également que la tâche d'écriture des textes alternatifs s'annonce longue.</figcaption>
+</figure>
+<figure>
+<img src="/assets/img/blog/essayer-evoluer-recommencer/screenshot-metadonnees.png" alt="Fenêtre Propriétés du document d'Acrobat, onglet Avancées : la conformité PDF/UA est réglée sur « Aucun(e) » et le champ Langue, en bas, est vide" loading="lazy">
+<figcaption>Je m'attaque aux métadonnées, dans les propriétés du document. Je suis surprise de voir une suite de chiffres et de lettres dans la description, que j'efface avant de naviguer vers les propriétés avancées. Bingo ! La langue du document n'est pas souvent spécifiée avant l'exportation, ce qui provoque une mauvaise lecture des différentes technologies.</figcaption>
+</figure>
+<figure>
+<img src="/assets/img/blog/essayer-evoluer-recommencer/screenshot-ordre-lecture.png" alt="Fenêtre des options de lecture pour lecteurs d'écran d'Acrobat, avec l'option « Ordre de lecture balisé » sélectionnée parmi les choix disponibles" loading="lazy">
+<figcaption>Je m'attaque à l'ordre de lecture. Je peux choisir entre un ordre de lecture défini par les balises, ou une lecture de gauche à droite, de haut en bas. Comme je veux faire les choses correctement, je choisis d'utiliser l'ordre de lecture balisé, puisqu'Acrobat m'a justement balisé le document avant.</figcaption>
+</figure>
+<p>Et là, je vais avouer que je vous ai menti. Je vous ai menti quand je vous ai dit que le plus simple serait de garder mon PDF original et de le rendre accessible. J'aurais pu m'arrêter là et vous montrer que le nouveau test est meilleur que l'ancien, me frotter les mains devant mon minuteur Pomodoro, et clôturer ici en vous souhaitant une bonne journée. Sauf que je n'ai pas parlé de l'étape des textes alternatifs pour rien.</p>
+<figure>
+<img src="/assets/img/blog/essayer-evoluer-recommencer/screenshot-page-image.png" alt="Panneau d'accessibilité d'Acrobat, outil « Ajouter un texte de remplacement » : une fenêtre affiche « Image 4 sur 55 » avec un champ de texte alternatif vide, par-dessus une page entière du document reconnue comme une seule image" loading="lazy">
+<figcaption>Car comme vous pouvez le voir ici, selon le logiciel, l'entièreté du contenu de ma page est une image. Ce qui indique que le contenu n'a pas pu être balisé, et n'est tout simplement pas lisible. Cette page en particulier est totalement muette dans un lecteur d'écran. En faisant défiler les 55 images à corriger, je peux voir exactement quels éléments sont, de facto, illisibles.</figcaption>
+</figure>
+<p>J'avoue, j'ai menti, et je vous ai induit en erreur en vous montrant que mon PDF était <em>un peu</em> accessible. J'ai aussi menti quand j'ai sous-entendu que c'était facile et rapide de corriger du <em>un peu</em> accessible. Par contre, mes scans, eux, ne vous ont pas menti. Les métadonnées étaient effectivement absentes, il manque des balises, il manque du texte alternatif. En réalité, chaque élément contenu dans un bloc (plus grossièrement, chaque élément que je n'ai pas écrit manuellement en cliquant sur &quot;Ajouter un titre/texte&quot;) est visible comme une image. Il y a des pages auxquelles je peux accéder correctement, comme les interrogatoires qui contiennent beaucoup de texte et pour lesquels j'ai bien utilisé les champs de texte de titre et de corps. Celles-ci sont à peu près lisibles, si on omet le cadre en haut de la page qui résume l'identité du suspect qui, lui, est lu comme une image. D'autres pages sont totalement illisibles, comme les indices : j'ai proposé trois indices par page, chacun dans un bloc, et aucun d'entre eux n'aidera mes joueurs. Les petits bricolages que j'ai faits sur mes pages, comme un faux post-it avec une note manuscrite, sont tout aussi invisibles. Enfin, comble de l'ironie, j'ai placé le plot-twist final sur un bloc de fond… effaçant totalement le coupable du jeu. Si vous jouiez avec un lecteur d'écran, vous pourriez éventuellement déduire à qui appartiennent les témoignages (si vous êtes imbattable sur Stardew Valley), mais sinon, ce ne sera pas votre soirée la plus agitée.</p>
+<h2 id="recommencer">Recommencer</h2>
+<p>Alors on fait quoi ? On abandonne l'idée de proposer un jeu de qualité à la communauté de joueuses et de joueurs Stardew Valley qui utilisent un lecteur d'écran, ou qui n'ont pas de personne pour narrer l'histoire ? On oublie l'idée de référencer le fichier correctement sur un moteur de recherche, et on abandonne l'idée de demander des indices supplémentaires à son assistant IA quand on coince ?</p>
+<p>Je vous ai encore menti, en réalité je ne vais pas vraiment recommencer. J'ai déjà la base du jeu : j'ai l'idée, le fil est logique, l'enquête est intéressante, la fiche de prise de notes est chiffonnée et lancée au visage de la personne en face pendant la soirée, le plus dur a été fait. La mise en place technique d'un projet n'est pas forcément la plus difficile, et ici, mon accès aux fichiers originaux me permet de récupérer les images et icônes que j'ai utilisées (coup de bol, elles sont enregistrées dans mon application Canva !), et d'utiliser ce bon vieux copier/coller pour récupérer les suspicions des habitantes et habitants de Pelican Town. Le plus long, dans mon cas, est de prendre en main InDesign, et de comprendre les options d'accessibilité pour les utiliser <em>correctement</em>. Prise en compte pendant la création du projet, l'accessibilité n'est pas forcément chronophage à mettre en place, et dans mon cas, j'ai (malgré moi à l'époque) utilisé beaucoup de texte, ce qui est plus simple à copier/coller entre les logiciels.</p>
+<p>J'ai donc usé et abusé de l'option cmd+C, cmd+V. Je peux lire l'entièreté du jeu dans l'historique de mon clipboard. Mais ce n'était pas le seul obstacle auquel je me suis confrontée, et ajoutés les uns aux autres, cela ne m'a pas facilité l'apprentissage d'InDesign. Les habitudes sont d'autant plus difficiles à prendre quand je maîtrise Canva depuis des années. Il est aussi difficile de se replonger dans un ancien projet sans en corriger les bases : accords, concordance des temps, rajouter des accents, changer la syntaxe, creuser encore un peu plus loin. Au final, je peux comparer sereinement les versions :</p>
+<ul>
+  <li>Modification de la police pour les blocs de texte pour une meilleure lisibilité, notamment en français où l'absence d'accents rend la lecture difficile.</li>
+  <li>Ajout de textes alternatifs sur tous les éléments visuels, y compris ceux ayant pour vocation d'orienter la personne qui gère la narration pour organiser les pièces et se repérer dans le jeu. Signalement des éléments purement visuels comme Artefacts.</li>
+  <li>Balisage complet, et organisation complète du document dans des articles, pour un ordre de lecture précis. J'ai veillé à ajouter dans les textes alternatifs lorsqu'un nouvel élément se débloque pour que tout le monde puisse suivre le fil.</li>
+  <li>Modification du PDF pour le rendre ludique en rajoutant des champs de texte balisés dans la fiche de notes. Export en PDF interactif fonctionnel pour éviter l'impression.</li>
+  <li>Modification des métadonnées pour assurer une lecture correcte du document, notamment le langage qui posait problème à la source.</li>
+</ul>
+<figure>
+<img src="/assets/img/blog/essayer-evoluer-recommencer/screenshot-axecheck-apres.png" alt="Même tableau AxeCheck après corrections : ISO 32000-1, Fonts et Natural language passent au vert, seul Content garde encore 61 échecs" loading="lazy">
+<figcaption>Sur AxeCheck, le résultat est sans appel. Je ne peux pas demander au scan de me pointer les erreurs, je ne sais donc pas d'où viennent les erreurs de contenu restantes. Je fais donc un autre scan, sur Acrobat cette fois.</figcaption>
+</figure>
+<figure>
+<img src="/assets/img/blog/essayer-evoluer-recommencer/screenshot-acrobat-apres.png" alt="Même rapport Acrobat après corrections : toutes les règles, y compris « Contenu balisé » et « Ordre de tabulation », passent en opération réussie" loading="lazy">
+<figcaption>Sur Acrobat, après une vérification manuelle de l'ordre de lecture que j'ai arrangé au fur et à mesure avec l'ajout d'articles sur InDesign, le rapport est bien plus positif.</figcaption>
+</figure>
+<p>Pour être transparente, le résultat n'est pas parfait. Comme énoncé plusieurs fois déjà, les scans automatisés ne sont pas très précis, et ils ne font pas non plus dans la nuance. Des choix que j'ai faits, comme celui de garder la police d'écriture du jeu d'origine pour les titres, m'empêchent d'utiliser des accents (un choix sur lequel j'ai déjà reculé, car le jeu d'origine était entièrement écrit dans cette typo, et n'en contenait donc aucun). L'utilisation de la carte du village, présente originalement dans le jeu, ne me permet pas de modifier les couleurs pour en adapter le contraste sans en dénaturer la référence. Il en est de même pour les éléments que j'ai réutilisés, comme les images des personnages, ou les éléments d'UI que j'ai récupérés pour donner des indications. Enfin, même si j'ai ajouté manuellement chaque élément du jeu dans des articles triés et catégorisés (définissant manuellement l'ordre de lecture, élément par élément), ils n'apparaissent pas sous forme de signets, et ce n'est pas utilisé pour scanner l'ordre de lecture dans Acrobat. Cette étape, qui m'a pris quelques secondes à chaque page, prend une autre tournure sur un document qui en contient 35. Pourtant, aucune de ces manipulations ne se reflète dans le scan final, qui signale un ordre de lecture anarchique qui n'existe pas. Tous ces éléments ne sont pas vérifiables sans un test manuel qui, à lui seul, demande du temps et de la rigueur. À ne pas enchaîner, donc, après dix heures d'édition de PDF.</p>
+<h2 id="ce-qui-reste-a-apprendre">Ce qui reste à apprendre</h2>
+<p>Je termine cet article satisfaite, mais beaucoup reste à faire. La création est un cycle infini : apprendre, essayer, recommencer. En recommençant, j'ai appris, et j'ai encore essayé. Mon crédo, c'est l'accessibilité, et j'ai conscience que le langage en lui-même est une barrière. Si je peux faire en sorte de traduire son écrit en oral et son rythme en balises, recommencer, c'est aussi parfois vouloir aller <em>encore</em> plus loin. Alors maintenant, j'ai bien envie de recommencer. En anglais, cette fois.</p>
+<p>Si vous aussi, vous faites face à un PDF inaccessible, et que vous préférez déléguer ce cycle, vous pouvez me contacter via la rubrique Contact. Si vous souhaitez commander le jeu, vous pouvez le trouver sur ma page Etsy.</p>
+<section class="post-resources" aria-labelledby="post-resources-heading">
+  <h2 id="post-resources-heading">Resources</h2>
+  <ul>
+    <li><span class="resource-title">Acrobat</span> — Lecteur PDF de la suite Adobe, utilisé pour les scans et le balisage automatique</li>
+    <li><span class="resource-title">InDesign</span> — Logiciel de la suite Adobe utilisé pour créer et exporter correctement les PDF</li>
+    <li><a href="https://check.axes4.com/en">AxeCheck</a> — Scan gratuit d'accessibilité PDF</li>
+  </ul>
+</section>
+<div class="post-cta">
+  <a class="button button-ghost" href="/en/contact/">Questions or comments? Get in touch.</a>
+</div>
+</article>
 </main>
 
 <footer class="mp-footer">

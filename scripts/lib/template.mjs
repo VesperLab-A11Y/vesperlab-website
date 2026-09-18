@@ -36,3 +36,31 @@ export function i18nVars(dict) {
   for (const [k, val] of Object.entries(dict)) if (k[0] !== '_') v['i18n.' + k] = val;
   return v;
 }
+
+// Un fragment EN est considéré non traduit s'il porte encore ce marqueur de
+// squelette (voir tous les src/pages/en/*.html générés jusqu'ici). Pauline
+// le retire naturellement en écrivant le vrai contenu, rien à cocher à la
+// main ailleurs.
+const UNTRANSLATED_MARKER = '<!-- TODO : contenu -->';
+export const isUntranslated = (frag) => frag.includes(UNTRANSLATED_MARKER);
+
+// Domaine translate.goog (proxy de traduction que Chrome utilise lui-même
+// pour son bouton "Traduire") : le domaine d'origine, points remplacés par
+// des tirets, sous-domaine de translate.goog. Permet de traduire une page
+// précise d'un clic, sans widget ni script tiers embarqué sur le site (voir
+// discussion Pauline du 2026-09-18).
+const TRANSLATE_HOST = 'vesperlab-dev.translate.goog';
+
+// Bandeau affiché à la place d'un fragment EN non traduit : contenu FR
+// replié en dessous (voir build-site.mjs/build-blog.mjs), ce bandeau
+// explique pourquoi et propose une traduction automatique via Google.
+// Statique (présent au chargement, pas injecté par JS) : lu dans l'ordre
+// naturel par un lecteur d'écran, aucune gestion de focus/annonce à coder.
+export function renderTranslationBanner(frPath) {
+  const translateUrl = `https://${TRANSLATE_HOST}${frPath}?_x_tr_sl=fr&_x_tr_tl=en&_x_tr_hl=en`;
+  return `<div class="translation-notice">
+  <p>This page hasn't been translated into English yet. You're reading the French original below.</p>
+  <p>I translate each page by hand, so it takes a while. Want it now?</p>
+  <a class="button button-ghost" href="${translateUrl}">Translate this page with Google Translate</a>
+</div>`;
+}
