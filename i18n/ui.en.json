@@ -1,5 +1,5 @@
 {
-  "_comment": "Shared interface strings for every EN page. Page content itself lives inline in src/pages/en/*.html. Draft translations — review for client terminology.",
+  "_comment": "Shared interface strings for every EN page. Page content itself lives inline in src/pages/en/*.html.",
   "skipLink": "Skip to content",
   "logoAria": "Vesper Lab, back to home",
   "navAria": "Main navigation",

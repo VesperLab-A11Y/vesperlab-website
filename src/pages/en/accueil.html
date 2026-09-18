@@ -1,5 +1,105 @@
 <!-- Fragment de contenu EN : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Squelette seulement — contenu à rédiger (voir roadmap Notion + docs/superpowers/specs/2026-09-09-site-multipage-specs-consolidees.md). -->
-<h1>Vesper Lab</h1>
+     Traduction du FR (src/pages/accueil.html) : rédigée directement en
+     anglais, pas mot-à-mot (voir STYLE-redaction-publique.md). Bloc "From
+     the blog" allégé par rapport au FR : les 3 articles mis en avant n'ont
+     pas d'équivalent anglais pour l'instant (0 article sous /en/blog/), donc
+     pas d'aperçus inventés ici, seulement le lien vers le blog et le flux
+     RSS. À regarnir une fois de vrais articles publiés en anglais. -->
 
-<p><!-- TODO : contenu --></p>
+<section class="hero">
+  <h1>Darkness closes nothing to those who know how to <em>listen</em>.</h1>
+  <p class="lead-body">Vesper Lab audits websites and digital documents,
+    finds what gets in the way, and explains how to fix it. WCAG 2.2 and
+    SGQRI 008 standards. Montréal, in French and English.</p>
+  <div class="button-row">
+    <a class="button" href="{{nav.blog}}">Read the articles</a>
+    <a class="button button-ghost" href="{{nav.lelab-realisations}}">See my work</a>
+  </div>
+</section>
+
+<section class="offer mp-card" aria-labelledby="h-explore">
+  <h2 id="h-explore">What I explore</h2>
+  <ul class="offer-list">
+    <li>
+      <p><strong>Accessibility diagnostic</strong> · Audit a website or app
+        from the standpoint of what the people using it actually experience.
+        Rank issues by impact, not by order of appearance.</p>
+      <p class="offer-note">A report the whole team can read, not just the
+        people who write the code.</p>
+    </li>
+    <li>
+      <p><strong>Accessible documents</strong> · Review and tag Word files,
+        slide decks, and PDFs so they stay usable once downloaded.</p>
+      <p class="offer-note">The least visible part of accessibility, and one
+        of the most overlooked.</p>
+    </li>
+    <li>
+      <p><strong>WCAG conformance</strong> · The reference criteria, one by
+        one: what each changes in practice, and how to document it without
+        jargon.</p>
+      <p class="offer-note">What I learn while preparing my CPACC
+        certification gets published on the blog as it happens.</p>
+    </li>
+  </ul>
+</section>
+
+<section class="blog-teaser mp-card" aria-labelledby="h-blog">
+  <h2 id="h-blog">From the blog</h2>
+  <p>New articles as the audits happen.</p>
+  <div class="button-row">
+    <a class="button button-ghost" href="{{nav.blog}}">All articles</a>
+    <a class="button button-ghost" href="/blog/feed.xml">Subscribe to the RSS feed</a>
+  </div>
+</section>
+
+<section class="lab-teaser mp-card mp-card--lab" aria-labelledby="h-lab">
+  <h2 id="h-lab">The Lab</h2>
+  <p>Bilingual tools I build for my own work, published in the open,
+    accessible, and reusable.</p>
+  <ul class="lab-items">
+    <li>
+      <h3>Vesper Toolkit</h3>
+      <p>A set of bookmarklets you drag into your bookmarks bar: an axe-core
+        scan, link/image/form-label checks, a CSS selector, and new
+        additions as they come.</p>
+    </li>
+    <li>
+      <h3>Vesper Library</h3>
+      <p>A library of accessible interface components, tested with a screen
+        reader, with the code and an explanation of what makes each one
+        usable.</p>
+    </li>
+    <li>
+      <h3>The WCAG 2.2 reference, in French and English</h3>
+      <p>All 87 criteria translated and documented, freely available. The
+        base every Lab tool builds on, growing with each audit.</p>
+    </li>
+  </ul>
+  <a class="button" href="{{nav.lelab}}">Explore the Lab</a>
+  <p class="lab-note">Compass and Sonar (public versions) arrive in
+    November, the Lab's first update after launch.</p>
+</section>
+
+<section class="about-teaser mp-card" aria-labelledby="h-about">
+  <h2 id="h-about">Who I am</h2>
+  <p>Five years as a paramedic, I studied sociology and the biases of the
+    medical field from the break room, then moved into web design and
+    development. Every hat I've worn traces back to the same thread: who
+    goes unseen, how they got erased, and how to switch the light back on.</p>
+  <p>Vesper Lab grew out of those blind spots, and the wish to see clearly.
+    I work from Montréal, in French and English.</p>
+  <a class="button button-ghost" href="{{nav.apropos}}">Learn more</a>
+</section>
+
+<section class="contact-teaser mp-card" aria-labelledby="h-contact">
+  <h2 id="h-contact">Stay in touch</h2>
+  <p>I write about accessibility, the tools I build, and what I learn along
+    the way.</p>
+  <div class="button-row">
+    <a class="button button-ghost" href="/blog/feed.xml">Subscribe to the RSS feed</a>
+    <a class="button" href="{{nav.contact}}">Get in touch</a>
+  </div>
+  <p class="contact-note">This site is audited against WCAG 2.2 criteria.
+    Its known limitations are documented in its
+    <a href="{{nav.declaration}}">accessibility statement</a>.</p>
+</section>

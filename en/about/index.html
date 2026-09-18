@@ -123,10 +123,119 @@
 
 <main id="main" tabindex="-1">
 <!-- Fragment de contenu EN : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Squelette seulement — contenu à rédiger (voir roadmap Notion + docs/superpowers/specs/2026-09-09-site-multipage-specs-consolidees.md). -->
-<h1>About</h1>
+     Traduction du FR (src/pages/apropos.html), rédigée directement en
+     anglais (voir STYLE-redaction-publique.md). Structure et comportement
+     identiques au FR : intro fixe puis 3 boutons à bascule qui ouvrent une
+     des 3 sections dans .apropos-frame (voir assets/js/apropos.js, commun
+     aux deux langues). ATTENTION : le paragraphe "communauté/engagement
+     bénévole" de The Mind est un brouillon côté FR (note session du
+     2026-09-15, pas encore retravaillé par Pauline) — traduit tel quel,
+     mais à resynchroniser ici une fois la version FR finalisée. -->
 
-<p><!-- TODO : contenu --></p>
+<section class="hero">
+  <h1>You don't go blind by turning off the light.</h1>
+  <p class="lead-body">Vesper Lab comes down to three pillars: a person, a
+    way of thinking, and an idea. One thread runs through my story, and it's
+    easiest to see in the dark.</p>
+</section>
+
+<div class="apropos-toggle-row" role="group" aria-label="Sections of the About page">
+  <button type="button" class="apropos-toggle" aria-expanded="false" aria-controls="panel-human">The human</button>
+  <button type="button" class="apropos-toggle" aria-expanded="false" aria-controls="panel-mind">The mind</button>
+  <button type="button" class="apropos-toggle" aria-expanded="false" aria-controls="panel-entity">The entity</button>
+</div>
+
+<div class="apropos-frame">
+  <div class="apropos-frame-inner">
+
+    <section id="panel-human" class="apropos-panel" hidden aria-labelledby="h-human">
+      <h2 id="h-human">The human</h2>
+      <div class="apropos-row apropos-row--30 apropos-row--reverse">
+        <div class="apropos-text">
+          <p>I spent six years in emergency medicine, mostly as a paramedic.
+            Meeting people with singular stories, listening to them, and
+            watching how the world treated them is what pulled me toward the
+            social sciences. From the back of the ambulance, I wrote my
+            thesis on bias and stereotyping among caregivers, and its real
+            effect on how people get treated in an emergency.</p>
+          <p>Visiting hospitals, I kept running into signage no one could
+            read, ramps that wobbled underfoot, and websites that fought me
+            when I searched for the right department from my phone. I moved
+            into web design, with a focus on health organizations, then into
+            development, so I could carry my ideas all the way through.</p>
+        </div>
+        <figure class="apropos-figure">
+          <img src="/assets/img/apropos-moi.jpg" alt="Pauline Chevalliot, a cup of coffee in hand, sitting by a window. Her cat stands behind her." loading="lazy">
+        </figure>
+      </div>
+      <p>After that, I worked evaluating AI systems: flagging harmful
+        content, correcting bias, adapting content across cultures,
+        fact-checking, and writing in gender-inclusive French. Same instinct
+        as everywhere else: ask who the system serves badly.</p>
+      <p>I moved from France to Québec, and now work in both French and
+        English, across two regulatory frameworks. What ties all of it
+        together is the same way of looking at things: noticing what no one
+        else flags, and wanting to understand why it's there.</p>
+    </section>
+
+    <section id="panel-mind" class="apropos-panel" hidden aria-labelledby="h-mind">
+      <h2 id="h-mind">The mind</h2>
+      <p>Bats have long carried the stigma attached to disability. The idea
+        that they were blind took hold through experiments that deliberately
+        blinded them, just to watch how they found their way without sight.
+        At the time, no one could imagine a species evolving past that, let
+        alone living independently with the light out. We understood
+        echolocation much later, and learned these animals could see just
+        fine. They just had an extra sense on top of it.</p>
+      <p>When the vesper bat wakes at dusk, it challenges what we think is
+        true, what we think should be true, and how we build a life together
+        around what already exists.</p>
+      <!-- Brouillon côté FR (note session du 2026-09-15 : communauté, vie
+           de groupe, marginalisation, engagement bénévole). Traduit pour
+           donner une forme à la section, pas un texte final. -->
+      <p>Documenting and publishing in the open is also a way of staying
+        close to what a marginalized community lives through: I do it as a
+        volunteer, outside of any paid mandate. What limits access isn't
+        only technical. It's also a question of who has the time, the
+        means, or the perceived standing to get involved. The vesper bat is
+        an animal we excluded from "normal" before we even tried to
+        understand it. One more reason to build this community with the
+        people we sideline by reflex, not as an afterthought.</p>
+    </section>
+
+    <section id="panel-entity" class="apropos-panel" hidden aria-labelledby="h-entity">
+      <h2 id="h-entity">The entity</h2>
+      <p>Vesper Lab is the name under which I document and practice digital
+        accessibility: audits, code, and what I learn along the way.</p>
+      <div class="apropos-row">
+        <div class="apropos-text">
+          <h3>What I publish</h3>
+          <p>Most documentation on digital accessibility is in English,
+            often behind a paywall. I translate, document, and publish it in
+            the open: the 87 WCAG 2.2 criteria in French and English, the
+            tools I build for my own audits, and articles on what I learn
+            along the way.</p>
+          <p>A small organization that can't afford to hire anyone should
+            still be able to get started on its own.</p>
+        </div>
+        <figure class="apropos-figure">
+          <img src="/assets/img/apropos-lab.jpg" alt="Line illustration in white on black: a shelf holding a clock, books, a bird, and a mirror." loading="lazy">
+        </figure>
+      </div>
+      <h3>How I work</h3>
+      <p>This site is audited against WCAG 2.2 criteria, and its known
+        limitations are published in its
+        <a href="/en/accessibility-statement/">accessibility statement</a>. My tools
+        are built to be usable by the people they concern, screen reader
+        included. Some of these issues affect me directly, which keeps me
+        from treating them as abstractions. I write in gender-inclusive
+        French, following the OQLF's recommendations.</p>
+      <p>I'm working toward CPACC certification in fall 2026, and I learn
+        as much by documenting as by auditing.</p>
+    </section>
+
+  </div>
+</div>
 </main>
 
 <footer class="mp-footer">
