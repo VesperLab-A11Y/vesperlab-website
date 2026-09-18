@@ -1133,7 +1133,7 @@ main#main .entry-text h2{
 
 .entry-mockup{
   flex:0 0 auto;
-  width:11rem;
+  width:16.5rem; /* +50% (demande Pauline du 2026-09-18), était 11rem */
   aspect-ratio:4/3;
   display:flex;
   align-items:center;
