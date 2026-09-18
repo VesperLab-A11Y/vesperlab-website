@@ -26,19 +26,19 @@
 <ul class="entry-list">
   <li class="entry-card">
     <div class="entry-badges">
-      <span class="entry-badge entry-badge--category">Diagnostic fictif</span>
-      <span class="entry-badge">Étude de cas fictive</span>
+      <span class="entry-badge entry-badge--category">Diagnostic</span>
+      <span class="entry-badge">Étude de cas</span>
     </div>
     <div class="entry-main">
       <div class="entry-text">
-        <h2>Audit fictif : site vitrine d'un cabinet comptable</h2>
-        <p class="entry-tagline">Un exercice d'audit complet mené sur un
-          site et un contenu inventés, pour illustrer ma méthode et mon
-          format de rapport.</p>
+        <h2>Diagnostic d'accessibilité : VesperLab.dev 1.0</h2>
+        <p class="entry-tagline">Mon tout premier diagnostic d'accessibilité, sur le tout premier jet du site que vous
+          êtes en train de visiter. A été le moteur de la création d'une majorité des bookmarklets du (<a href="https://toolkit.vesperlab.dev/">Vesper Toolkit</a>).
+        </p>
         <ul class="entry-stats">
-          <li>3<span>constats critiques</span></li>
-          <li>6<span>constats majeurs</span></li>
-          <li>9<span>constats mineurs</span></li>
+          <li>19<span>constats</span></li>
+          <li>3<span>critiques</span></li>
+          <li>80%<span>de faux positifs</span></li>
         </ul>
       </div>
     </div>
@@ -46,32 +46,29 @@
       <span class="entry-icon-btn entry-link-icon entry-link-icon--none" aria-hidden="true">
         <svg class="entry-icon-btn-svg" viewBox="0 0 512 512" focusable="false"><path fill="currentColor" transform="translate(85.333333, 64.000000)" d="M128,63.999444 L128,106.666444 L42.6666667,106.666667 L42.6666667,320 L256,320 L256,234.666444 L298.666,234.666444 L298.666667,362.666667 L4.26325641e-14,362.666667 L4.26325641e-14,64 L128,63.999444 Z M362.666667,1.42108547e-14 L362.666667,170.666667 L320,170.666667 L320,72.835 L143.084945,249.751611 L112.915055,219.581722 L289.83,42.666 L192,42.6666667 L192,1.42108547e-14 L362.666667,1.42108547e-14 Z"/></svg>
       </span>
-      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-audit-comptable" aria-label="Plus de détails sur l'audit fictif du cabinet comptable" data-label-open="Plus de détails sur l'audit fictif du cabinet comptable" data-label-close="Masquer les détails sur l'audit fictif du cabinet comptable">
+      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-vespersitev1" aria-label="Plus de détails sur le diagnostic de VesperLab.dev V1" data-label-open="Plus de détails sur le diagnostic de VesperLab.dev V1" data-label-close="Masquer les détails sur le diagnostic de VesperLab.dev V1">
         <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
       </button>
     </div>
     <div class="entry-panel-wrap">
       <div class="entry-panel-inner">
-        <div class="entry-panel" id="panel-audit-comptable" hidden>
+        <div class="entry-panel" id="panel-vespersitev1" hidden>
           <dl class="entry-detail">
             <div>
               <dt>Périmètre audité</dt>
-              <dd>Page d'accueil, formulaire de contact et page de tarifs,
-                sur desktop et mobile.</dd>
+              <dd>Site complet de 5 pages, formulaire de contact, et options d'accessibilité. Vérification
+                des contrastes, précisément dans le contexte d'un mode sombre principal.</dd>
             </div>
             <div>
               <dt>Un constat représentatif</dt>
-              <dd>Critique — Formulaire de contact sans étiquettes
-                explicites : les champs courriel et message ne sont associés
-                à aucun <code>&lt;label&gt;</code>, seulement repérables par
-                leur position visuelle. Au lecteur d'écran, seul un champ de
-                texte anonyme est annoncé.</dd>
+              <dd>Critique - L'absence d'indication de la langue <code>&lt;lang="fr"&gt;</code> dans le code. 
+               Une technologie d'assistance ne serait pas capable de savoir en quelle langue lire le contenu ou l'interpréter,
+              provoquant des problèmes de prononciation ou un résultat incompréhensible.</dd>
             </div>
             <div>
-              <dt>Note d'anonymisation</dt>
-              <dd>Site, organisation et contenu entièrement fictifs,
-                construits pour l'exercice. Aucune donnée ni aucun nom réels
-                n'y figurent.</dd>
+              <dt>Note de l'autrice</dt>
+              <dd>On dira "Erreur de débutante" et je suis d'accord avec vous. 
+                Preuve en est qu'un oubli minime peut avoir un grand impact.</dd>
             </div>
           </dl>
         </div>
@@ -87,8 +84,7 @@
     <div class="entry-main">
       <div class="entry-text">
         <h2>La dernière tasse de Caroline</h2>
-        <p class="entry-tagline">Jeu de mystère inspiré de Stardew Valley —
-          une tasse a disparu, et tout le village a un alibi douteux.</p>
+        <p class="entry-tagline">Un jeu de meurtre et mystère sur le thème du jeu vidéo Stardew Valley, au format PDF.</p>
       </div>
     </div>
     <div class="entry-controls">
@@ -105,28 +101,32 @@
           <dl class="entry-detail">
             <div>
               <dt>Pourquoi</dt>
-              <dd>Pour apprendre la conception de jeu en dehors de l'audit,
-                sur un thème confortable après des journées denses en
-                accessibilité.</dd>
+              <dd>Pour apprendre à créer des documents PDF accessibles, essayer de nouveaux logiciels,
+                affiner mon processus de test manuel sur documents, et m'amuser avec l'univers des 
+                habitantes et habitants de Pelican Town.
+              </dd>
             </div>
             <div>
               <dt>Ce que j'ai construit</dt>
-              <dd>Pour l'instant : la trame narrative et les personnages. Le
-                prototype jouable arrive.</dd>
+              <dd>Un jeu au format PDF, jouable en coopération avec l'aide d'une personne pour organiser 
+                et faire la narration de l'enquête. Le jeu est proposé en français et en anglais. Le document
+              en lui-même est interactif et accessible.</dd>
             </div>
             <div>
               <dt>Ce que j'en tire</dt>
-              <dd>Une occasion de pratiquer l'écriture interactive, loin du
-                vocabulaire WCAG.</dd>
+              <dd>Un (<a href="/blog/_posts/2026-09-17-essayer-evoluer-recommencer.md">article de blog</a>), 
+             un jeu à jouer en groupe, un nouveau sujet de discussion, et l'espoir secret que l'équipe de 
+            développement du jeu original fasse une partie.</dd>
             </div>
             <div>
               <dt>État actuel</dt>
               <dd>En cours.</dd>
             </div>
           </dl>
-          <p class="entry-freeform">Pensé accessible dès le départ : ce sera
-            aussi un terrain d'essai pour mes propres critères, hors
-            contexte professionnel.</p>
+          <p class="entry-freeform">Un objectif en tête tout le long du projet : qu'une personne qui utilise
+            une technologie d'assistance puisse être la personne qui s'occupe de la narration, et ne rencontrer
+            aucune encombre dans le déroulé de la partie.
+          </p>
         </div>
       </div>
     </div>
