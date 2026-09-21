@@ -4,8 +4,9 @@ description: Pourquoi un CV accessible passe mieux les filtres automatiques, et 
 category: Réflexions
 tags: emploi, lecteurs d'écran, recrutement
 resources:
-  - ATS Screener | | Simulateur utilisé personnellement pour scanner un CV
-  - Rapport d'usage des ATS | | Jobscan, cité pour le taux d'adoption des ATS par les grandes entreprises
+  - ATS Screener | https://ats-screener.vercel.app/ | Simulateur ATS open-source que j'utilise personnellement pour scanner mon CV
+  - Rapport d'usage des ATS | https://www.jobscan.co/blog/fortune-500-use-applicant-tracking-systems/ | Jobscan, cité pour le taux d'adoption des ATS par les grandes entreprises
+  - Graphique des critères de notation | https://www.toptal.com/resume/career-center/what-is-an-ats-resume-checker-how-can-it-help-you-improve-your-tech-resume?status=draft | Un article de ToptalResume qui explique comment les ATS fonctionnent, en anglais. Une partie complète explique le système de notation et les catégories du graphique
 ---
 
 Lorsque j'ai commencé mon parcours certifiant, j'avais déjà une idée, encore assez vague, du concept de l'accessibilité des documents. Je savais que la plupart des documents proposés en ligne n'étaient pas accessibles, car j'étais très friande des technologies de Text-To-Speech pendant mes études de sociologie (pour écouter mes cours depuis l'ambulance) et que la moitié de mes cours étaient inaudibles. Mais je n'avais aucune idée que mon propre CV serait tout aussi illisible.
@@ -24,6 +25,8 @@ Parce que oui, ça paraît effectivement logique. J'ai expliqué dans [mon artic
 ## ATS, qu'est-ce que c'est ?
 
 ATS est l'acronyme de "Applicant Tracking System" (ou "système de suivi des candidatures", en français). C'est un genre de logiciel qui assiste les services de recrutement en leur permettant de trier les candidatures, suivre le processus de recrutement, ou ici, la fonction qui nous intéresse particulièrement, d'extraire les données du CV. Il a été largement adopté par les grandes entreprises (97,4 % des 500 plus grandes entreprises, selon le Rapport d'usage des ATS de Jobscan) et il est au centre des préoccupations auprès des personnes qui cherchent un emploi. Il est en revanche difficile de trouver des sources et statistiques fiables en ligne. Le secteur est en pleine croissance, porté par l'implémentation de l'intelligence artificielle, mais peu de données solides circulent encore.
+
+![Graphique illustrant quelles catégories les logiciels ATS utilisent pour attribuer un score à un CV. Les critères, selon leur ordre d'impact dans le score, sont : la recherche par mot-clef, puis si le domaine est adapté au poste, si les emplois passés sont adaptés, les réussites professionnelles, si le formattage du CV est adapté pour un logiciel ATS, le langage et les informations, et les informations personnelles en dernière position.](/assets/img/blog/cv-accessible/ATS-scoring.png "Selon ce graphique et l'autrice de l'article Tracie Close, visible dans les ressources, les ATS utilisent plusieurs catégories pour noter nos CV. Une chose est sure cependant : si le logiciel ne peut pas accéder au contenu ou seulement en partie, la note en sera forcément impactée.")
 
 ## André et Alice cherchent une job
 
