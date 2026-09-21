@@ -7,6 +7,7 @@ resources:
   - Text-to-Speech Market Report | https://www.expertmarketresearch.com/reports/text-to-speech-market | Croissance projetée du marché TTS, citée dans l'article
   - OpenDataLoader | https://opendataloader.org/docs#why-opendataloader | Alternative open-source basée sur l'IA pour le balisage automatique de PDF
   - AxeCheck | https://check.axes4.com/en | Scan gratuit d'accessibilité PDF
+  - Heffington's | https://heffingtons.com/types-of-color-blindness/ | Source de l'image d'illustration du daltonisme
   - Adobe Acrobat | | Seul logiciel reconnu, à ma connaissance, pour un balisage automatique fiable
 ---
 
@@ -37,6 +38,8 @@ J'ai expliqué plus haut qu'un document PDF accessible est un document (correcte
 
 En premier lieu, mettez à jour les métadonnées de votre document. Renseignez dans le champ concerné, souvent depuis les options du fichier, le titre et la langue, a minima. En second lieu, adoptez l'habitude d'utiliser les balises : dans les options de mise en page d'un document, par exemple, vous pouvez choisir d'utiliser un modèle de titre. Ces modèles sont personnalisables en fonction de vos choix de design, et reproduisent correctement les tags associés, là où adapter simplement la police et la taille de votre titre en partant d'un simple paragraphe ne permettra pas de se repérer correctement. Lors de l'insertion d'une image, un clic-droit ouvre souvent l'accès vers l'ajout d'un texte alternatif, qui remplace sa fonction pour le public qui ne pourrait pas la voir. De même, un graphique ou un camembert multicolore sans indication visuelle n'est pas très utile si on ne peut pas discerner les couleurs.
 
+![Comparaison du même graphique coloré, en fonction du type de daltonisme : deuteranopia, qui ne voit mal le vert ; pronotopia, qui voit mal le rouge ; et tritanopia, qui voit mal le bleu.](/assets/img/blog/accessibilite-5-conseils/daltonism.png "Sur cette représentation du spectre de couleur vu par les gens atteints de plusieurs types de daltonisme, on observe à quel point une couleur peut être différente en fonction de celui ou celle qui la regarde. Maintenant, l'utilisation de la couleur comme seul indicateur de gravité dans un document prend un tout autre regard : plusieurs !")
+
 Beaucoup de fonctions proposées sont des raccourcis qui, si elles sautent parfois une étape, effacent votre travail d'accessibilité. Par exemple, la fonction "Dessiner un tableau" amène souvent un manque de labellisation du contenu des cellules, le rendant incompréhensible. L'exportation subit le même sort : veillez à passer par le chemin "officiel" plutôt que le chemin officieux (par la boite d'impression), qui peut produire une image au lieu d'un document balisé. Plus vous apportez du soin à l'utilisation de la sémantique, plus votre document final sera correctement balisé à la fin. Et plus vous vous forcez à utiliser ces fonctions, plus naturel et rapide deviendra le geste.
 
 ## Réparer quand c'est possible
@@ -61,7 +64,6 @@ Si vous faites vos premiers pas en accessibilité, il est fort à parier que vou
 
 Une fois votre nouveau PDF prêt, vous pouvez le tester par vous-même. C'est l'occasion, peut-être, de faire vos premiers pas avec un lecteur d'écran. Si le temps vous manque, vous pouvez scanner gratuitement vos documents via [AxeCheck](https://check.axes4.com/en) ou un autre outil d'accessibilité PDF (lisez les conditions, et attention à vos données), mais un scan automatisé demande toujours des vérifications manuelles. Si vous utilisez des fonctions Text-To-Speech, vérifier le balisage par ce biais est aussi un moyen de vérifier la navigation, quand le logiciel le permet. Enfin, votre lecteur de document peut déjà vous donner des indications sur son accessibilité, par la fonction Recherche (qui ne peut pas fonctionner si le document a un format d'image), le sommaire… Utiliser la touche Tab dans un document est aussi une claire indication : il permet de naviguer entre les titres, les liens, les contenus… et est utilisé par les technologies d'assistance. Enfin, si vous disposez d'Adobe Acrobat, vous pouvez lancer un scan automatisé avant de valider votre PDF pour distribution.
 
-![Exemple d'illustration démonstrative — à remplacer par une vraie capture d'écran](/assets/img/blog-placeholder-2.svg "Légende de démonstration — remplace-moi par une capture d'écran réelle")
 
 ## Qu'est-ce qu'on en retient ?
 
