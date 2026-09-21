@@ -212,7 +212,7 @@ export function renderResources(resources, headingText) {
   if (!resources || !resources.length) return '';
   const items = resources.map((r) => {
     const titleHtml = r.url ? `<a href="${esc(r.url)}">${esc(r.title)}</a>` : `<span class="resource-title">${esc(r.title)}</span>`;
-    const descHtml = r.description ? ` — ${esc(r.description)}` : '';
+    const descHtml = r.description ? ` : ${esc(r.description)}` : '';
     return `    <li>${titleHtml}${descHtml}</li>`;
   }).join('\n');
   return `<section class="post-resources" aria-labelledby="post-resources-heading">\n  <h2 id="post-resources-heading">${esc(headingText)}</h2>\n  <ul>\n${items}\n  </ul>\n</section>`;

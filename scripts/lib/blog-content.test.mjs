@@ -187,7 +187,7 @@ test('renderResources : lien -> texte cliquable, sans lien -> texte simple', () 
   ], 'Ressources');
   assert.match(html, /<section class="post-resources" aria-labelledby="post-resources-heading">/);
   assert.match(html, /<h2 id="post-resources-heading">Ressources<\/h2>/);
-  assert.match(html, /<a href="https:\/\/www\.w3\.org\/TR\/WCAG22\/">WCAG 2\.2<\/a> — Référence normative/);
+  assert.match(html, /<a href="https:\/\/www\.w3\.org\/TR\/WCAG22\/">WCAG 2\.2<\/a> : Référence normative/);
   assert.match(html, /<li><span class="resource-title">VoiceOver<\/span><\/li>/);
 });
 
@@ -195,7 +195,7 @@ test('renderResources : sans URL, le titre est dans un span.resource-title', () 
   const html = renderResources([
     { title: 'VoiceOver', url: '', description: "Lecteur d'écran utilisé pour les tests" },
   ], 'Ressources');
-  assert.match(html, /<li><span class="resource-title">VoiceOver<\/span> — Lecteur d'écran utilisé pour les tests<\/li>/);
+  assert.match(html, /<li><span class="resource-title">VoiceOver<\/span> : Lecteur d'écran utilisé pour les tests<\/li>/);
 });
 
 test('renderCta : utilise les valeurs par défaut si le front matter est vide', () => {
