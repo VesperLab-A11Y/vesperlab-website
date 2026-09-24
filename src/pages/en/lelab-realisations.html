@@ -1,5 +1,192 @@
 <!-- Fragment de contenu EN : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Squelette seulement — contenu à rédiger (voir roadmap Notion + docs/superpowers/specs/2026-09-09-site-multipage-specs-consolidees.md). -->
-<h1>Case studies</h1>
+     Traduction fidèle du fragment FR (src/pages/lelab-realisations.html) —
+     même structure, mêmes classes/id/SVG. H1 traduit en "Portfolio" pour
+     matcher le libellé de nav déjà choisi (i18n/ui.en.json, navLabPortfolio)
+     plutôt qu'une traduction littérale de "Projets". "BR?AN" laissé tel
+     quel (nom propre non traduisible). Titre du jeu traduit en
+     "Caroline's Last Cup", pour matcher le titre EN déjà établi
+     dans i18n/ui.en.json (footerProject1Title).
 
-<p><!-- TODO : contenu --></p>
+     Mockup (.entry-mockup) : voir le commentaire équivalent dans le
+     fragment FR (src/pages/lelab-realisations.html) pour la marche à
+     suivre — mêmes classes/CSS, capacité déjà optionnelle (.entry-main en
+     flex). Ajouter le mockup une fois côté FR ET EN si l'image sert dans
+     les deux langues. -->
+
+<section class="hero">
+  <h1>Portfolio</h1>
+  <p class="lead-body">My fictional diagnostics and personal projects,
+    open to the public. Several categories, one principle: the
+    essentials read without opening anything, the details are for the
+    curious.</p>
+</section>
+
+<ul class="entry-list">
+  <li class="entry-card">
+    <div class="entry-badges">
+      <span class="entry-badge entry-badge--category">Diagnostic</span>
+      <span class="entry-badge">Case study</span>
+    </div>
+    <div class="entry-main">
+      <div class="entry-text">
+        <h2>Accessibility diagnostic: VesperLab.dev 1.0</h2>
+        <p class="entry-tagline">My very first accessibility diagnostic, run on the very first draft of the site
+          you're visiting right now. It's what drove the creation of most of the (<a href="https://toolkit.vesperlab.dev/">Vesper Toolkit</a>) bookmarklets.
+        </p>
+        <ul class="entry-stats">
+          <li>19<span>findings</span></li>
+          <li>3<span>critical</span></li>
+          <li>80%<span>false positives</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="entry-controls">
+      <span class="entry-icon-btn entry-link-icon entry-link-icon--none" aria-hidden="true">
+        <svg class="entry-icon-btn-svg" viewBox="0 0 512 512" focusable="false"><path fill="currentColor" transform="translate(85.333333, 64.000000)" d="M128,63.999444 L128,106.666444 L42.6666667,106.666667 L42.6666667,320 L256,320 L256,234.666444 L298.666,234.666444 L298.666667,362.666667 L4.26325641e-14,362.666667 L4.26325641e-14,64 L128,63.999444 Z M362.666667,1.42108547e-14 L362.666667,170.666667 L320,170.666667 L320,72.835 L143.084945,249.751611 L112.915055,219.581722 L289.83,42.666 L192,42.6666667 L192,1.42108547e-14 L362.666667,1.42108547e-14 Z"/></svg>
+      </span>
+      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-vespersitev1" aria-label="More details about the VesperLab.dev V1 diagnostic" data-label-open="More details about the VesperLab.dev V1 diagnostic" data-label-close="Hide details about the VesperLab.dev V1 diagnostic">
+        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+    <div class="entry-panel-wrap">
+      <div class="entry-panel-inner">
+        <div class="entry-panel" id="panel-vespersitev1" hidden>
+          <dl class="entry-detail">
+            <div>
+              <dt>Scope audited</dt>
+              <dd>Full 5-page site, contact form, and accessibility options. Contrast checks, specifically
+                in the context of a primarily dark theme.</dd>
+            </div>
+            <div>
+              <dt>A representative finding</dt>
+              <dd>Critical — The missing language attribute <code>&lt;lang="fr"&gt;</code> in the code.
+               An assistive technology wouldn't be able to tell which language to read or interpret the
+              content in, causing mispronunciation or an incomprehensible result.</dd>
+            </div>
+            <div>
+              <dt>Author's note</dt>
+              <dd>Call it a beginner's mistake — I won't argue.
+                Proof that a tiny oversight can have a big impact.</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="entry-card">
+    <div class="entry-badges">
+      <span class="entry-badge entry-badge--category">Personal project</span>
+      <span class="entry-badge">Coming soon</span>
+    </div>
+    <div class="entry-main">
+      <div class="entry-text">
+        <h2>Caroline's Last Cup</h2>
+        <p class="entry-tagline">A murder-mystery game themed around the video game Stardew Valley, in PDF format.</p>
+      </div>
+      <div class="entry-mockup"><img src="/assets/img/lelab/mockup-ldtdc.png" alt=""></div>
+    </div>
+    <div class="entry-controls">
+      <span class="entry-icon-btn entry-link-icon entry-link-icon--none" aria-hidden="true">
+        <svg class="entry-icon-btn-svg" viewBox="0 0 512 512" focusable="false"><path fill="currentColor" transform="translate(85.333333, 64.000000)" d="M128,63.999444 L128,106.666444 L42.6666667,106.666667 L42.6666667,320 L256,320 L256,234.666444 L298.666,234.666444 L298.666667,362.666667 L4.26325641e-14,362.666667 L4.26325641e-14,64 L128,63.999444 Z M362.666667,1.42108547e-14 L362.666667,170.666667 L320,170.666667 L320,72.835 L143.084945,249.751611 L112.915055,219.581722 L289.83,42.666 L192,42.6666667 L192,1.42108547e-14 L362.666667,1.42108547e-14 Z"/></svg>
+      </span>
+      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-caroline" aria-label="More details about Caroline's Last Cup" data-label-open="More details about Caroline's Last Cup" data-label-close="Hide details about Caroline's Last Cup">
+        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+    <div class="entry-panel-wrap">
+      <div class="entry-panel-inner">
+        <div class="entry-panel" id="panel-caroline" hidden>
+          <dl class="entry-detail">
+            <div>
+              <dt>Why</dt>
+              <dd>To learn how to create accessible PDF documents, try out new software,
+                refine my manual testing process for documents, and have fun with the
+                world and residents of Pelican Town.
+              </dd>
+            </div>
+            <div>
+              <dt>What I built</dt>
+              <dd>A game in PDF format, playable cooperatively with one person organizing and narrating
+                the investigation. The game is available in French and English. The document itself
+              is interactive and accessible.</dd>
+            </div>
+            <div>
+              <dt>What I got out of it</dt>
+              <dd>A (<a href="/en/blog/essayer-evoluer-recommencer/">blog post</a>),
+             a game to play with a group, a new conversation topic, and the secret hope that the
+            original game's dev team plays a round.</dd>
+            </div>
+            <div>
+              <dt>Current status</dt>
+              <dd>Currently being translated. The goal is for the game's creator, @ConcernedApe,
+                to receive a copy before I share it with friends and other people. Since he's
+                English-speaking, an English version of the game is one of my accessibility priorities.
+              </dd>
+            </div>
+          </dl>
+          <p class="entry-freeform">One goal guided the whole project: that a person using
+            assistive technology could be the one narrating the game, without running into
+            any obstacle along the way.
+          </p>
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="entry-card">
+    <div class="entry-badges">
+      <span class="entry-badge entry-badge--category">Personal project</span>
+      <span class="entry-badge">Coming soon</span>
+    </div>
+    <div class="entry-main">
+      <div class="entry-text">
+        <h2>BR?AN</h2>
+        <p class="entry-tagline">An open-source Android bookmarking app for minds that wander. Capture a link, an image, a note or a drawing without ever losing your train of thought.
+          Toss out an idea and be able to find it again.
+        </p>
+      </div>
+      <div class="entry-mockup"><img src="/assets/img/lelab/mockup-brian.png" alt=""></div>
+    </div>
+    <div class="entry-controls">
+      <span class="entry-icon-btn entry-link-icon entry-link-icon--none" aria-hidden="true">
+        <svg class="entry-icon-btn-svg" viewBox="0 0 512 512" focusable="false"><path fill="currentColor" transform="translate(85.333333, 64.000000)" d="M128,63.999444 L128,106.666444 L42.6666667,106.666667 L42.6666667,320 L256,320 L256,234.666444 L298.666,234.666444 L298.666667,362.666667 L4.26325641e-14,362.666667 L4.26325641e-14,64 L128,63.999444 Z M362.666667,1.42108547e-14 L362.666667,170.666667 L320,170.666667 L320,72.835 L143.084945,249.751611 L112.915055,219.581722 L289.83,42.666 L192,42.6666667 L192,1.42108547e-14 L362.666667,1.42108547e-14 Z"/></svg>
+      </span>
+      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-bran" aria-label="More details about BR?AN" data-label-open="More details about BR?AN" data-label-close="Hide details about BR?AN">
+        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+    <div class="entry-panel-wrap">
+      <div class="entry-panel-inner">
+        <div class="entry-panel" id="panel-bran" hidden>
+          <dl class="entry-detail">
+            <div>
+              <dt>Why</dt>
+              <dd>To capture an idea, a link or an image the exact moment it crosses your mind, without
+                having to choose between five different notes apps. Being able to keep a trace
+                of what you came across, thought, or imagined, right when it happens.</dd>
+            </div>
+            <div>
+              <dt>What I'm building</dt>
+              <dd>An Android app in React Native/Expo, local-first (SQLite on the device):
+                six content types (link, gallery, note, quote, drawing, stack) that can be
+                grouped freely or into themed stacks, with quick capture from Android's Share
+                button. A braindump tab, for short notes when there's no sticky note within reach.</dd>
+            </div>
+            <div>
+              <dt>Current status</dt>
+              <dd>Currently in development. I'm working on an export-and-read-in-browser system, to keep
+                a trace of your ideas everywhere. I'm also working on a tab with a different format,
+                aimed at capturing ideas faster, with fewer interactions.
+              </dd>
+            </div>
+          </dl>
+          <p class="entry-freeform">Privacy built in from the architecture up: everything stays local
+            by default, syncing to Google Drive is optional and limited to files the app creates
+            for browser reading if wanted, no analytics or tracking SDK. Distribution planned
+            through GitHub and the Komi Store to start.</p>
+        </div>
+      </div>
+    </div>
+  </li>
+</ul>

@@ -1,5 +1,312 @@
 <!-- Fragment de contenu EN : intérieur de <main>. Assemblé par scripts/build-site.mjs.
-     Squelette seulement — contenu à rédiger (voir roadmap Notion + docs/superpowers/specs/2026-09-09-site-multipage-specs-consolidees.md). -->
-<h1>Tools</h1>
+     Traduction fidèle du fragment FR (src/pages/lelab-outils.html) — même
+     structure, mêmes classes/id/SVG, seul le texte change. Mockups : mêmes
+     captures que la version FR quand l'outil est bilingue, mais en anglais
+     (assets/img/lelab/*-en.png, déjà présentes sur disque pour les 5 outils).
+     Voir le fragment FR pour les instructions d'ajout d'un mockup. -->
 
-<p><!-- TODO : contenu --></p>
+<section class="hero">
+  <h1>Vesper Tools</h1>
+  <p class="lead-body">The tools I build for my own audits, published in
+    open access. Free, with no account needed, and held to the same
+    accessibility standards as what I audit.</p>
+</section>
+
+<ul class="entry-list">
+  <li class="entry-card">
+    <div class="entry-badges">
+      <span class="entry-badge">Published</span>
+    </div>
+    <div class="entry-main">
+      <div class="entry-text">
+        <h2>Vesper Toolkit</h2>
+        <p class="entry-tagline">A dozen accessibility-testing tools in
+          your bookmarks bar. No extension, no sign-up, no data that
+          leaves the browser.</p>
+      </div>
+      <div class="entry-mockup"><img src="/assets/img/lelab/mockup-toolkit-en.png" alt=""></div>
+    </div>
+    <div class="entry-controls">
+      <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Toolkit" aria-label="View Vesper Toolkit on GitHub">
+        <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-toolkit" aria-label="More details about Vesper Toolkit" data-label-open="More details about Vesper Toolkit" data-label-close="Hide details about Vesper Toolkit">
+        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+    <div class="entry-panel-wrap">
+      <div class="entry-panel-inner">
+        <div class="entry-panel" id="panel-toolkit" hidden>
+          <dl class="entry-detail">
+            <div>
+              <dt>What it's for</dt>
+              <dd>Running automated scans of a page to get a first read:
+                axe-core, contrast, tab order, accessible name, heading
+                hierarchy, form labels, and several other targeted
+                tools.</dd>
+            </div>
+            <div>
+              <dt>How to use it</dt>
+              <dd>Drag the bookmarklets from the install page
+                (<a href="https://toolkit.vesperlab.dev/">toolkit.vesperlab.dev</a>),
+                then click one on the page you want to test.</dd>
+            </div>
+            <div>
+              <dt>What it doesn't do</dt>
+              <dd>Doesn't replace a manual check: axe-core only catches
+                part of the WCAG criteria, the rest is still down to
+                human judgment.</dd>
+            </div>
+            <div>
+              <dt>Technology and license</dt>
+              <dd>Vanilla HTML/CSS/JS, no dependencies, MIT licensed.</dd>
+            </div>
+          </dl>
+          <p class="entry-freeform">Currently available in English only;
+            a French translation is in progress.
+          </p>
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="entry-card">
+    <div class="entry-badges">
+      <span class="entry-badge">Published</span>
+    </div>
+    <div class="entry-main">
+      <div class="entry-text">
+        <h2>Vesper Library</h2>
+        <p class="entry-tagline">A library of accessible interface
+          components: a demo to try with keyboard and screen reader, a
+          code snippet, and a WCAG checklist for each one.</p>
+      </div>
+      <div class="entry-mockup"><img src="/assets/img/lelab/mockup-library-en.png" alt=""></div>
+    </div>
+    <div class="entry-controls">
+      <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Library" aria-label="View Vesper Library on GitHub">
+        <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      </a>
+      <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-library" aria-label="More details about Vesper Library" data-label-open="More details about Vesper Library" data-label-close="Hide details about Vesper Library">
+        <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+      </button>
+    </div>
+    <div class="entry-panel-wrap">
+      <div class="entry-panel-inner">
+        <div class="entry-panel" id="panel-library" hidden>
+          <dl class="entry-detail">
+            <div>
+              <dt>What it's for</dt>
+              <dd>29 common interface components (menus, forms, dialogs,
+                tabs…), each tested with a screen reader, with reference
+                code and the WCAG 2.2 criteria to check point by
+                point.</dd>
+            </div>
+            <div>
+              <dt>How to use it</dt>
+              <dd>Search for a component, copy the code snippet, or turn
+                on Report Mode to check off verified points during a
+                diagnostic and export your annex. Directly from
+                (<a href="https://library.vesperlab.dev/">library.vesperlab.dev</a>)</dd>
+            </div>
+            <div>
+              <dt>What it doesn't do</dt>
+              <dd>Doesn't cover components that are very brand-specific:
+                the 29 entries stay generic patterns, to be adapted to
+                context.</dd>
+            </div>
+            <div>
+              <dt>Technology and license</dt>
+              <dd>Static HTML/CSS/JS page, no dependencies, self-hosted
+                fonts, MIT licensed.</dd>
+            </div>
+          </dl>
+          <p class="entry-freeform">Bilingual French/English: the
+            language toggle translates all the content, not just the
+            interface.</p>
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="entry-card">
+  <div class="entry-badges">
+    <span class="entry-badge">Published</span>
+  </div>
+  <div class="entry-main">
+    <div class="entry-text">
+      <h2>Vesper Compass and Sonar</h2>
+      <p class="entry-tagline">An educational, filterable reference of
+        the WCAG 2.2 criteria, to better grasp digital accessibility and
+        understand the real needs behind the code.
+      </p>
+    </div>
+    <div class="entry-mockup"> <img src="/assets/img/lelab/mockup-compass-en.png" alt=""></div>
+  </div>
+  <div class="entry-controls">
+    <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Compass" aria-label="View Vesper Compass on GitHub">
+      <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+    </a>
+    <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-compass" aria-label="More details about Vesper Compass" data-label-open="More details about Vesper Compass" data-label-close="Hide details about Vesper Compass">
+      <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+  </div>
+  <div class="entry-panel-wrap">
+    <div class="entry-panel-inner">
+      <div class="entry-panel" id="panel-compass" hidden>
+        <dl class="entry-detail">
+          <div>
+            <dt>What it's for</dt>
+            <dd>Keeping the digital accessibility criteria close at
+              hand, understanding them, pulling them up whenever needed,
+              and putting real human needs behind the rules.</dd>
+          </div>
+          <div>
+            <dt>How to use it</dt>
+            <dd>Install the Sonar bookmarklet to display Compass in a
+              window, right on the page you're visiting. Visit
+              (<a href="https://compass.vesperlab.dev/">compass.vesperlab.dev</a>)
+              for the full glossary, with a search bar.</dd>
+          </div>
+          <div>
+            <dt>What it doesn't do</dt>
+            <dd>Replace the official texts! Compass exists to make the
+              regulation approachable and human, not to serve as an
+              authority in an accessibility remediation process.</dd>
+          </div>
+          <div>
+            <dt>Technology and license</dt>
+            <dd>Static HTML/CSS/JS page, no dependencies, self-hosted
+              fonts, MIT licensed. The criteria come from the same
+              dataset as Toolkit, generated once for both.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</li>
+
+  <li class="entry-card">
+  <div class="entry-badges">
+    <span class="entry-badge">Published</span>
+  </div>
+  <div class="entry-main">
+    <div class="entry-text">
+      <h2>Vesper AC Viewer</h2>
+      <p class="entry-tagline">The best companion to the Toolkit
+        bookmarklets, for viewing and exporting your scan results.
+      </p>
+    </div>
+    <div class="entry-mockup"> <img src="/assets/img/lelab/mockup-viewer-en.png" alt=""></div>
+  </div>
+  <div class="entry-controls">
+    <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Toolkit" aria-label="View Vesper Viewer on GitHub">
+      <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+    </a>
+    <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-viewer" aria-label="More details about Vesper Viewer" data-label-open="More details about Vesper Viewer" data-label-close="Hide details about Vesper Viewer">
+      <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+  </div>
+  <div class="entry-panel-wrap">
+    <div class="entry-panel-inner">
+      <div class="entry-panel" id="panel-viewer" hidden>
+        <dl class="entry-detail">
+          <div>
+            <dt>What it's for</dt>
+            <dd>Viewing the results of the 🦇 AC Scan and 🦇 AC Targeted
+              Scan bookmarklets in an accessible way, showing details,
+              and exporting the data in several formats.
+            </dd>
+          </div>
+          <div>
+            <dt>How to use it</dt>
+            <dd>Visit (<a href="https://toolkit.vesperlab.dev/scan-results.html">the Viewer page</a>)
+              and paste your results. The bookmarklets are available on
+              (<a href="https://toolkit.vesperlab.dev/">toolkit.vesperlab.dev</a>)</dd>
+          </div>
+          <div>
+            <dt>What it doesn't do</dt>
+            <dd>Doesn't run a scan itself: you first need a JSON
+  produced by AC Scan (or one of Toolkit's other scans that exports in
+  the same format) to paste in. The report stays axe-core's raw output:
+  to sort through and interpret like any automated scan.</dd>
+          </div>
+          <div>
+            <dt>Technology and license</dt>
+            <dd>Standalone HTML/JS page, but it loads two external
+  libraries from a CDN to generate the exports: ExcelJS (.xlsx) and
+  docx.js (.docx). MIT licensed.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</li>
+
+  <li class="entry-card">
+  <div class="entry-badges">
+    <span class="entry-badge">Published</span>
+  </div>
+  <div class="entry-main">
+    <div class="entry-text">
+      <h2>Vesper Visible</h2>
+      <p class="entry-tagline">One and the same site, two pages: one
+        designed to be accessible from the start, the other where
+        accessibility was improvised. See — and hear — the differences
+        for yourself, if you can find them.
+      </p>
+    </div>
+    <div class="entry-mockup"> <img src="/assets/img/lelab/mockup-visible-en.png" alt=""></div>
+  </div>
+  <div class="entry-controls">
+    <a class="entry-icon-btn entry-link-icon" href="https://github.com/VesperLab-A11Y/Vesper-Visible" aria-label="View Vesper Visible on GitHub">
+      <svg class="entry-icon-btn-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+    </a>
+    <button type="button" class="entry-icon-btn entry-toggle" aria-expanded="false" aria-controls="panel-visible" aria-label="More details about Vesper Visible" data-label-open="More details about Vesper Visible" data-label-close="Hide details about Vesper Visible">
+      <svg class="entry-icon-btn-svg entry-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+  </div>
+  <div class="entry-panel-wrap">
+    <div class="entry-panel-inner">
+      <div class="entry-panel" id="panel-visible" hidden>
+        <dl class="entry-detail">
+          <div>
+            <dt>What it's for</dt>
+            <dd>Understanding accessibility concretely through a direct
+              comparison, trying out the (<a href="https://toolkit.vesperlab.dev/">Vesper Toolkit</a>)
+              bookmarklets, watching automated scans in action and
+              understanding their limits, opening up the field of the
+              visible.
+            </dd>
+          </div>
+          <div>
+            <dt>How to use it</dt>
+            <dd>Visit (<a href="https://visible.vesperlab.dev/">Vesper Visible</a>)
+              and run your own experiments: you can use the bookmarklets
+              from the (<a href="https://toolkit.vesperlab.dev/">Vesper Toolkit</a>),
+              color tools, a screen reader, and your browser's dev
+            tools. To dig even deeper, several accessibility barriers
+          stay invisible to any scan.</dd>
+          </div>
+          <div>
+            <dt>What it doesn't do</dt>
+            <dd>The site itself serves no real function: it doesn't
+              represent a business and has no real pages or content to
+              offer. It also won't hand you (all) the answers directly:
+              they're scattered through the scan results, the code, and
+              various toggles, but no link will compare the elements
+              side by side for you.
+            </dd>
+          </div>
+          <div>
+            <dt>Technology and license</dt>
+            <dd>Three static HTML/CSS/JS pages, no dependencies,
+  self-hosted fonts, MIT licensed.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</li>
+
+</ul>

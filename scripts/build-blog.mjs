@@ -193,9 +193,16 @@ for (const lang of ['fr', 'en']) {
   // L'accroche/intro vit dans src/pages/blog.html (FR) — pas dans
   // build-site.mjs, qui ne construit jamais /blog/ puisque ce script écrase
   // sa sortie : voir le commentaire en tête de src/pages/blog.html.
+  // EN : sous-titre traduit à la main (voir src/pages/blog.html pour le FR),
+  // pas de widget de recherche pour l'instant (blog-search.js est en dur en
+  // français, hors scope de cette passe) — juste le hero + un bandeau de
+  // politique de traduction, propre à la version anglaise. Ce bandeau est
+  // général (pose le contexte avant même de cliquer un article) et distinct
+  // du bandeau par article de renderTranslationBanner (qui, lui, s'affiche
+  // seulement sur les articles réellement pas traduits, avant leur contenu).
   const heroHtml = lang === 'fr'
     ? read('src/pages/blog.html').replace(/<!--[\s\S]*?-->/g, '').trim()
-    : `<section class="hero">\n  <h1>Blog</h1>\n</section>`;
+    : `<section class="hero">\n  <h1>Blog</h1>\n  <p class="lead-body">Findings gathered during audits, experiments with my own tools, and the detours accessibility takes once it steps outside the spec. No fixed schedule: I publish when I have something to say.</p>\n  <div class="button-row">\n    <a class="button button-ghost" href="/blog/feed.xml">Subscribe to the RSS feed</a>\n  </div>\n</section>\n<div class="translation-notice">\n  <p>I translate these articles by hand, one at a time, so some are still French-only. If you land on one that isn't translated yet, you'll see a banner on that page offering a one-click translation.</p>\n</div>`;
 
   const other = lang === 'fr' ? 'en' : 'fr';
   const listVars = {

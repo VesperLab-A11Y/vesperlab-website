@@ -14,7 +14,23 @@
      l'instant : l'icône lien est un <span aria-hidden="true"> neutre
      (blanc), pas un <a> — voir le commentaire sur .entry-link-icon dans
      style.css. Rien n'est annoncé au lecteur d'écran pour son absence :
-     un lien qui n'existe pas n'a rien à décrire. -->
+     un lien qui n'existe pas n'a rien à décrire.
+
+     Mockup (.entry-mockup) : même mécanique que la page Outils
+     (src/pages/lelab-outils.html), optionnelle par carte — .entry-main est
+     en flex, .entry-text prend toute la place tout seul si .entry-mockup
+     est absent (déjà le cas ici pour les 3 entrées, rien à changer côté
+     CSS). Pour ajouter un aperçu à une carte :
+     1. Déposer l'image dans assets/img/lelab/ (ex. caroline-mockup.jpg).
+     2. Juste après le </div> qui ferme .entry-text de la carte visée,
+        insérer :
+          <div class="entry-mockup">
+            <img src="/assets/img/lelab/caroline-mockup.jpg" alt="">
+          </div>
+     3. alt="" si l'image n'illustre rien de plus que le titre/tagline déjà
+        écrits à côté (cas le plus probable ici) ; sinon décrire ce qu'elle
+        montre en une phrase courte.
+     4. npm run build pour régénérer le-lab/realisations/index.html. -->
 
 <section class="hero">
   <h1>Projets</h1>
@@ -86,6 +102,7 @@
         <h2>La dernière tasse de Caroline</h2>
         <p class="entry-tagline">Un jeu de meurtre et mystère sur le thème du jeu vidéo Stardew Valley, au format PDF.</p>
       </div>
+      <div class="entry-mockup"><img src="/assets/img/lelab/mockup-ldtdc.png" alt=""></div>
     </div>
     <div class="entry-controls">
       <span class="entry-icon-btn entry-link-icon entry-link-icon--none" aria-hidden="true">
@@ -147,6 +164,7 @@
           Lancer ses idées et pouvoir les retrouver.
         </p>
       </div>
+      <div class="entry-mockup"><img src="/assets/img/lelab/mockup-brian.png" alt=""></div>
     </div>
     <div class="entry-controls">
       <span class="entry-icon-btn entry-link-icon entry-link-icon--none" aria-hidden="true">

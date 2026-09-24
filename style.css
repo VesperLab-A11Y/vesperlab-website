@@ -722,7 +722,7 @@ main#main h3{
 }
 .mp-card--lab::before{
   background:var(--accent) !important;
-  opacity:1 !important;
+  opacity:.88 !important; /* légèrement adouci (retour Pauline : trop accrocheur à pleine opacité) */
   mask-image:none !important; /* reste un panneau plein, pas un dégradé */
   -webkit-mask-image:none !important;
 }
@@ -1134,7 +1134,7 @@ main#main .entry-text h2{
 .entry-mockup{
   flex:0 0 auto;
   width:16.5rem; /* +50% (demande Pauline du 2026-09-18), était 11rem */
-  aspect-ratio:4/3;
+  aspect-ratio:4/3; /* réservé tant qu'aucune image (texte de substitution) */
   display:flex;
   align-items:center;
   justify-content:center;
@@ -1146,19 +1146,23 @@ main#main .entry-text h2{
   text-align:center;
   overflow:hidden;
 }
-/* Dès qu'une vraie image remplace le texte de substitution : bordure pleine
-   (le pointillé ne veut dire que « rien à voir ici pour l'instant ») et
-   aucun espace intérieur, pour que l'image occupe toute la boîte 4/3. */
+/* Dès qu'une vraie image remplace le texte de substitution : plus de cadre
+   ni de padding (les mockups de Pauline ont un fond transparent voulu, un
+   cadre le casserait — retour du 2026-09-24) et le ratio 4/3 n'est plus
+   forcé : la boîte suit la forme réelle de l'image (ex. une capture de
+   téléphone, portraite), plafonnée en hauteur pour ne pas dominer la carte
+   à côté du texte. */
 .entry-mockup:has(img){
+  aspect-ratio:auto;
   padding:0;
-  border-style:solid;
-  border-color:var(--border-default);
+  border:none;
 }
 .entry-mockup img{
   display:block;
   width:100%;
-  height:100%;
-  object-fit:cover;
+  height:auto;
+  max-height:24rem;
+  object-fit:contain;
   border-radius:inherit;
 }
 
@@ -1642,3 +1646,45 @@ main#main .post-toc h2{margin-bottom:var(--space-3);}
 }
 .translation-notice p:last-of-type{margin-bottom:0;}
 .translation-notice .button{margin-top:var(--space-4);}
+
+/* ============================================================================
+   Agrandissement d'image au clic — assets/js/lightbox.js. Scope volontaire :
+   mockups d'outils/projets, photos À propos, images d'article de blog (voir
+   le commentaire en tête du script pour ce qui est exclu et pourquoi). */
+.lightbox-trigger{cursor:zoom-in;}
+/* <dialog> natif : centré par le navigateur (position par défaut de
+   l'algorithme "top layer"), ::backdrop pour l'assombrissement — pas de
+   JS pour ça. */
+.lightbox-dialog{
+  border:none;
+  border-radius:var(--radius-md);
+  background:var(--surface-card);
+  padding:var(--space-8);
+  max-width:min(90vw, 60rem);
+  max-height:90vh;
+}
+.lightbox-dialog::backdrop{background:rgb(3 5 4 / .85);}
+.lightbox-img{
+  display:block;
+  max-width:100%;
+  max-height:calc(90vh - var(--space-8) * 2);
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  border-radius:var(--radius-sm);
+}
+.lightbox-close{
+  position:absolute;
+  top:var(--space-3);
+  right:var(--space-3);
+  width:44px;
+  height:44px;
+  border:1px solid var(--border-default);
+  border-radius:50%;
+  background:var(--surface-page);
+  color:var(--text-body);
+  font-size:1.5rem;
+  line-height:1;
+  cursor:pointer;
+}
+.lightbox-close:hover{border-color:var(--accent);color:var(--accent);}
