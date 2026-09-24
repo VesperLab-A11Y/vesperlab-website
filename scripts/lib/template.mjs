@@ -18,13 +18,37 @@ export const partials = {
   footer: read('src/partials/footer.html'),
 };
 
+// Rend les id="..." d'un fragment inliné (et leurs références internes :
+// aria-labelledby/aria-describedby="...", href="#...", url(#...)) uniques
+// dans la page en leur ajoutant un suffixe — sinon deux copies du même SVG
+// (logo en-tête + logo pied de page, par ex.) se retrouvent avec le même id
+// deux fois dans le même document, ce qui est invalide en HTML et rend
+// l'aria-labelledby ambigu pour les technologies d'assistance. N'affecte que
+// les id trouvés DANS ce fragment (pas de risque de renommer un id sans
+// rapport ailleurs sur la page).
+let inlineCounter = 0;
+function uniquifyInlineIds(fragment) {
+  const ids = [...fragment.matchAll(/\bid="([\w-]+)"/g)].map((m) => m[1]);
+  if (ids.length === 0) return fragment;
+  inlineCounter += 1;
+  let out = fragment;
+  for (const id of [...new Set(ids)]) {
+    const suffixed = id + '-inline' + inlineCounter;
+    out = out.split('id="' + id + '"').join('id="' + suffixed + '"');
+    out = out.split('="' + id + '"').join('="' + suffixed + '"'); // aria-labelledby / aria-describedby
+    out = out.split('(#' + id + ')').join('(#' + suffixed + ')'); // url(#id)
+    out = out.split('href="#' + id + '"').join('href="#' + suffixed + '"');
+  }
+  return out;
+}
+
 // Rendu d'un gabarit :
 //   {{> nom}}          -> partiel src/partials/<nom>.html (déjà chargé)
-//   {{inline:chemin}}  -> contenu brut d'un fichier du dépôt
+//   {{inline:chemin}}  -> contenu brut d'un fichier du dépôt, id internes uniquifiés
 //   {{cle}} {{a.b}}    -> vars[cle] ; laissé tel quel si absent
 export function render(tpl, vars) {
   let out = tpl.replace(/\{\{>\s*(\w+)\s*\}\}/g, (_, name) => partials[name] || '');
-  out = out.replace(/\{\{inline:([^}]+)\}\}/g, (_, p) => read(p.trim()).trim());
+  out = out.replace(/\{\{inline:([^}]+)\}\}/g, (_, p) => uniquifyInlineIds(read(p.trim()).trim()));
   // [\w.-] : autorise les tirets dans les clés (ex. nav.lelab-outils).
   out = out.replace(/\{\{([\w.-]+)\}\}/g, (m, key) => (key in vars ? vars[key] : m));
   return out;
