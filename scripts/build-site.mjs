@@ -14,16 +14,17 @@
 //
 // Sorties, écrites à la racine du dépôt :
 //   <chemin>/index.html          — une page par entrée × langue
-//   index.generated.html         — l'accueil FR. NE remplace PAS index.html tant
-//                                  que Pauline n'a pas basculé le site (voir plan).
-//   sitemap.generated.xml        — sitemap proposé (ne remplace pas sitemap.xml)
+//   index.html                   — l'accueil FR (le site a basculé le 2026-10-06 : avant, il
+//                                  s'écrivait dans index.generated.html pour ne pas écraser la
+//                                  page « en attente », conservée dans la branche en-attente).
+//   sitemap.xml                  — pages fixes + articles de blog (blog/<slug>/, en/blog/<slug>/)
 //
 // Les entrées marquées "generated": true dans site.json sont ignorées ici
 // (le blog est produit par build-blog.mjs), mais leur chemin sert quand même
 // à fabriquer les liens de navigation.
 // ============================================================================
 
-import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { writeFileSync, mkdirSync, existsSync, readdirSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { ROOT, read, render, i18nVars, OG_LOCALE, isUntranslated, renderTranslationBanner } from './lib/template.mjs';
 
@@ -34,7 +35,7 @@ const LANGS = ['fr', 'en'];
 
 // URL -> chemin de fichier. « / » est dévié pour ne pas écraser l'index.html live.
 const outFor = (path, lang) =>
-  lang === 'fr' && path === '/' ? 'index.generated.html' : path.replace(/^\/|\/$/g, '') + '/index.html';
+  lang === 'fr' && path === '/' ? 'index.html' : path.replace(/^\/|\/$/g, '') + '/index.html';
 
 const sitemapUrls = [];
 let count = 0;
@@ -95,11 +96,23 @@ for (const lang of LANGS) {
   }
 }
 
+// Articles de blog : produits par build-blog.mjs (dossiers blog/<slug>/ et en/blog/<slug>/) ; on les
+// ajoute au sitemap sans les connaître un par un. Les dossiers « _ » (brouillons, sources) sont ignorés.
+for (const base of ['blog', 'en/blog']) {
+  const dir = join(ROOT, base);
+  if (!existsSync(dir)) continue;
+  for (const d of readdirSync(dir, { withFileTypes: true })) {
+    if (!d.isDirectory() || d.name.startsWith('_')) continue;
+    if (!existsSync(join(dir, d.name, 'index.html'))) continue;
+    sitemapUrls.push('https://vesperlab.dev/' + base + '/' + d.name + '/');
+  }
+}
+
 const sm =
   '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
   sitemapUrls.map((u) => '  <url><loc>' + u + '</loc></url>').join('\n') +
   '\n</urlset>\n';
-writeFileSync(join(ROOT, 'sitemap.generated.xml'), sm, 'utf8');
+writeFileSync(join(ROOT, 'sitemap.xml'), sm, 'utf8');
 
-console.log('\n' + count + ' page(s) fixe(s) assemblée(s). sitemap.generated.xml écrit.');
+console.log('\n' + count + ' page(s) fixe(s) assemblée(s). sitemap.xml écrit.');

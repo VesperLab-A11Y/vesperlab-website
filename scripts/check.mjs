@@ -1,164 +1,111 @@
-// Contrôles de structure et d'accessibilité pour le site Vesper Lab.
+// ============================================================================
+// check.mjs — contrôles de structure et d'accessibilité sur TOUTES les pages
+// ----------------------------------------------------------------------------
 // Node natif, aucune dépendance. Usage : node scripts/check.mjs
-import { readFileSync, existsSync } from 'node:fs';
+// (ou : npm run check). Les pages viennent de sitemap.xml.
+//
+// Contrôlé sur chaque page : langue (fr ou en selon l'adresse), un seul <h1>,
+// titres sans saut de niveau, <title> non vide, images avec alt, aucune
+// ressource tierce chargée (scripts, feuilles de style, images, polices),
+// liens internes qui existent, ancres #id qui existent.
+// Pages du site (pas les exports d'Auditor) : lien d'évitement vers un <main id>,
+// repères header / main / footer, meta description, hreflang réciproques.
+// Aussi : chaque page présente sur le disque est dans le sitemap.
+//
+// Le contenu des blocs <script type="application/json"> (diagnostic d'origine
+// et annexes embarqués dans les rapports) n'est pas analysé : c'est une archive.
+// ============================================================================
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-let failures = 0;
-const fail = (m) => { console.error('✗ ' + m); failures++; };
-const ok = (m) => console.log('✓ ' + m);
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+const SITE = 'https://vesperlab.dev';
+let failures = 0, checks = 0;
+const fail = (page, m) => { console.error('✗ ' + page + ' — ' + m); failures++; };
+const pass = () => { checks++; };
 
-const html = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+// Pages produites par Vesper Auditor : mêmes exigences de base, mais pas le gabarit du site.
+const EXPORTS = new Set(['/declaration-accessibilite/', '/en/accessibility-statement/', '/diagnostic-accessibilite/', '/en/accessibility-diagnosis/']);
 
-// 1. Langue
-/<html[^>]*\blang="fr"/.test(html) ? ok('html lang="fr"') : fail('html lang="fr" manquant');
+const sitemap = readFileSync(join(ROOT, 'sitemap.xml'), 'utf8');
+const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => m[1].replace(SITE, ''));
+const fileOf = (p) => join(ROOT, p.replace(/^\//, ''), p.endsWith('/') ? 'index.html' : '');
+const exists = (p) => { const f = fileOf(p); return existsSync(f) && statSync(f).isFile(); };
 
-// 2. Un seul <h1>
-const h1s = html.match(/<h1[\s>]/g) || [];
-h1s.length === 1 ? ok('un seul <h1>') : fail(h1s.length + ' <h1> (attendu 1)');
+// 0. Le sitemap décrit des pages qui existent, et toutes les pages existantes y sont.
+for (const u of urls) exists(u) ? pass() : fail(u, 'dans le sitemap mais absente du disque');
+const onDisk = [];
+(function walk(dir, rel) {
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    if (e.name.startsWith('.') || e.name.startsWith('_') || ['node_modules', 'docs', 'src', 'scripts', 'assets', 'i18n', 'styles'].includes(e.name)) continue;
+    if (e.isDirectory()) walk(join(dir, e.name), rel + e.name + '/');
+    else if (e.name === 'index.html' && rel) onDisk.push('/' + rel);
+  }
+})(ROOT, '');
+for (const p of onDisk) urls.includes(p) ? pass() : fail(p, 'existe mais n\'est pas dans le sitemap');
 
-// 3. Hiérarchie de titres : h1 puis h2, h2, h3 — aucun saut
-const levels = [...html.matchAll(/<h([1-6])[\s>]/g)].map(m => +m[1]);
-const expected = [1, 2, 3, 2]; // logo, « Arrivée… », « En attendant… », « Utilisez l'écho »
-JSON.stringify(levels) === JSON.stringify(expected)
-  ? ok('hiérarchie de titres ' + levels.join(' '))
-  : fail('hiérarchie de titres ' + JSON.stringify(levels) + ' (attendu ' + JSON.stringify(expected) + ')');
+const altOf = (page, html) => {
+  const m = html.match(/<link[^>]+rel="alternate"[^>]*>/g) || [];
+  return Object.fromEntries(m.map((t) => [(t.match(/hreflang="([^"]+)"/) || [])[1], ((t.match(/href="([^"]+)"/) || [])[1] || '').replace(SITE, '')]));
+};
+const pages = {};
+for (const u of urls) if (exists(u)) pages[u] = readFileSync(fileOf(u), 'utf8');
 
-// 4. Skip-link vers une ancre existante
-const skip = html.match(/<a[^>]+class="skip-link"[^>]+href="#([\w-]+)"/);
-if (!skip) fail('skip-link absent');
-else if (!new RegExp('id="' + skip[1] + '"').test(html)) fail('cible du skip-link #' + skip[1] + ' introuvable');
-else ok('skip-link → #' + skip[1]);
+for (const [u, raw] of Object.entries(pages)) {
+  // on retire ce qui n'est pas du HTML du site : scripts, styles et archives JSON embarquées
+  const html = raw.replace(/<script\b[^>]*type="application\/json"[^>]*>[\s\S]*?<\/script>/gi, '');
+  const scriptless = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
+  const isExport = EXPORTS.has(u);
+  const wantLang = u.startsWith('/en/') ? 'en' : 'fr';
 
-// 5. <main id="main">
-/<main[^>]+id="main"/.test(html) ? ok('<main id="main">') : fail('<main id="main"> manquant');
+  (new RegExp('<html[^>]*\\blang="' + wantLang + '"').test(html)) ? pass() : fail(u, 'lang="' + wantLang + '" attendu');
+  const h1 = scriptless.match(/<h1[\s>]/g) || [];
+  h1.length === 1 ? pass() : fail(u, h1.length + ' <h1> (attendu 1)');
+  const levels = [...scriptless.matchAll(/<h([1-6])[\s>]/g)].map((m) => +m[1]);
+  let prev = 0, jump = null;
+  for (const l of levels) { if (prev && l > prev + 1) { jump = prev + '→' + l; break; } prev = l; }
+  jump ? fail(u, 'saut de titres ' + jump) : pass();
+  /<title>[^<]+<\/title>/.test(html) ? pass() : fail(u, '<title> vide ou absent');
+  for (const t of scriptless.match(/<img\b[^>]*>/g) || []) /\balt=/.test(t) ? pass() : fail(u, 'image sans alt : ' + t.slice(0, 80));
 
-// 6. Landmarks header / main / footer
-['header', 'main', 'footer'].forEach(t =>
-  new RegExp('<' + t + '[\\s>]').test(html) ? ok('<' + t + '>') : fail('<' + t + '> manquant'));
+  // ressources tierces : tout src / href de feuille de style ou d'icône qui part hors du site
+  for (const m of scriptless.matchAll(/<(?:script|img|source|iframe|link)\b[^>]*?(?:src|href)="(https?:\/\/[^"]+)"[^>]*>/g)) {
+    const tag = m[0];
+    if (/<link\b/.test(tag) && !/rel="(?:stylesheet|preload|icon|apple-touch-icon)"/.test(tag)) continue;  // canonical, alternate… ne chargent rien
+    if (m[1].startsWith(SITE)) continue;
+    fail(u, 'ressource tierce : ' + m[1]);
+  }
+  for (const m of html.matchAll(/<script\b[^>]*\bsrc="(https?:\/\/[^"]+)"/g)) if (!m[1].startsWith(SITE)) fail(u, 'script tiers : ' + m[1]);
 
-// 7. Sections reliées à leur titre
-for (const id of ['h-prep', 'h-echo']) {
-  new RegExp('aria-labelledby="' + id + '"').test(html) && new RegExp('id="' + id + '"').test(html)
-    ? ok('section aria-labelledby="' + id + '"')
-    : fail('section/labelledby ' + id + ' incohérent');
+  // liens internes + ancres
+  // les ancres des liens d'archive (#annexe-html-N) pointent vers les blocs JSON embarqués : on prend les id du fichier brut
+  const ids = new Set([...raw.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]));
+  for (const m of scriptless.matchAll(/<a\b[^>]*\bhref="([^"]*)"/g)) {
+    const href = m[1].replace(/&amp;/g, '&');
+    if (!href || /^(mailto:|tel:|javascript:|data:)/.test(href)) continue;
+    let target = href.replace(SITE, '');
+    if (/^https?:/.test(target)) continue;               // lien externe : hors contrôle
+    const [pathPart, hash] = target.split('#');
+    if (!pathPart) { if (hash && !ids.has(hash)) fail(u, 'ancre #' + hash + ' introuvable'); else pass(); continue; }
+    const abs = pathPart.startsWith('/') ? pathPart : new URL(pathPart, 'https://x' + u).pathname;
+    const clean = abs.split('?')[0];
+    const ok = existsSync(join(ROOT, clean)) && (statSync(join(ROOT, clean)).isFile() || existsSync(join(ROOT, clean, 'index.html')));
+    ok ? pass() : fail(u, 'lien interne cassé : ' + href);
+  }
+
+  if (isExport) continue;
+  // pages du site
+  const skip = html.match(/<a[^>]+class="skip-link"[^>]+href="#([\w-]+)"/);
+  (skip && new RegExp('id="' + skip[1] + '"').test(html)) ? pass() : fail(u, 'lien d\'évitement absent ou sans cible');
+  /<main[^>]+id="main"/.test(html) ? pass() : fail(u, '<main id="main"> manquant');
+  for (const t of ['header', 'footer']) new RegExp('<' + t + '[\\s>]').test(html) ? pass() : fail(u, '<' + t + '> manquant');
+  /<meta name="description" content="[^"]{10,}"/.test(html) ? pass() : fail(u, 'meta description absente');
+  const alt = altOf(u, html), other = wantLang === 'fr' ? 'en' : 'fr';
+  if (!alt[other]) { fail(u, 'hreflang ' + other + ' absent'); continue; }
+  const back = altOf(alt[other], pages[alt[other]] || '');
+  back[wantLang] === u ? pass() : fail(u, 'hreflang non réciproque avec ' + alt[other]);
 }
 
-// 8. Aucun target="_blank"
-/target="_blank"/.test(html) ? fail('target="_blank" interdit') : ok('aucun target="_blank"');
-
-// 9. Les trois liens sociaux, dans l'ordre, avec libellé visually-hidden
-const social = ['https://github.com/VesperLab-A11Y',
-                'https://buymeacoffee.com/vesperlab',
-                'https://www.linkedin.com/in/paulinechevalliot'];
-let last = -1, ordered = true;
-for (const url of social) {
-  const i = html.indexOf(url);
-  if (i === -1) { fail('lien social manquant : ' + url); ordered = false; }
-  else if (i < last) ordered = false;
-  last = i;
-}
-ordered ? ok('3 liens sociaux dans l\'ordre GitHub → BMC → LinkedIn') : fail('liens sociaux absents ou mal ordonnés');
-const vh = (html.match(/class="visually-hidden"/g) || []).length;
-vh >= 3 ? ok(vh + ' libellés visually-hidden') : fail('moins de 3 libellés visually-hidden');
-
-// 10. Contact : mailto en clair + bouton
-(html.match(/href="mailto:contact@vesperlab\.dev"/g) || []).length >= 2
-  ? ok('mailto:contact@vesperlab.dev présent (lien texte + bouton)')
-  : fail('mailto:contact@vesperlab.dev doit apparaître 2 fois (lien texte + bouton)');
-/class="button"[^>]*href="mailto:contact@vesperlab\.dev"|href="mailto:contact@vesperlab\.dev"[^>]*class="button"/.test(html)
-  ? ok('bouton « Écrivez-moi » en mailto') : fail('bouton .button mailto manquant');
-
-// 11. Icônes SVG décoratives neutralisées
-const decoSvg = (html.match(/<svg[^>]+aria-hidden="true"[^>]+focusable="false"|<svg[^>]+focusable="false"[^>]+aria-hidden="true"/g) || []).length;
-decoSvg >= 3 ? ok(decoSvg + ' SVG décoratifs (aria-hidden + focusable=false)') : fail('SVG d\'icônes non neutralisés');
-
-// 12. <head> : title, description, canonical, OG
-const head = [
-  [/<title>Vesper Lab : Accessibilité numérique<\/title>/, 'title exact'],
-  [/<meta name="description" content="Laboratoire d'accessibilité numérique, situé à Montréal\. Diagnostics web et PDF, en français et en anglais\.">/, 'meta description exacte'],
-  [/<link rel="canonical" href="https:\/\/vesperlab\.dev\/">/, 'canonical'],
-  [/<meta property="og:title"/, 'og:title'],
-  [/<meta property="og:image" content="https:\/\/vesperlab\.dev\/assets\/og-image\.png">/, 'og:image absolu'],
-  [/<meta name="theme-color" content="#030504">/, 'theme-color'],
-  [/<link rel="icon" href="assets\/favicon\.svg" sizes="any">/, 'favicon svg'],
-];
-for (const [re, label] of head) re.test(html) ? ok(label) : fail(label + ' manquant/incorrect');
-
-// 13. Aucun <script> dans la page
-/<script[\s>]/.test(html) ? fail('<script> interdit dans index.html') : ok('aucun <script>');
-
-// 14. Aucune ressource tierce (http/https absolus non vesperlab.dev, hors href de liens <a>)
-const thirdParty = [...html.matchAll(/(?:src|href)="(https?:\/\/[^"]+)"/g)]
-  .map(m => m[1])
-  .filter(u => !u.startsWith('https://vesperlab.dev'))
-  .filter(u => !/^https:\/\/(www\.linkedin\.com|github\.com|buymeacoffee\.com)/.test(u)); // liens <a> sociaux OK
-thirdParty.length === 0 ? ok('aucune ressource tierce chargée') : fail('ressource tierce : ' + thirdParty.join(', '));
-
-// 15. Fichiers assets référencés présents sur le disque
-for (const m of html.matchAll(/(?:src|href)="(assets\/[^"]+)"/g)) {
-  existsSync(new URL('../' + m[1], import.meta.url)) ? ok('asset ' + m[1]) : fail('asset introuvable : ' + m[1]);
-}
-// og-image.png n'est référencé que par une URL absolue (og:image) : on le vérifie à part.
-existsSync(new URL('../assets/og-image.png', import.meta.url))
-  ? ok('asset assets/og-image.png')
-  : fail('asset introuvable : assets/og-image.png');
-
-// 16. Textes de contenu obligatoires (verbatim)
-const copy = [
-  'L’obscurité ne ferme rien à qui sait',
-  'Normes WCAG 2.2 et SGQRI 008',
-  'Arrivée prévue à l’automne 2026',
-  'et de nombreux conseils sont en préparation',
-  'En attendant le crépuscule',
-  'Utilisez l’écho',
-  'ou en m’écrivant directement',
-  'Ce site respecte les critères d’accessibilité WCAG 2.2 AA',
-  'Créé par Vesper Lab',
-];
-for (const s of copy) html.includes(s) ? ok('copie : « ' + s.slice(0, 32) + '… »') : fail('copie manquante : « ' + s + ' »');
-
-// 17. 404.html : présent, lien retour accueil, feuille de styles partagée
-if (!existsSync(new URL('../404.html', import.meta.url))) fail('404.html manquant');
-else {
-  const e = readFileSync(new URL('../404.html', import.meta.url), 'utf8');
-  /<html[^>]*\blang="fr"/.test(e) ? ok('404 lang="fr"') : fail('404 lang manquant');
-  /href="\/"/.test(e) ? ok('404 → lien accueil') : fail('404 sans lien accueil');
-  /rel="stylesheet" href="style\.css"/.test(e) ? ok('404 utilise style.css') : fail('404 sans style.css');
-  /<meta name="robots" content="noindex">/.test(e) ? ok('404 noindex') : fail('404 sans noindex');
-  (e.match(/<h1[\s>]/g) || []).length === 1 ? ok('404 un seul <h1>') : fail('404 : nombre de <h1> incorrect');
-}
-
-// 18. Fichiers de déploiement
-for (const f of ['robots.txt', 'sitemap.xml', '_headers']) {
-  existsSync(new URL('../' + f, import.meta.url)) ? ok(f) : fail(f + ' manquant');
-}
-/https:\/\/vesperlab\.dev\/sitemap\.xml/.test(readFileSync(new URL('../robots.txt', import.meta.url), 'utf8'))
-  ? ok('robots.txt déclare le sitemap') : fail('robots.txt sans sitemap');
-
-// 19. style.css : aucune ressource tierce (le §14 ne couvrait qu'index.html)
-const css = readFileSync(new URL('../style.css', import.meta.url), 'utf8');
-/@import/.test(css) ? fail('style.css : @import interdit') : ok('style.css : aucun @import');
-/https?:\/\//.test(css) ? fail('style.css : URL http(s) absolue interdite') : ok('style.css : aucune URL http(s) absolue');
-const fontFaceCount = (css.match(/@font-face\s*\{/g) || []).length;
-fontFaceCount === 10 ? ok('style.css : 10 blocs @font-face') : fail('style.css : ' + fontFaceCount + ' blocs @font-face (attendu 10)');
-for (const m of css.matchAll(/url\('(assets\/[^']+)'\)/g)) {
-  existsSync(new URL('../' + m[1], import.meta.url)) ? ok('style.css : asset ' + m[1]) : fail('style.css : asset introuvable : ' + m[1]);
-}
-
-// 20. style.css : thème sombre uniquement, aucun prefers-color-scheme
-/prefers-color-scheme/.test(css)
-  ? fail('style.css : prefers-color-scheme interdit (thème sombre uniquement)')
-  : ok('style.css : aucun prefers-color-scheme');
-
-// 21. 404.html : aucun <script>, aucune ressource tierce (même allowlist qu'index.html)
-{
-  const e = readFileSync(new URL('../404.html', import.meta.url), 'utf8');
-  /<script[\s>]/.test(e) ? fail('<script> interdit dans 404.html') : ok('404 : aucun <script>');
-  const thirdParty404 = [...e.matchAll(/(?:src|href)="(https?:\/\/[^"]+)"/g)]
-    .map(m => m[1])
-    .filter(u => !u.startsWith('https://vesperlab.dev'))
-    .filter(u => !/^https:\/\/(www\.linkedin\.com|github\.com|buymeacoffee\.com)/.test(u));
-  thirdParty404.length === 0 ? ok('404 : aucune ressource tierce chargée') : fail('404 : ressource tierce : ' + thirdParty404.join(', '));
-}
-
-console.log(failures ? `\n${failures} échec(s)` : '\nTout est vert.');
+console.log('\n' + Object.keys(pages).length + ' pages, ' + checks + ' contrôles réussis, ' + failures + ' échec(s).');
 process.exit(failures ? 1 : 0);

@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://vesperlab.dev/</loc>
-    <lastmod>2026-09-03</lastmod>
-    <changefreq>monthly</changefreq>
-  </url>
+  <url><loc>https://vesperlab.dev/</loc></url>
+  <url><loc>https://vesperlab.dev/a-propos/</loc></url>
+  <url><loc>https://vesperlab.dev/le-lab/</loc></url>
+  <url><loc>https://vesperlab.dev/le-lab/realisations/</loc></url>
+  <url><loc>https://vesperlab.dev/le-lab/outils/</loc></url>
+  <url><loc>https://vesperlab.dev/blog/</loc></url>
+  <url><loc>https://vesperlab.dev/contact/</loc></url>
+  <url><loc>https://vesperlab.dev/declaration-accessibilite/</loc></url>
+  <url><loc>https://vesperlab.dev/diagnostic-accessibilite/</loc></url>
+  <url><loc>https://vesperlab.dev/en/</loc></url>
+  <url><loc>https://vesperlab.dev/en/about/</loc></url>
+  <url><loc>https://vesperlab.dev/en/the-lab/</loc></url>
+  <url><loc>https://vesperlab.dev/en/the-lab/case-studies/</loc></url>
+  <url><loc>https://vesperlab.dev/en/the-lab/tools/</loc></url>
+  <url><loc>https://vesperlab.dev/en/blog/</loc></url>
+  <url><loc>https://vesperlab.dev/en/contact/</loc></url>
+  <url><loc>https://vesperlab.dev/en/accessibility-statement/</loc></url>
+  <url><loc>https://vesperlab.dev/en/accessibility-diagnosis/</loc></url>
+  <url><loc>https://vesperlab.dev/blog/accessibilite-pdf-5-conseils/</loc></url>
+  <url><loc>https://vesperlab.dev/blog/cv-les-yeux-fermes/</loc></url>
+  <url><loc>https://vesperlab.dev/blog/essayer-evoluer-recommencer/</loc></url>
+  <url><loc>https://vesperlab.dev/en/blog/accessibilite-pdf-5-conseils/</loc></url>
+  <url><loc>https://vesperlab.dev/en/blog/cv-les-yeux-fermes/</loc></url>
+  <url><loc>https://vesperlab.dev/en/blog/essayer-evoluer-recommencer/</loc></url>
 </urlset>
