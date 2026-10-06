@@ -46,8 +46,16 @@
     {
       "key": "declaration",
       "nav": false,
+      "generated": true,
       "fr": { "path": "/declaration-accessibilite/",  "title": "Déclaration d'accessibilité — Vesper Lab",  "description": "État de conformité WCAG 2.2 du site et limites connues." },
       "en": { "path": "/en/accessibility-statement/", "title": "Accessibility statement — Vesper Lab",      "description": "WCAG 2.2 conformance status and known limitations of this site." }
+    },
+    {
+      "key": "diagnostic",
+      "nav": false,
+      "generated": true,
+      "fr": { "path": "/diagnostic-accessibilite/",  "title": "Diagnostic d'accessibilité — Vesper Lab",  "description": "Diagnostic complet de l'accessibilité du site : méthode, constats, conformité WCAG 2.2 critère par critère." },
+      "en": { "path": "/en/accessibility-diagnosis/", "title": "Accessibility diagnosis — Vesper Lab",     "description": "Full accessibility diagnosis of the site: method, findings, WCAG 2.2 conformance criterion by criterion." }
     }
   ]
 }
