@@ -1506,6 +1506,8 @@ main#main .post-toc h2{margin-bottom:var(--space-3);}
   padding:0.15em 0.4em;
 }
 .post pre code{background:none;padding:0;}
+/* Retour à la ligne dans les blocs de code : pas de défilement horizontal (WCAG 1.4.10). */
+.post pre, .post pre code{white-space:pre-wrap;overflow-wrap:anywhere;}
 
 .post hr{
   border:none;
@@ -1536,6 +1538,7 @@ main#main .post-toc h2{margin-bottom:var(--space-3);}
   background:var(--surface-card);
 }
 .post figure img{width:100%;border-radius:var(--radius-md);display:block;}
+.post figure video{width:100%;height:auto;border-radius:var(--radius-md);display:block;background:var(--surface-card);}
 .post figcaption{
   font-size:var(--font-size-caption);
   color:var(--text-muted);

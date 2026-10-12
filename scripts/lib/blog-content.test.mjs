@@ -21,6 +21,12 @@ test('mdToHtml : titres, paragraphes, listes', () => {
   assert.equal(html, '<h2 id="titre">Titre</h2>\n<p>Un paragraphe.</p>\n<ul>\n  <li>Un</li>\n  <li>Deux</li>\n</ul>');
 });
 
+test('mdToHtml : une vidéo seule devient une figure <video> à la demande, sans autoplay', () => {
+  const { html } = mdToHtml('![Démo animée](/a/demo.mp4 "Légende")');
+  assert.equal(html, '<figure>\n<video controls playsinline preload="none" poster="/a/demo-poster.png" aria-label="Démo animée">\n<source src="/a/demo.mp4" type="video/mp4">\n<p>Démo animée</p>\n</video>\n<figcaption>Légende</figcaption>\n</figure>');
+  assert.ok(!/autoplay|loop/.test(html));
+});
+
 test('parsePost : sépare front matter et corps', () => {
   const { meta, body } = parsePost('---\ntitle: Mon titre\ncategory: Réflexions\n---\nLe corps.');
   assert.equal(meta.title, 'Mon titre');

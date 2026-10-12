@@ -49,7 +49,24 @@ const CALLOUT_MARK_RE = /^\[!INFO\]\s*$/i;
 // droit autour du titre est donc déjà &quot;, pas ".
 const IMAGE_ONLY_RE = /^!\[([^\]]*)\]\(([^)\s]+)(?:\s+&quot;(.*)&quot;)?\)$/;
 
+// Vidéo : même syntaxe qu'une image (`![description](fichier.mp4 "légende")`).
+// Pas d'autoplay ni de boucle : la lecture ne démarre qu'à la demande, avec les
+// contrôles natifs (pause, plein écran…), ce qui respecte prefers-reduced-motion
+// (WCAG 2.2.2). La description sert de nom accessible et de contenu de repli.
+// Affiche (poster) : même nom de fichier suffixé « -poster.png », obligatoire.
+const VIDEO_RE = /\.(mp4|webm)$/i;
+
+function renderVideo(alt, src, caption) {
+  const type = 'video/' + src.match(VIDEO_RE)[1].toLowerCase();
+  const poster = src.replace(VIDEO_RE, '-poster.png');
+  const video = `<video controls playsinline preload="none" poster="${poster}" aria-label="${alt}">\n` +
+    `<source src="${src}" type="${type}">\n<p>${alt}</p>\n</video>`;
+  if (!caption) return `<figure>\n${video}\n</figure>`;
+  return `<figure>\n${video}\n<figcaption>${caption}</figcaption>\n</figure>`;
+}
+
 function renderFigure(alt, src, caption) {
+  if (VIDEO_RE.test(src)) return renderVideo(alt, src, caption);
   const img = `<img src="${src}" alt="${alt}" loading="lazy">`;
   if (!caption) return `<figure>\n${img}\n</figure>`;
   return `<figure>\n${img}\n<figcaption>${caption}</figcaption>\n</figure>`;

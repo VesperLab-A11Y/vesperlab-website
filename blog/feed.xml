@@ -6,6 +6,13 @@
   <description>Articles sur l'accessibilité numérique.</description>
   <language>fr-CA</language>
   <item>
+    <title>Réinventer l'exportation</title>
+    <link>https://vesperlab.dev/blog/reinventer-exportation/</link>
+    <guid>https://vesperlab.dev/blog/reinventer-exportation/</guid>
+    <pubDate>Fri, 09 Oct 2026 12:00:00 GMT</pubDate>
+    <description>Le PDF reste LE format d'échange, mais le rendre accessible tient du parcours du combattant. Et si on partait du HTML, qu'on lit tous les jours, pour en faire la source de nos exportations ?</description>
+  </item>
+  <item>
     <title>Essayer, évoluer, recommencer</title>
     <link>https://vesperlab.dev/blog/essayer-evoluer-recommencer/</link>
     <guid>https://vesperlab.dev/blog/essayer-evoluer-recommencer/</guid>
